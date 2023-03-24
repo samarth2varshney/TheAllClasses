@@ -22,32 +22,31 @@ class Splash_screen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var Boardmap: Map<String, Any>? = null
-        var JEEmap: Map<String, Any>? = null
-        var NEETmap: Map<String, Any>? = null
-        var TeacherTraningCoursemap: Map<String, Any>? = null
         var name: String? = null
 
         val intent = Intent(this, MainActivity::class.java)
 
        GlobalScope.launch (Dispatchers.IO) {
 
-            val Board = db.document("/Boards/boards")
-            Board.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        Boardmap = document.data as Map<String, Any>
-                        name = document.id
-                        intent.putExtra("name", name)
-                        intent.putExtra("Boardmap", Boardmap as Serializable)
+           val Board = db.document("/Boards/boards")
+           Board.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       Boardmap = document.data as Map<String, Any>
+                       name = document.id
+                       intent.putExtra("name", name)
+                       flag1=true
+                       openActivity()
+                   } else {
+                       Log.d(ContentValues.TAG, "No such document")
+                   }
+               }
+               .addOnFailureListener { exception ->
+                   Log.d(ContentValues.TAG, "get failed with ", exception)
+               }
+       }
 
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
+        GlobalScope.launch (Dispatchers.IO) {
 
             val JEE = db.document("/JEE/jee")
             JEE.get()
@@ -56,8 +55,8 @@ class Splash_screen : AppCompatActivity() {
                         JEEmap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("JEEmap", name)
-                        intent.putExtra("JEEmap", JEEmap as Serializable)
-
+                        flag2=true
+                        openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
                     }
@@ -65,6 +64,8 @@ class Splash_screen : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
                 }
+        }
+        GlobalScope.launch (Dispatchers.IO) {
 
             val NEET = db.document("/NEET/neet")
             NEET.get()
@@ -73,8 +74,8 @@ class Splash_screen : AppCompatActivity() {
                         NEETmap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("NEETmap", name)
-                        intent.putExtra("NEETmap", NEETmap as Serializable)
-
+                        flag3=true
+                        openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
                     }
@@ -82,6 +83,9 @@ class Splash_screen : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
                 }
+
+        }
+        GlobalScope.launch (Dispatchers.IO) {
             val Teachertraningcourse = db.document("/TeacherTraningCourse/teachertraningcourse")
             Teachertraningcourse.get()
                 .addOnSuccessListener { document ->
@@ -89,7 +93,8 @@ class Splash_screen : AppCompatActivity() {
                         TeacherTraningCoursemap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("TeacherTraningCoursemap", name)
-                        intent.putExtra("TeacherTraningCoursemap", TeacherTraningCoursemap as Serializable)
+                        flag4=true
+                        openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
                     }
@@ -99,13 +104,29 @@ class Splash_screen : AppCompatActivity() {
                 }
 
        }
+    }
 
-
-
-        binding.button5.setOnClickListener {
-
+    private fun openActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        if(flag1&&flag2&&flag3&&flag4){
+            intent.putExtra("Boardmap", Boardmap as Serializable)
+            intent.putExtra("JEEmap", JEEmap as Serializable)
+            intent.putExtra("NEETmap", NEETmap as Serializable)
+            intent.putExtra("TeacherTraningCoursemap", TeacherTraningCoursemap as Serializable)
             startActivity(intent)
         }
+    }
+
+    companion object{
+    var Boardmap: Map<String, Any>? = null
+    var JEEmap: Map<String, Any>? = null
+    var NEETmap: Map<String, Any>? = null
+    var TeacherTraningCoursemap: Map<String, Any>? = null
+
+        var flag1=false
+        var flag2=false
+        var flag3=false
+        var flag4=false
 
     }
 }
