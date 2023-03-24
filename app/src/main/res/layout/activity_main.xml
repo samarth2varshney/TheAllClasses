@@ -8,52 +8,52 @@
 
     <Button
         android:id="@+id/Boardsbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="58dp"
+        android:layout_width="174dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FCE7B4"
         android:text="Boards"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/NEETbtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/JEEbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="56dp"
+        android:layout_width="174dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#A7FFAD"
         android:text="JEE"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/TeacherTraningbtn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/NEETbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="275dp"
+        android:layout_width="174dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="268dp"
+        android:backgroundTint="#A7FFAD"
         android:text="NEET"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/TeacherTraningbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="277dp"
+        android:layout_width="174dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="268dp"
+        android:backgroundTint="#FCE7B4"
         android:text="Teachertraning"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="181dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="124dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

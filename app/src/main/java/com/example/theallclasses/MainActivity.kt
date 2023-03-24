@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         val mintent = Intent(this, Recycler1::class.java)
 
-        binding.textView.text = "${JEEmap!!.keys}"
-
        binding.Boardsbtn.setOnClickListener {
            mintent.putExtra("map", Boardmap as Serializable)
            startActivity(mintent)
