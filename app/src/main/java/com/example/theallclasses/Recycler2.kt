@@ -32,7 +32,11 @@ class Recycler2 : AppCompatActivity() {
                     if(map2[map2.keys.elementAt(0)] is Map<*,*>){
                         mintent.putExtra("map", map2 as Serializable)
                         startActivity(mintent)
-                    }else{
+                    }
+                    else{
+                        val intent2 = Intent(this@Recycler2,CustomUiActivity::class.java)
+                        intent2.putExtra("youtubelink",map2["youtubelink"].toString())
+                        startActivity(intent2)
 
                     }
                 }

@@ -34,6 +34,11 @@ class Recycler1 : AppCompatActivity() {
                         mintent.putExtra("map", map2 as Serializable)
                         startActivity(mintent)
                     }
+                    else{
+                        val intent2 = Intent(this@Recycler1,CustomUiActivity::class.java)
+                        intent2.putExtra("youtubelink",map2["youtubelink"].toString())
+                        startActivity(intent2)
+                    }
                 }
             }
         })
