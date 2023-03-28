@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity() {
@@ -31,6 +34,8 @@ class OTPActivity : AppCompatActivity() {
     private lateinit var OTP: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
+
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +151,34 @@ class OTPActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+
+                    //fetching uid of the signed in user
+                    val user = Firebase.auth.currentUser
+                    user?.let {
+                        SharedData.uid=it.uid
+                    }
+
+                    val docRef = db.collection("users").document(SharedData.uid)
+
+                    docRef.get().addOnSuccessListener { document ->
+                        if (document.exists() && document != null) {
+                            // The document exists, so you can access its data
+
+                            //move this to splash screen
+                            SharedData.username = document.getString("username").toString()
+                            SharedData.board = document.getBoolean("board") == true
+                            SharedData.jee = document.getBoolean("jee") == true
+                            SharedData.neet = document.getBoolean("neet") == true
+                            SharedData.teachertrainingcourse = document.getBoolean("teachertrainingcourse") == true
+                        } else {
+                            // The document doesn't exist
+                            println("The document doesn't exist.")
+                            startActivity(Intent(this,CompleteSetupActivity::class.java))
+                        }
+                    }.addOnFailureListener { exception ->
+                        // Handle any errors that occurred while retrieving the document
+                        println("Error getting document: $exception")
+                    }
 
                     Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
                     sendToMain()
