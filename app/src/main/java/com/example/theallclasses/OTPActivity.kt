@@ -1,5 +1,6 @@
 package com.example.theallclasses
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity() {
@@ -31,7 +37,7 @@ class OTPActivity : AppCompatActivity() {
     private lateinit var OTP: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
-
+    val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otpactivity)
@@ -144,8 +150,22 @@ class OTPActivity : AppCompatActivity() {
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
+
+
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+                    GlobalScope.launch (Dispatchers.IO) {
+                        val Users = hashMapOf(
+                            "Board" to false,
+                            "JEE" to false,
+                            "NEET" to false,
+                            "TeacherTraningCourse" to false
+                        )
+                        db.collection("Users").document("users")
+                            .set(Users)
+                            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                    }
 
                     Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
                     sendToMain()
