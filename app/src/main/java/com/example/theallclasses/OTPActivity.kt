@@ -1,5 +1,6 @@
 package com.example.theallclasses
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,9 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+<<<<<<< HEAD
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+=======
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+>>>>>>> cdc503395e84ab8c5980a7471b78bf9d34857524
 import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity() {
@@ -34,9 +43,13 @@ class OTPActivity : AppCompatActivity() {
     private lateinit var OTP: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
+<<<<<<< HEAD
 
     val db = Firebase.firestore
 
+=======
+    val db = Firebase.firestore
+>>>>>>> cdc503395e84ab8c5980a7471b78bf9d34857524
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otpactivity)
@@ -149,8 +162,22 @@ class OTPActivity : AppCompatActivity() {
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
+
+
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+                    GlobalScope.launch (Dispatchers.IO) {
+                        val Users = hashMapOf(
+                            "Board" to false,
+                            "JEE" to false,
+                            "NEET" to false,
+                            "TeacherTraningCourse" to false
+                        )
+                        db.collection("Users").document("users")
+                            .set(Users)
+                            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                    }
 
                     //fetching uid of the signed in user
                     val user = Firebase.auth.currentUser

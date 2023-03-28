@@ -37,7 +37,7 @@ class Recycler2 : AppCompatActivity() {
                         val intent2 = Intent(this@Recycler2,CustomUiActivity::class.java)
                         intent2.putExtra("youtubelink",map2["youtubelink"].toString())
                         startActivity(intent2)
-
+                        // TODO start youtube activity
                     }
                 }
             }
