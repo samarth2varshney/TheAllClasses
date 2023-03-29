@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.theallclasses.databinding.ActivitySplashScreenBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +18,7 @@ import java.io.Serializable
 
 class Splash_screen : AppCompatActivity() {
     val db = Firebase.firestore
+    val auth = FirebaseAuth.getInstance()
     private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,7 @@ class Splash_screen : AppCompatActivity() {
         setContentView(binding.root)
 
         var name: String? = null
+
 
 
        GlobalScope.launch (Dispatchers.IO) {
@@ -106,26 +110,17 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        val intent = Intent(this, PhoneActivity::class.java)
         if(SharedData.flag1&&SharedData.flag2&&SharedData.flag3&&SharedData.flag4){
-            intent.putExtra("Boardmap", SharedData.Boardmap as Serializable)
-            intent.putExtra("JEEmap", SharedData.JEEmap as Serializable)
-            intent.putExtra("NEETmap", SharedData.NEETmap as Serializable)
-            intent.putExtra("TeacherTraningCoursemap", SharedData.TeacherTraningCoursemap as Serializable)
-            startActivity(intent)
+            if (auth.currentUser != null){
+                val user = Firebase.auth.currentUser
+                user?.let {
+                    SharedData.uid=it.uid
+                }
+                startActivity(Intent(this , MainActivity::class.java))
+            }
+            else{
+                startActivity(Intent(this, PhoneActivity::class.java))
+            }
         }
     }
-
-//    companion object{
-//    var Boardmap: Map<String, Any>? = null
-//    var JEEmap: Map<String, Any>? = null
-//    var NEETmap: Map<String, Any>? = null
-//    var TeacherTraningCoursemap: Map<String, Any>? = null
-//
-//        var flag1=false
-//        var flag2=false
-//        var flag3=false
-//        var flag4=false
-//
-//    }
 }

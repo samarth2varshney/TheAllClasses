@@ -123,12 +123,4 @@ class PhoneActivity : AppCompatActivity() {
             mProgressBar.visibility = View.INVISIBLE
         }
     }
-
-
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser != null){
-            startActivity(Intent(this , MainActivity::class.java))
-        }
-    }
 }

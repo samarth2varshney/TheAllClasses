@@ -158,48 +158,24 @@ class OTPActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     GlobalScope.launch (Dispatchers.IO) {
-                        val Users = hashMapOf(
-                            "Board" to false,
-                            "JEE" to false,
-                            "NEET" to false,
-                            "TeacherTraningCourse" to false
-                        )
-                        db.collection("Users").document("users")
-                            .set(Users)
-                            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-                    }
-
-                    //fetching uid of the signed in user
-                    val user = Firebase.auth.currentUser
-                    user?.let {
-                        SharedData.uid=it.uid
-                    }
-
-                    val docRef = db.collection("users").document(SharedData.uid)
-
-                    docRef.get().addOnSuccessListener { document ->
-                        if (document.exists() && document != null) {
-                            // The document exists, so you can access its data
-
-                            //move this to splash screen
-                            SharedData.username = document.getString("username").toString()
-                            SharedData.board = document.getBoolean("board") == true
-                            SharedData.jee = document.getBoolean("jee") == true
-                            SharedData.neet = document.getBoolean("neet") == true
-                            SharedData.teachertrainingcourse = document.getBoolean("teachertrainingcourse") == true
-                        } else {
-                            // The document doesn't exist
-                            println("The document doesn't exist.")
-                            startActivity(Intent(this,CompleteSetupActivity::class.java))
+                        val user = Firebase.auth.currentUser
+                        user?.let {
+                            SharedData.uid=it.uid
                         }
-                    }.addOnFailureListener { exception ->
-                        // Handle any errors that occurred while retrieving the document
-                        println("Error getting document: $exception")
-                    }
+                        val docRef = db.collection("users").document(SharedData.uid)
 
-                    Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
-                    sendToMain()
+                        docRef.get().addOnSuccessListener { document ->
+                            if (!document.exists() || document == null) {
+                                // The document doesn't exist
+                                Log.d("Result","New User Login Attempt")
+                                startActivity(Intent(this@OTPActivity,CompleteSetupActivity::class.java))
+                            }
+                        }.addOnFailureListener { exception ->
+                            // Handle any errors that occurred while retrieving the document
+                            println("Error getting document: $exception")
+                        }
+                        sendToMain()
+                    }
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
@@ -215,6 +191,7 @@ class OTPActivity : AppCompatActivity() {
     }
 
     private fun sendToMain() {
+//        Toast.makeText(this@OTPActivity, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, MainActivity::class.java))
     }
     private fun sendToPhone() {
