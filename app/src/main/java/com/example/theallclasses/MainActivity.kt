@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PhoneActivity::class.java))
         }
 
+        binding.purchaseBtn.setOnClickListener {
+            startActivity(Intent(this,PurchaseActivity::class.java))
+        }
         GlobalScope.launch(Dispatchers.IO) {
             val docRef = db.collection("users").document(SharedData.uid)
 
