@@ -24,13 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        var intent = intent
-
-//        val Boardmap = intent.getSerializableExtra("Boardmap") as? Map<String, Any>
-//        val JEEmap = intent.getSerializableExtra("JEEmap") as? Map<String, Any>
-//        val NEETmap = intent.getSerializableExtra("NEETmap") as? Map<String, Any>
-//        val TeacherTraningCoursemap = intent.getSerializableExtra("TeacherTraningCoursemap") as? Map<String, Any>
-
         val mintent = Intent(this, Recycler1::class.java)
 
         binding.Boardsbtn.setOnClickListener {

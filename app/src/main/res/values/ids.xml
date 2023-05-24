@@ -4,4 +4,5 @@
     <item name="resendTextView" type="id" />
     <item name="guideline5" type="id" />
     <item name="otpEditText1" type="id" />
+    <item name="imageSlider" type="id" />
 </resources>

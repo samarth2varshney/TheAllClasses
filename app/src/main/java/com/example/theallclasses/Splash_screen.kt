@@ -19,6 +19,7 @@ import java.io.Serializable
 class Splash_screen : AppCompatActivity() {
     val db = Firebase.firestore
     val auth = FirebaseAuth.getInstance()
+    var map: Map<String, Any>? = null
     private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +27,6 @@ class Splash_screen : AppCompatActivity() {
         setContentView(binding.root)
 
         var name: String? = null
-
-
 
        GlobalScope.launch (Dispatchers.IO) {
 
@@ -38,7 +37,7 @@ class Splash_screen : AppCompatActivity() {
                        SharedData.Boardmap = document.data as Map<String, Any>
                        name = document.id
                        intent.putExtra("name", name)
-                       SharedData.flag1=true
+                       flag1=true
                        openActivity()
                    } else {
                        Log.d(ContentValues.TAG, "No such document")
@@ -58,7 +57,7 @@ class Splash_screen : AppCompatActivity() {
                         SharedData.JEEmap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("JEEmap", name)
-                        SharedData.flag2=true
+                        flag2=true
                         openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
@@ -77,7 +76,7 @@ class Splash_screen : AppCompatActivity() {
                        SharedData.NEETmap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("NEETmap", name)
-                        SharedData.flag3=true
+                        flag3=true
                         openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
@@ -96,7 +95,7 @@ class Splash_screen : AppCompatActivity() {
                         SharedData.TeacherTraningCoursemap = document.data as Map<String, Any>
                         name = document.id
                         intent.putExtra("TeacherTraningCoursemap", name)
-                        SharedData.flag4=true
+                        flag4=true
                         openActivity()
                     } else {
                         Log.d(ContentValues.TAG, "No such document")
@@ -105,22 +104,47 @@ class Splash_screen : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
                 }
-
        }
+
+        GlobalScope.launch (Dispatchers.IO){
+            val docRef = db.document("/images/Images")
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        map = document.data as Map<String,Any>
+                        SharedData.imagename = map!!.keys.toTypedArray()
+                        flag5=true
+                        openActivity()
+                    } else {
+                        Log.d(ContentValues.TAG, "No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
+        }
     }
 
     private fun openActivity() {
-        if(SharedData.flag1&&SharedData.flag2&&SharedData.flag3&&SharedData.flag4){
+        if(flag1&&flag2&&flag3&&flag4&&flag5){
             if (auth.currentUser != null){
                 val user = Firebase.auth.currentUser
                 user?.let {
                     SharedData.uid=it.uid
                 }
-                startActivity(Intent(this , MainActivity::class.java))
+                startActivity(Intent(this , MainActivity2::class.java))
             }
             else{
                 startActivity(Intent(this, PhoneActivity::class.java))
             }
         }
+    }
+
+    companion object{
+        var flag1=false
+        var flag2=false
+        var flag3=false
+        var flag4=false
+        var flag5=false
     }
 }
