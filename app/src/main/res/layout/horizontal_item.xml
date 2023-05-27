@@ -4,20 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@drawable/rounded_message_gray"
+    android:padding="20dp"
+    android:elevation="8dp">
+
+    <ImageView
+        android:id="@+id/pic1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyTextView1"
+        tools:src="@tools:sample/avatars"></ImageView>
 
     <TextView
-        android:id="@+id/keyTextView"
-        android:layout_width="386dp"
-        android:layout_height="55dp"
+        android:id="@+id/keyTextView1"
+        android:layout_width="277dp"
+        android:layout_height="58dp"
         android:background="@drawable/rounded_message_gray"
-        android:backgroundTint="#FFCE4B"
         android:maxWidth="250dp"
         android:padding="10dp"
+        android:paddingLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is a message" />

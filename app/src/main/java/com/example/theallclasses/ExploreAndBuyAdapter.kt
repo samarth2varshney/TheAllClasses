@@ -13,16 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class Adapter(private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView1)!!
-        val imageView = itemView.findViewById<ImageView>(R.id.pic1)
+
+        val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
+        val imageView = itemView.findViewById<ImageView>(R.id.pic2)
+        val explorebutton = itemView.findViewById<Button>(R.id.exploreId)
+        val buybutton = itemView.findViewById<Button>(R.id.buyId)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.horizontal_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.explore_and_buy_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -36,8 +40,9 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
             holder.keyTextView.text = map["name"].toString()
             Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
         }
+
         val mintent = Intent(context, Recycler1::class.java)
-        holder.itemView.setOnClickListener{
+        holder.explorebutton.setOnClickListener {
             if (mapData[mapData.keys.elementAt(position)] is Map<*, *>){
                 map2 = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
                 if (mapData.keys.elementAt(position)[0]!='t'){
@@ -45,12 +50,16 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
                     context.startActivity(mintent)
                 }
                 else{
-                    val intent2 = Intent(context,CustomUiActivity::class.java)
-                    intent2.putExtra("youtubelink",map2["youtubelink"].toString())
-                    context.startActivity(intent2)
+                    val intent = Intent(context, CustomUiActivity::class.java)
+                    context.startActivity(intent)
                 }
             }
         }
+
+        holder.buybutton.setOnClickListener {
+
+        }
+
 
     }
 

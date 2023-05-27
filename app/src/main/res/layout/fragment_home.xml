@@ -27,63 +27,15 @@
         app:sliderScrollTimeInSec="1"
         app:sliderStartAutoCycle="true" />
 
-    <Button
-        android:id="@+id/Boardsbtn"
-        android:layout_width="174dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FCE7B4"
-        android:text="Boards"
-        android:textColor="@color/black"
-        android:textColorHighlight="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/NEETbtn"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/JEEbtn"
-        android:layout_width="174dp"
-        android:layout_height="78dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#A7FFAD"
-        android:text="JEE"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/TeacherTraningbtn"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/NEETbtn"
-        android:layout_width="174dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="268dp"
-        android:backgroundTint="#A7FFAD"
-        android:text="NEET"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/TeacherTraningbtn"
-        android:layout_width="174dp"
-        android:layout_height="78dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="268dp"
-        android:backgroundTint="#FCE7B4"
-        android:text="Teachertraning"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-<!--    <Button-->
-<!--        android:id="@+id/purchaseBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Purchase"-->
-<!--        tools:layout_editor_absoluteX="148dp"-->
-<!--        tools:layout_editor_absoluteY="559dp" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/horizontalRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

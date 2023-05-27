@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.SliderView
 //import com.smarteist.autoimageslider.SliderView
@@ -28,30 +30,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mintent = Intent(activity, Recycler1::class.java)
+        val courses : Map<String,Map<String, Any>?> = mapOf("Boards" to SharedData.Boardmap,"JEE" to SharedData.JEEmap
+            ,"NEET" to SharedData.NEETmap,"TeacherTraning" to SharedData.TeacherTraningCoursemap)
 
-        binding.Boardsbtn.setOnClickListener {
-            mintent.putExtra("map", SharedData.Boardmap as Serializable)
-            startActivity(mintent)
-        }
-        binding.JEEbtn.setOnClickListener {
-            mintent.putExtra("map", SharedData.JEEmap as Serializable)
-            startActivity(mintent)
-        }
+        binding.horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
+        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(),courses)
+        binding.horizontalRecyclerView.adapter = horizontaladapter
 
-        binding.NEETbtn.setOnClickListener {
-            mintent.putExtra("map", SharedData.NEETmap as Serializable)
-            startActivity(mintent)
-        }
-
-        binding.TeacherTraningbtn.setOnClickListener {
-            mintent.putExtra("map", SharedData.TeacherTraningCoursemap as Serializable)
-            startActivity(mintent)
-        }
-
-//        binding.purchaseBtn.setOnClickListener {
-//            startActivity(Intent(activity,PurchaseActivity::class.java))
-//        }
         sliderView = binding.imageSlider
 
         sliderAdapter = SliderAdapter(SharedData.imagename)

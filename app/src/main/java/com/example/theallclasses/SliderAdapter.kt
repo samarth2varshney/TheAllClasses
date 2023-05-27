@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.smarteist.autoimageslider.SliderViewAdapter
 import java.io.File
@@ -27,15 +28,7 @@ class SliderAdapter(imageUrl: Array<String>?) :
     override fun onBindViewHolder(viewHolder: SliderAdapter.SliderViewHolder?, position: Int) {
 
         if (viewHolder != null) {
-            val storageRef = FirebaseStorage.getInstance().reference.child("images/${sliderList!![position]}")
-
-            val localfile = File.createTempFile("tempImage", "jpg")
-            storageRef.getFile(localfile).addOnSuccessListener {
-                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                viewHolder.imageView.setImageBitmap(bitmap)
-            }.addOnFailureListener {
-
-            }
+            Glide.with(viewHolder.itemView).load(sliderList!![position]).fitCenter().into(viewHolder.imageView)
         }
     }
 

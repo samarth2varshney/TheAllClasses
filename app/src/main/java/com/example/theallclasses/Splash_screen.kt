@@ -26,8 +26,6 @@ class Splash_screen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var name: String? = null
-
        GlobalScope.launch (Dispatchers.IO) {
 
            val Board = db.document("/Boards/boards")
@@ -35,98 +33,67 @@ class Splash_screen : AppCompatActivity() {
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.Boardmap = document.data as Map<String, Any>
-                       name = document.id
-                       intent.putExtra("name", name)
                        flag1=true
                        openActivity()
-                   } else {
-                       Log.d(ContentValues.TAG, "No such document")
                    }
                }
-               .addOnFailureListener { exception ->
-                   Log.d(ContentValues.TAG, "get failed with ", exception)
+
+           val JEE = db.document("/JEE/jee")
+           JEE.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.JEEmap = document.data as Map<String, Any>
+                       flag2=true
+                       openActivity()
+                   }
+               }
+
+           val NEET = db.document("/NEET/neet")
+           NEET.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.NEETmap = document.data as Map<String, Any>
+                       flag3=true
+                       openActivity()
+                   }
+               }
+
+           val docRef = db.document("/HeroSectionSliderImages/appslider")
+           docRef.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       map = document.data as Map<String,Any>
+                       SharedData.imagename = map!!.keys.toTypedArray()
+                       flag5=true
+                       openActivity()
+                   }
+               }
+
+           val Teachertraningcourse = db.document("/TeacherTraningCourse/teachertraningcourse")
+           Teachertraningcourse.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.TeacherTraningCoursemap = document.data as Map<String, Any>
+                       flag4=true
+                       openActivity()
+                   }
+               }
+
+           val courseImage = db.document("/CourseImage/image")
+           courseImage.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.courseImage = document.data as Map<String, String>
+                       flag6=true
+                       openActivity()
+                   }
                }
        }
 
-        GlobalScope.launch (Dispatchers.IO) {
-
-            val JEE = db.document("/JEE/jee")
-            JEE.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        SharedData.JEEmap = document.data as Map<String, Any>
-                        name = document.id
-                        intent.putExtra("JEEmap", name)
-                        flag2=true
-                        openActivity()
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-        }
-        GlobalScope.launch (Dispatchers.IO) {
-
-            val NEET = db.document("/NEET/neet")
-            NEET.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                       SharedData.NEETmap = document.data as Map<String, Any>
-                        name = document.id
-                        intent.putExtra("NEETmap", name)
-                        flag3=true
-                        openActivity()
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-
-        }
-        GlobalScope.launch (Dispatchers.IO) {
-            val Teachertraningcourse = db.document("/TeacherTraningCourse/teachertraningcourse")
-            Teachertraningcourse.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        SharedData.TeacherTraningCoursemap = document.data as Map<String, Any>
-                        name = document.id
-                        intent.putExtra("TeacherTraningCoursemap", name)
-                        flag4=true
-                        openActivity()
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-       }
-
-        GlobalScope.launch (Dispatchers.IO){
-            val docRef = db.document("/images/Images")
-            docRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        map = document.data as Map<String,Any>
-                        SharedData.imagename = map!!.keys.toTypedArray()
-                        flag5=true
-                        openActivity()
-                    } else {
-                        Log.d(ContentValues.TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "get failed with ", exception)
-                }
-        }
     }
 
     private fun openActivity() {
-        if(flag1&&flag2&&flag3&&flag4&&flag5){
+        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6){
             if (auth.currentUser != null){
                 val user = Firebase.auth.currentUser
                 user?.let {
@@ -146,5 +113,6 @@ class Splash_screen : AppCompatActivity() {
         var flag3=false
         var flag4=false
         var flag5=false
+        var flag6=false
     }
 }

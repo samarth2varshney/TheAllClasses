@@ -33,7 +33,7 @@ class CompleteSetupActivity : AppCompatActivity() {
                 val db = Firebase.firestore
                 val docRef = db.collection("users").document(SharedData.uid)
                 docRef.set(data1)
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this,MainActivity2::class.java))
             }
         }
 
