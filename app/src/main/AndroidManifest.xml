@@ -17,12 +17,18 @@
         android:theme="@style/Theme.TheAllClasses"
         tools:targetApi="31">
         <activity
+            android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExploreAndBuy"
             android:exported="false" />
-
         <activity
             android:name=".PurchaseActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
@@ -31,22 +37,10 @@
             android:resource="@color/white" />
 
         <activity
-            android:name=".CompleteSetupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OTPActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PhoneActivity"
-            android:exported="false" />
-        <activity
             android:name=".CustomUiActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".Recycler2"
-            android:exported="false" />
         <activity
             android:name=".Recycler1"
             android:exported="false" />

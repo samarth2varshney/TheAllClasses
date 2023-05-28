@@ -1,18 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TheAllClasses" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
+
+        <item name="android:buttonStyle">@style/AppButtonStyle</item>
+
+        <!-- Set the background color -->
+        <item name="android:windowBackground">@android:color/white</item>
+
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <!-- Set the hint color for EditText -->
+        <item name="android:textColorHint">@color/textSecondary</item>
+
+        <!-- Set the text color for TextView -->
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+    <!-- Button Style -->
+    <style name="AppButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/buttonBackground</item>
+        <item name="android:textColor">@color/buttonText</item>
     </style>
 </resources>

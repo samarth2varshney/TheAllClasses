@@ -102,7 +102,7 @@ class Splash_screen : AppCompatActivity() {
                 startActivity(Intent(this , MainActivity2::class.java))
             }
             else{
-                startActivity(Intent(this, PhoneActivity::class.java))
+                startActivity(Intent(this, SignInActivity::class.java))
             }
         }
     }
