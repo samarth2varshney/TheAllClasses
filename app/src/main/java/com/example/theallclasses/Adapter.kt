@@ -2,6 +2,9 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +49,7 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
                 }
                 else{
                     val intent2 = Intent(context,CustomUiActivity::class.java)
-                    intent2.putExtra("youtubelink",map2["youtubelink"].toString())
+                    intent2.putExtra("youtubelink",map2["youtube"].toString())
                     context.startActivity(intent2)
                 }
             }

@@ -11,8 +11,8 @@
     <ImageView
         android:id="@+id/pic2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="150dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/keyTextView2"
-        android:layout_width="277dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:background="@drawable/rounded_message_gray"
         android:maxWidth="250dp"
@@ -39,22 +39,70 @@
         android:id="@+id/exploreId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:text="Explore"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/buyId"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pic2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/buyId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:text="Buy"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exploreId"
-        app:layout_constraintTop_toBottomOf="@+id/pic2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/courseInfo"
+        android:layout_width="197dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="18dp"
+        android:textColor="#F44336"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/exploreId"
+        app:layout_constraintStart_toStartOf="@+id/pic2"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="91dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/pic2"
+        app:layout_constraintTop_toBottomOf="@+id/pic2"
+        app:srcCompat="@drawable/discount" />
+
+    <TextView
+        android:id="@+id/discount"
+        android:layout_width="33dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="38dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="FOR FULL COURSE"
+        android:textColor="#FF787272"
+        android:textColorHint="#787272"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/courseInfo"
+        app:layout_constraintTop_toBottomOf="@+id/courseInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,9 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +25,8 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         val imageView = itemView.findViewById<ImageView>(R.id.pic2)
         val explorebutton = itemView.findViewById<Button>(R.id.exploreId)
         val buybutton = itemView.findViewById<Button>(R.id.buyId)
+        val courseInfo = itemView.findViewById<TextView>(R.id.courseInfo)
+        val discount = itemView.findViewById<TextView>(R.id.discount)
 
     }
 
@@ -39,6 +44,19 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             map = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
             holder.keyTextView.text = map["name"].toString()
             Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
+
+            val spannableString = SpannableString(map["originalCost"].toString())
+            spannableString.setSpan(StrikethroughSpan(), 0, map["originalCost"].toString().length, 0)
+            holder.courseInfo.append(spannableString)
+
+            holder.courseInfo.append("   ")
+
+            holder.courseInfo.append(map["cost"].toString())
+            holder.courseInfo.append("\n")
+
+
+            holder.discount.text = map["discount"].toString()
+
         }
 
         val mintent = Intent(context, Recycler1::class.java)

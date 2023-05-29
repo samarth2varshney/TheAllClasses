@@ -18,7 +18,11 @@ class Recycler1 : AppCompatActivity() {
 
         val mapWithName = map
         map!!.remove("name")
-        map!!.remove("image")
+        map.remove("image")
+        map.remove("cost")
+        map.remove("discount")
+        map.remove("duration")
+        map.remove("originalCost")
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = Adapter(this,map!!,mapWithName!!)

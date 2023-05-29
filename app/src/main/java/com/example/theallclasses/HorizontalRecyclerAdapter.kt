@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
@@ -27,6 +26,7 @@ class HorizontalRecyclerAdapter(private val context: Context, private val mapDat
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.keyTextView.text = mapData.keys.elementAt(position)
         Glide.with(holder.itemView).load(SharedData.courseImage!![mapData.keys.elementAt(position)]).fitCenter().into(holder.imageView)
 

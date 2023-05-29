@@ -62,7 +62,7 @@ class CustomUiActivity : AppCompatActivity() {
                 youTubePlayerView.addFullScreenListener(customPlayerUiController)
                 youTubePlayerView.exitFullScreen()
                 val youtubelink = intent.getStringExtra("youtubelink")
-                youTubePlayer.loadOrCueVideo(lifecycle, "BddP6PYo2gs", 0f)
+                youTubePlayer.loadOrCueVideo(lifecycle, youtubelink!!, 0f)
                 youTubePlayer.addListener(playerTracker)
                 findViewById<Button>(R.id.play).setOnClickListener {
                     if (playerTracker.state == PlayerConstants.PlayerState.PLAYING)
