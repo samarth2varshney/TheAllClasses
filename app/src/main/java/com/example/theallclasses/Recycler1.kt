@@ -21,7 +21,7 @@ class Recycler1 : AppCompatActivity() {
         map.remove("image")
         map.remove("cost")
         map.remove("discount")
-        map.remove("duration")
+        map.remove("time")
         map.remove("originalCost")
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
