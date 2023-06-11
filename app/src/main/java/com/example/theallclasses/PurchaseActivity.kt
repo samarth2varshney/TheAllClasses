@@ -16,10 +16,12 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         binding = ActivityPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var cost = intent.getIntExtra("cost",0)
+
         Checkout.preload(this@PurchaseActivity)
 
         binding.btnPayNow.setOnClickListener {
-            payNow(500)
+            payNow(cost)
         }
     }
     fun payNow(amount: Int){

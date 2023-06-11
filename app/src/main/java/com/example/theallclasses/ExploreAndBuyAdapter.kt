@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
+import kotlin.math.cos
 
 class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
@@ -39,6 +40,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
 
         var map: Map<String, Any>
         var map2: Map<String, Any>
+        var cost = ""
         if(mapWithName[mapWithName.keys.elementAt(position)] is Map<*, *> ) {
             map = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
             holder.keyTextView.text = map["name"].toString()
@@ -51,6 +53,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             holder.courseInfo.append("   ")
 
             holder.courseInfo.append(map["cost"].toString())
+            cost = map["cost"].toString()
             holder.courseInfo.append("\n")
 
 
@@ -74,7 +77,10 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         }
 
         holder.buybutton.setOnClickListener {
-
+            val intent = Intent(context, PurchaseActivity::class.java)
+            if(cost!="null"){
+            intent.putExtra("cost", cost.toInt())
+            context.startActivity(intent)}
         }
 
 
