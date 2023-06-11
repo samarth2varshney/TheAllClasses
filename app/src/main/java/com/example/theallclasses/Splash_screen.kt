@@ -26,6 +26,13 @@ class Splash_screen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.imageView.animate().apply {
+            duration = 1000
+            rotation(360f)
+            flag7=true
+            openActivity()
+        }.start()
+
        GlobalScope.launch (Dispatchers.IO) {
 
            val Board = db.document("/Boards/boards")
@@ -93,7 +100,7 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6){
+        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6&& flag7){
             if (auth.currentUser != null){
                 val user = Firebase.auth.currentUser
                 user?.let {
@@ -114,5 +121,6 @@ class Splash_screen : AppCompatActivity() {
         var flag4=false
         var flag5=false
         var flag6=false
+        var flag7=false
     }
 }

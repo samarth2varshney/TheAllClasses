@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.SliderView
 //import com.smarteist.autoimageslider.SliderView
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
         val horizontaladapter = HorizontalRecyclerAdapter(requireContext(),courses)
         binding.horizontalRecyclerView.adapter = horizontaladapter
 
+        //Automatic Slider
         sliderView = binding.imageSlider
 
         sliderAdapter = SliderAdapter(SharedData.imagename)
@@ -50,6 +52,10 @@ class HomeFragment : Fragment() {
         sliderView.isAutoCycle = true
 
         sliderView.startAutoCycle()
+
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView2)
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView3)
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView5)
 
     }
 }

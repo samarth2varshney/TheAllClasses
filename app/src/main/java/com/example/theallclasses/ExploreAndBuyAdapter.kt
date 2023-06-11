@@ -18,7 +18,6 @@ import java.io.Serializable
 
 class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
@@ -26,7 +25,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         val explorebutton = itemView.findViewById<Button>(R.id.exploreId)
         val buybutton = itemView.findViewById<Button>(R.id.buyId)
         val courseInfo = itemView.findViewById<TextView>(R.id.courseInfo)
-        val discount = itemView.findViewById<TextView>(R.id.discount)
+        val discount = itemView.findViewById<TextView>(R.id.timeofcourse)
 
     }
 
@@ -55,7 +54,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             holder.courseInfo.append("\n")
 
 
-            holder.discount.text = map["discount"].toString()
+            holder.discount.text = map["time"].toString()
 
         }
 

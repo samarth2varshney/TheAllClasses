@@ -1,11 +1,9 @@
 package com.example.theallclasses
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.ActivityExploreAndBuyBinding
-import java.io.Serializable
 
 class ExploreAndBuy : AppCompatActivity() {
     private lateinit var binding: ActivityExploreAndBuyBinding
