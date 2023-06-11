@@ -74,6 +74,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         }
 
         holder.buybutton.setOnClickListener {
+
         }
 
 
