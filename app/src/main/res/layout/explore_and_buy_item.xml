@@ -36,7 +36,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exploreId"
-        android:layout_width="86dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/buttonbackground"
@@ -50,7 +50,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buyId"
-        android:layout_width="86dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:background="@drawable/buttonbackground"
         android:text="Buy"

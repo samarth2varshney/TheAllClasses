@@ -2,29 +2,26 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
-import android.text.SpannableString
-import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class Adapter(private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+class TopicAdapter(private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<TopicAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val keyTextView = itemView.findViewById<TextView>(R.id.chaptername)!!
-        val imageView = itemView.findViewById<ImageView>(R.id.chapterimage)
+        val keyTextView = itemView.findViewById<TextView>(R.id.topicname)
+        val imageView = itemView.findViewById<ImageView>(R.id.topicimage)
+        val videobutton = itemView.findViewById<Button>(R.id.videobutton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.chapter_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.topic_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -38,8 +35,8 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
             Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
         }
 
-        val mintent = Intent(context, Topic::class.java)
-        holder.itemView.setOnClickListener{
+        val mintent = Intent(context, Recycler1::class.java)
+        holder.videobutton.setOnClickListener{
             if (mapData[mapData.keys.elementAt(position)] is Map<*, *>){
                 map2 = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
                 if (mapData.keys.elementAt(position)[0]!='t'){

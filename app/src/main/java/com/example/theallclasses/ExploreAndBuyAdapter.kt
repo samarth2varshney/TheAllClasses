@@ -2,7 +2,6 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.text.SpannableString
 import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
@@ -11,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
-import kotlin.math.cos
 
 class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
@@ -82,7 +79,6 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             intent.putExtra("cost", cost.toInt())
             context.startActivity(intent)}
         }
-
 
     }
 

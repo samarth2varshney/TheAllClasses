@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheAllClasses"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Topic"
+            android:exported="false" />
         <activity
             android:name=".SignInActivity"
             android:exported="false" />
@@ -28,9 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".PurchaseActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -55,7 +55,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity2"
@@ -67,18 +66,14 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- Razorpay Checkout Activity -->
+        </service> <!-- Razorpay Checkout Activity -->
         <activity
             android:name="com.razorpay.CheckoutActivity"
-            android:exported="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.TheAllClasses"
-            tools:replace="android:configChanges,android:theme" />
-
-        <!-- Razorpay Token Receiver -->
+            tools:replace="android:configChanges,android:theme" /> <!-- Razorpay Token Receiver -->
         <receiver
             android:name="com.razorpay.RzpTokenReceiver"
             android:exported="true">
