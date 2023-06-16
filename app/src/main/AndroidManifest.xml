@@ -30,7 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".PurchaseActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

@@ -2,6 +2,7 @@ package com.example.theallclasses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.ActivityTopicBinding
 
@@ -11,6 +12,9 @@ class Topic : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopicBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+
         var intent = intent
 
         val map = intent.getSerializableExtra("map") as? MutableMap<String, Any>

@@ -2,6 +2,7 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ class TopicAdapter(private val context: Context, private val mapData: Map<String
         val keyTextView = itemView.findViewById<TextView>(R.id.topicname)
         val imageView = itemView.findViewById<ImageView>(R.id.topicimage)
         val videobutton = itemView.findViewById<Button>(R.id.videobutton)
+        val pdfbutton = itemView.findViewById<Button>(R.id.PDFbutton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,6 +51,15 @@ class TopicAdapter(private val context: Context, private val mapData: Map<String
                     context.startActivity(intent2)
                 }
             }
+        }
+
+        holder.pdfbutton.setOnClickListener {
+            // add the link of pdf
+            val value = "https://drive.google.com/file/d/1radz-qe1FtvlDcvtZ-GvBJ72x5iDHOOA/view?usp=sharing"
+            val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(value))
+
+            // start activity
+            context.startActivity(intent3)
         }
 
     }
