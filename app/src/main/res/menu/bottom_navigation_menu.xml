@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_purchase"
-        android:icon="@drawable/ic_purchase"
-        android:title="Purchase" />
+        android:id="@+id/navigation_material"
+        android:icon="@drawable/ic_material"
+        android:title="Material" />
+    <item
+        android:id="@+id/navigation_live"
+        android:icon="@drawable/ic_live"
+        android:title="Live" />
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
@@ -11,5 +15,5 @@
     <item
         android:id="@+id/navigation_courses"
         android:icon="@drawable/ic_courses"
-        android:title="Courses" />
+        android:title="My Courses" />
 </menu>

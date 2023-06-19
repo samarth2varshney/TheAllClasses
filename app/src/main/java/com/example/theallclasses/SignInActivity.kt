@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.theallclasses.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -52,6 +53,12 @@ class SignInActivity : AppCompatActivity() {
                             baseContext, "Authentication successfull.",
                             Toast.LENGTH_SHORT
                         ).show()
+                        //fetching UID(flag) document
+                        val db = Firebase.firestore
+                        db.document("/users/${SharedData.uid}").get()
+                            .addOnSuccessListener { document ->
+                                SharedData.UIDmap = document.data as Map<String, Any>
+                            }
                         goToMain()
                     } else {
                         // If sign in fails, display a message to the user.
