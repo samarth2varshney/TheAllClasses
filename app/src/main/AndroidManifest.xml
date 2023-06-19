@@ -17,6 +17,9 @@
         android:theme="@style/Theme.TheAllClasses"
         tools:targetApi="31">
         <activity
+            android:name=".AllCourses"
+            android:exported="false" />
+        <activity
             android:name=".Topic"
             android:exported="false" />
         <activity

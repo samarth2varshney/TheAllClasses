@@ -30,28 +30,18 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var map: Map<String, Any>
-        var map2: Map<String, Any>
-        if(mapWithName[mapWithName.keys.elementAt(position)] is Map<*, *> ) {
-            map = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
-            holder.keyTextView.text = map["name"].toString()
-            Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
-        }
+        val map: Map<String, Any> = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
+        val map2: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
+        val chaptername = map["name"].toString()
+        val chapterimage = map["image"].toString()
 
-        val mintent = Intent(context, Topic::class.java)
+        holder.keyTextView.text = chaptername
+        Glide.with(holder.itemView).load(chapterimage).fitCenter().into(holder.imageView)
+
         holder.itemView.setOnClickListener{
-            if (mapData[mapData.keys.elementAt(position)] is Map<*, *>){
-                map2 = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
-                if (mapData.keys.elementAt(position)[0]!='t'){
-                    mintent.putExtra("map", map2 as Serializable)
-                    context.startActivity(mintent)
-                }
-                else{
-                    val intent2 = Intent(context,CustomUiActivity::class.java)
-                    intent2.putExtra("youtubelink",map2["youtube"].toString())
-                    context.startActivity(intent2)
-                }
-            }
+            val mintent = Intent(context, Topic::class.java)
+            mintent.putExtra("map", map2 as Serializable)
+            context.startActivity(mintent)
         }
 
     }

@@ -12,16 +12,14 @@ class ExploreAndBuy : AppCompatActivity() {
         binding = ActivityExploreAndBuyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var intent = intent
-
         val map = intent.getSerializableExtra("map") as? MutableMap<String, Any>
 
         val mapWithName = map
         map!!.remove("name")
-        map!!.remove("image")
+        map.remove("image")
 
         binding.courserecyclerview.layoutManager = LinearLayoutManager(this)
-        val adapter = ExploreAndBuyAdapter(this,map!!,mapWithName!!)
+        val adapter = ExploreAndBuyAdapter(this,map,mapWithName!!)
         binding.courserecyclerview.adapter = adapter
 
 

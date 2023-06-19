@@ -31,12 +31,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val courses : Map<String,Map<String, Any>?> = mapOf("Boards" to SharedData.Boardmap,"JEE" to SharedData.JEEmap
-            ,"NEET" to SharedData.NEETmap,"TeacherTraning" to SharedData.TeacherTraningCoursemap)
+        binding.Text1.text = "Online classes"
+        binding.Text2.text = "Offline classes"
+        binding.Text3.text = "Home Tuttion"
 
-        binding.horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
-        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(),courses)
-        binding.horizontalRecyclerView.adapter = horizontaladapter
+        SharedData.Mycourses = SharedData.CourseFlag.filterValues { it == true }
+            .mapNotNull { (key, _) -> SharedData.JEEmap?.get(key)?.let { key to it } }
+            .toMap()
+        //SharedData.Mycourses = SharedData.JEEmap
+
+        binding.constraintLayout2.setOnClickListener {
+            val intent = Intent(requireContext(), AllCourses::class.java)
+            startActivity(intent)
+        }
 
         //Automatic Slider
         sliderView = binding.imageSlider
@@ -53,9 +60,9 @@ class HomeFragment : Fragment() {
 
         sliderView.startAutoCycle()
 
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView2)
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView3)
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.imageView5)
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.onlineimage)
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.offlineimage)
+        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.hometutionimage)
 
     }
 }

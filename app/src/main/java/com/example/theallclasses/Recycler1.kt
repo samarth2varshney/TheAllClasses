@@ -12,8 +12,6 @@ class Recycler1 : AppCompatActivity() {
         binding = ActivityRecycler1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var intent = intent
-
         val map = intent.getSerializableExtra("map") as? MutableMap<String, Any>
 
         val mapWithName = map

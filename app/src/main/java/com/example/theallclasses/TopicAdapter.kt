@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
@@ -29,36 +30,24 @@ class TopicAdapter(private val context: Context, private val mapData: Map<String
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var map: Map<String, Any>
-        var map2: Map<String, Any>
-        if(mapWithName[mapWithName.keys.elementAt(position)] is Map<*, *> ) {
-            map = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
-            holder.keyTextView.text = map["name"].toString()
-            Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
-        }
+        var map: Map<String, Any> = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
 
-        val mintent = Intent(context, Recycler1::class.java)
+        val pdflink = map["pdf"].toString()
+        val youtubelink = map["youtube"].toString()
+        val imagelink = map["image"].toString()
+        val topicname = map["name"].toString()
+
+        holder.keyTextView.text = topicname
+        Glide.with(holder.itemView).load(imagelink).fitCenter().into(holder.imageView)
+
         holder.videobutton.setOnClickListener{
-            if (mapData[mapData.keys.elementAt(position)] is Map<*, *>){
-                map2 = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
-                if (mapData.keys.elementAt(position)[0]!='t'){
-                    mintent.putExtra("map", map2 as Serializable)
-                    context.startActivity(mintent)
-                }
-                else{
-                    val intent2 = Intent(context,CustomUiActivity::class.java)
-                    intent2.putExtra("youtubelink",map2["youtube"].toString())
-                    context.startActivity(intent2)
-                }
-            }
+            val intent2 = Intent(context,CustomUiActivity::class.java)
+            intent2.putExtra("youtubelink",youtubelink)
+            context.startActivity(intent2)
         }
 
         holder.pdfbutton.setOnClickListener {
-            // add the link of pdf
-            val value = "https://drive.google.com/file/d/1radz-qe1FtvlDcvtZ-GvBJ72x5iDHOOA/view?usp=sharing"
-            val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(value))
-
-            // start activity
+            val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(pdflink))
             context.startActivity(intent3)
         }
 

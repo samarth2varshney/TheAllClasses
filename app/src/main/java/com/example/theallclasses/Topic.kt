@@ -15,20 +15,14 @@ class Topic : AppCompatActivity() {
 
         window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
 
-        var intent = intent
-
         val map = intent.getSerializableExtra("map") as? MutableMap<String, Any>
 
         val mapWithName = map
         map!!.remove("name")
         map.remove("image")
-        map.remove("cost")
-        map.remove("discount")
-        map.remove("time")
-        map.remove("originalCost")
 
         binding.recyclerviewtopic.layoutManager = LinearLayoutManager(this)
-        val adapter = TopicAdapter(this,map!!,mapWithName!!)
+        val adapter = TopicAdapter(this,map,mapWithName!!)
         binding.recyclerviewtopic.adapter = adapter
     }
 }

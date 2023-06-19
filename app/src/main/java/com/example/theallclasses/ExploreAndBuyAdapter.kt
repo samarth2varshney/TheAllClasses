@@ -17,14 +17,12 @@ import java.io.Serializable
 class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
         val imageView = itemView.findViewById<ImageView>(R.id.pic2)
         val explorebutton = itemView.findViewById<Button>(R.id.exploreId)
         val buybutton = itemView.findViewById<Button>(R.id.buyId)
         val courseInfo = itemView.findViewById<TextView>(R.id.courseInfo)
-        val discount = itemView.findViewById<TextView>(R.id.timeofcourse)
-
+        val timeofcourse = itemView.findViewById<TextView>(R.id.timeofcourse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,50 +32,39 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        val map: Map<String, Any> = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
+        var map2: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
-        var map: Map<String, Any>
-        var map2: Map<String, Any>
-        var cost = ""
-        if(mapWithName[mapWithName.keys.elementAt(position)] is Map<*, *> ) {
-            map = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
-            holder.keyTextView.text = map["name"].toString()
-            Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
+        val coursename = map["name"].toString()
+        val courseimage = map["image"].toString()
+        val cousercost = map["cost"].toString()
+        val coursetime = map["time"].toString()
 
-            val spannableString = SpannableString(map["originalCost"].toString())
-            spannableString.setSpan(StrikethroughSpan(), 0, map["originalCost"].toString().length, 0)
-            holder.courseInfo.append(spannableString)
+        holder.keyTextView.text = coursename
+        holder.timeofcourse.text = coursetime
+        Glide.with(holder.itemView).load(courseimage).fitCenter().into(holder.imageView)
 
-            holder.courseInfo.append("   ")
+        // text with horizontal cut
+        val spannableString = SpannableString(map["originalCost"].toString())
+        spannableString.setSpan(StrikethroughSpan(), 0, map["originalCost"].toString().length, 0)
+        holder.courseInfo.append(spannableString)
+        holder.courseInfo.append("   ")
 
-            holder.courseInfo.append(map["cost"].toString())
-            cost = map["cost"].toString()
-            holder.courseInfo.append("\n")
-
-
-            holder.discount.text = map["time"].toString()
-
-        }
+        holder.courseInfo.append(cousercost)
 
         val mintent = Intent(context, Recycler1::class.java)
         holder.explorebutton.setOnClickListener {
-            if (mapData[mapData.keys.elementAt(position)] is Map<*, *>){
-                map2 = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
-                if (mapData.keys.elementAt(position)[0]!='t'){
-                    mintent.putExtra("map", map2 as Serializable)
-                    context.startActivity(mintent)
-                }
-                else{
-                    val intent = Intent(context, CustomUiActivity::class.java)
-                    context.startActivity(intent)
-                }
-            }
+            mintent.putExtra("map", map2 as Serializable)
+            context.startActivity(mintent)
         }
 
         holder.buybutton.setOnClickListener {
             val intent = Intent(context, PurchaseActivity::class.java)
-            if(cost!="null"){
-            intent.putExtra("cost", cost.toInt())
-            context.startActivity(intent)}
+            if(cousercost!="null"){
+                intent.putExtra("courseName" ,mapData.keys.elementAt(position))
+                intent.putExtra("cost", cousercost.toInt())
+                context.startActivity(intent)
+            }
         }
 
     }
