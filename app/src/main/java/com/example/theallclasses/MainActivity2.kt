@@ -1,4 +1,5 @@
 package com.example.theallclasses
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.example.theallclasses.databinding.ActivityMain2Binding
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
@@ -51,7 +53,7 @@ class MainActivity2 : AppCompatActivity() {
 
         // Set up navigation item selected listener for the drawer
         navigationView.setNavigationItemSelectedListener { menuItem ->
-//            when (menuItem.itemId) {
+            when (menuItem.itemId) {
 //                R.id.navigation_item1 -> {
 //                    // Handle navigation item 1 click
 //                    // Replace with your own logic
@@ -67,7 +69,15 @@ class MainActivity2 : AppCompatActivity() {
 //                    // Replace with your own logic
 //                    replaceFragment(Item3Fragment())
 //                }
-//            }
+            R.id.navigation_logout -> {
+//                    // Handle navigation item 3 click
+//                    // Replace with your own logic
+//                    replaceFragment(Item3Fragment())
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@MainActivity2, SignInActivity::class.java))
+                    finish()
+                }
+            }
             drawerLayout.closeDrawers()
             true
         }
@@ -81,10 +91,14 @@ class MainActivity2 : AppCompatActivity() {
                     replaceFragment(HomeFragment())
                     true
                 }
-                R.id.navigation_purchase -> {
+                R.id.navigation_live -> {
                     // Handle dashboard item click
                     // Replace with your own logic
-                    replaceFragment(PurchaseFragment())
+                    replaceFragment(LiveFragment())
+                    true
+                }
+                R.id.navigation_material -> {
+                    replaceFragment(MaterialFragment())
                     true
                 }
                 R.id.navigation_courses -> {

@@ -103,9 +103,11 @@ class Splash_screen : AppCompatActivity() {
                     SharedData.uid=it.uid
                 }
                 startActivity(Intent(this , MainActivity2::class.java))
+                finish()
             }
             else{
                 startActivity(Intent(this, SignInActivity::class.java))
+                finish()
             }
         }
     }
