@@ -12,10 +12,9 @@ object SharedData {
     // userinfo
     var uid: String = ""
     var username: String = ""
-    var board:Boolean = false
-    var jee:Boolean = false
-    var neet:Boolean = false
-    var teachertrainingcourse:Boolean = false
+
+    //userUID Document
+    var UIDmap: Map<String, Any>? = null
 
     //bannerinfo
     var path = ""

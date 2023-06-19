@@ -41,7 +41,7 @@ class Splash_screen : AppCompatActivity() {
                    }
                }
 
-           val JEE = db.document("/JEE/jee")
+           val JEE = db.document("/JEE/JEE")
            JEE.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
@@ -100,8 +100,15 @@ class Splash_screen : AppCompatActivity() {
             if (auth.currentUser != null){
                 val user = Firebase.auth.currentUser
                 user?.let {
-                    SharedData.uid=it.uid
+                    SharedData.uid = it.uid
+
+                    //fetching UID(flag) document
+                    db.document("/users/${SharedData.uid}").get()
+                        .addOnSuccessListener { document ->
+                                SharedData.UIDmap = document.data as Map<String, Any>
+                        }
                 }
+
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
             }

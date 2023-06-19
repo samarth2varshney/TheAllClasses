@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -75,7 +76,28 @@ class SignUpActivity : AppCompatActivity() {
                                     ).show()
                                     SharedData.uid = user.uid
                                     SharedData.username = user.email.toString()
-                                    goToMain()
+                                    val collectionRef = FirebaseFirestore.getInstance().collection("users")
+                                    val documentRef = collectionRef.document(user.uid)
+
+                                    // Create the data for the document
+                                    val data = hashMapOf(
+                                        "JEE Class 11" to false,
+                                        "JEE Class 12" to false,
+                                        "username" to name,
+                                        "mycourses" to hashMapOf<String, String>()
+                                    )
+                                    // Set the data in the Firestore document
+                                    documentRef.set(data)
+                                        .addOnSuccessListener {
+                                            // Document creation success
+                                            // You can perform any additional actions here
+                                            goToMain()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            // Document creation failed
+                                            // Handle the error here
+                                        }
+
                                 } else {
                                     // Display name update failed
                                     Toast.makeText(
