@@ -13,13 +13,15 @@ import java.util.Date
 
 class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     private lateinit var binding: ActivityPurchaseBinding
-    var courseName = intent.getStringExtra("courseName").toString()
+    lateinit var courseName:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         var cost = intent.getIntExtra("cost",0)
+        courseName = intent.getStringExtra("courseName").toString()
 
         Checkout.preload(this@PurchaseActivity)
 
