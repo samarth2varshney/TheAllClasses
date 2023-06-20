@@ -21,6 +21,7 @@ object SharedData {
     // userinfo
     var uid: String = ""
     var username: String = ""
+    var email: String = ""
 
 
     //bannerinfo
