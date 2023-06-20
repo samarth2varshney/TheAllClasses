@@ -53,12 +53,6 @@ class SignInActivity : AppCompatActivity() {
                             baseContext, "Authentication successfull.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        //fetching UID(flag) document
-                        val db = Firebase.firestore
-                        db.document("/users/${SharedData.uid}").get()
-                            .addOnSuccessListener { document ->
-                                SharedData.UIDmap = document.data as Map<String, Any>
-                            }
                         goToMain()
                     } else {
                         // If sign in fails, display a message to the user.

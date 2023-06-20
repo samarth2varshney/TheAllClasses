@@ -75,29 +75,8 @@ class SignUpActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     SharedData.uid = user.uid
-                                    SharedData.username = user.email.toString()
-                                    val collectionRef = FirebaseFirestore.getInstance().collection("users")
-                                    val documentRef = collectionRef.document(user.uid)
-
-                                    // Create the data for the document
-                                    val data = hashMapOf(
-                                        "JEE Class 11" to false,
-                                        "JEE Class 12" to false,
-                                        "username" to name,
-                                        "mycourses" to hashMapOf<String, String>()
-                                    )
-                                    // Set the data in the Firestore document
-                                    documentRef.set(data)
-                                        .addOnSuccessListener {
-                                            // Document creation success
-                                            // You can perform any additional actions here
-                                            goToMain()
-                                        }
-                                        .addOnFailureListener { e ->
-                                            // Document creation failed
-                                            // Handle the error here
-                                        }
-
+                                    SharedData.username = name
+                                    goToMain()
                                 } else {
                                     // Display name update failed
                                     Toast.makeText(

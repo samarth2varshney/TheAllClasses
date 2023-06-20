@@ -8,7 +8,9 @@ object SharedData {
     var NEETmap: Map<String, Any>? = null
     var TeacherTraningCoursemap: Map<String, Any>? = null
     var courseImage: Map<String,String>? = null
+
     var Mycourses: Map<String, Any>? = null
+
     val CourseFlag = mapOf(
         "Jee11" to false,
         "Jee12" to false,
@@ -20,8 +22,6 @@ object SharedData {
     var uid: String = ""
     var username: String = ""
 
-    //userUID Document
-    var UIDmap: Map<String, Any>? = null
 
     //bannerinfo
     var imagename:Array<String>?=null

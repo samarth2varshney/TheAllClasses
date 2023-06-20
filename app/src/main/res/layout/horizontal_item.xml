@@ -7,7 +7,8 @@
     android:layout_margin="10dp"
     android:background="@drawable/rounded_message_gray"
     android:elevation="8dp"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:id="@+id/horizontalItemBG">
 
     <ImageView
         android:id="@+id/pic1"

@@ -16,4 +16,25 @@
     <color name="edit_text_bg">#F5F5F5</color>
 
     <color name="white">#FFFFFF</color>
+
+
+
+    <color name="LightSkyBlue">#82CFFB</color>
+    <color name="RoyalBlue">#2563EA</color>
+
+    <color name="SalmonPink">#FDA3AC</color>
+    <color name="Rojo">#DC2625</color>
+
+    <color name="Mauve">#D0B4FE</color>
+    <color name="BlueViolet">#7B3AEC</color>
+
+
+    <color name="Timberwolf">#D5D3D4</color>
+    <color name="DavyGray">#57544F</color>
+
+
+    <color name="Aquamarine">#72E8B4</color>
+    <color name="PigmentGreen">#17A34A</color>
+
+
 </resources>
