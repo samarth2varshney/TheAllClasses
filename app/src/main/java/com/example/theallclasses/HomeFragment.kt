@@ -31,19 +31,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.Text1.text = "Online classes"
-        binding.Text2.text = "Offline classes"
-        binding.Text3.text = "Home Tuttion"
-
         SharedData.Mycourses = SharedData.CourseFlag.filterValues { it == true }
             .mapNotNull { (key, _) -> SharedData.JEEmap?.get(key)?.let { key to it } }
             .toMap()
-        //SharedData.Mycourses = SharedData.JEEmap
 
-        binding.constraintLayout2.setOnClickListener {
-            val intent = Intent(requireContext(), AllCourses::class.java)
-            startActivity(intent)
-        }
+
+        val OnlineCourses : Map<String,Map<String, Any>?> = mapOf("Boards" to SharedData.Boardmap,"JEE" to SharedData.JEEmap
+            ,"NEET" to SharedData.NEETmap,"TeacherTraning" to SharedData.TeacherTraningCoursemap)
+
+        binding.onlinecourserecyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
+        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(),OnlineCourses)
+        binding.onlinecourserecyclerview.adapter = horizontaladapter
 
         //Automatic Slider
         sliderView = binding.imageSlider
@@ -59,10 +57,6 @@ class HomeFragment : Fragment() {
         sliderView.isAutoCycle = true
 
         sliderView.startAutoCycle()
-
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.onlineimage)
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.offlineimage)
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/theallclasses.appspot.com/o/images%2Fdear.jpg?alt=media&token=664dada1-c761-4500-a30d-49a60484c193").fitCenter().into(binding.hometutionimage)
 
     }
 }
