@@ -64,17 +64,6 @@
             app:layout_constraintTop_toTopOf="@+id/imageButton"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:srcCompat="@tools:sample/avatars">
-
-        </ImageView>
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -86,6 +75,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

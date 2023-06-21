@@ -25,8 +25,6 @@ import kotlin.concurrent.schedule
 
 class CustomUiActivity : AppCompatActivity() {
 
-    private var shouldUpdateSeekBar = true
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,92 +32,19 @@ class CustomUiActivity : AppCompatActivity() {
 
         window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         val youTubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
+        val youtubelink = intent.getStringExtra("youtubelink")
 
         lifecycle.addObserver(youTubePlayerView)
 
-        val customPlayerUi = youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_player_ui)
-        val seekb = findViewById<SeekBar>(R.id.seekBar)
-        var videoduration:Int=1
-        val playerTracker: YouTubePlayerTracker = YouTubePlayerTracker()
-
-        //val youTubePlayerSeekBar = findViewById<YouTubePlayerView>(R.id.youtube_player_seekbar)
-
-        val listener: YouTubePlayerListener = object : AbstractYouTubePlayerListener() {
-            @SuppressLint("SuspiciousIndentation")
-
-            override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
-                // findViewById<TextView>(R.id.textView).text = duration.toString() + ""
-                videoduration = duration.toInt()
-                seekb.max = videoduration
-            }
-            @SuppressLint("SuspiciousIndentation")
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val customPlayerUiController = CustomPlayerUiController(
-                    this@CustomUiActivity,
-                    customPlayerUi,
-                    youTubePlayer,
-                    youTubePlayerView
-                )
-
-                youTubePlayer.addListener(customPlayerUiController)
-                youTubePlayerView.addFullScreenListener(customPlayerUiController)
-                youTubePlayerView.exitFullScreen()
-                val youtubelink = intent.getStringExtra("youtubelink")
-                youTubePlayer.loadOrCueVideo(lifecycle, youtubelink!!, 0f)
-                youTubePlayer.addListener(playerTracker)
-                findViewById<Button>(R.id.play).setOnClickListener {
-                    if (playerTracker.state == PlayerConstants.PlayerState.PLAYING)
-                        youTubePlayer.pause()
-                    if (playerTracker.state != PlayerConstants.PlayerState.PLAYING)
-                        youTubePlayer.play()
-                }
-                findViewById<SeekBar>(R.id.seekBar)?.setOnSeekBarChangeListener(object :
-                    SeekBar.OnSeekBarChangeListener {
-                    override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-                    }
-
-                    override fun onStartTrackingTouch(seek: SeekBar) {
-                        shouldUpdateSeekBar = false
-                        // write custom code for progress is started
-                    }
-
-                    override fun onStopTrackingTouch(seek: SeekBar) {
-                        // write custom code for progress is stopped
-                        youTubePlayer.seekTo(seek.progress.toFloat())
-                        Timer().schedule(400){
-                            shouldUpdateSeekBar = true
-                        }
-                    }
-                })
+                val videoId = youtubelink.toString()
+                youTubePlayer.loadVideo(videoId, 0f)
             }
+        })
 
-            override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {
-                val enterExitFullscreenButton = findViewById<Button>(R.id.forward)
-                enterExitFullscreenButton.setOnClickListener {
-                    youTubePlayer.seekTo(second+5)
-                }
-                if(shouldUpdateSeekBar)
-                    seekb.setProgress((second).toInt(),true)
 
-            }
 
-        }
-
-        // disable web ui
-        val options = IFramePlayerOptions.Builder().controls(0).build()
-        youTubePlayerView.initialize(listener, options)
     }
-
-//    override fun onConfigurationChanged(newConfig: Configuration) {
-//        super.onConfigurationChanged(newConfig)
-//
-//        // Checks the orientation of the screen
-//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            youTubePlayerView!!.enterFullScreen()
-//        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            youTubePlayerView!!.exitFullScreen()
-//        }
-//    }
-
 }
 
