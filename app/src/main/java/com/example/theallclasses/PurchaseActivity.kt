@@ -96,13 +96,13 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                 }
             }
         }
-        binding.tvTransact.text = "Payment ID: ${p0}"
+//        binding.tvTransact.text = "Payment ID: ${p0}"
         binding.tvTransact.setTextColor(Color.GREEN)
     }
 
 
     override fun onPaymentError(p0: Int, p1: String?) {
-        binding.tvTransact.text = "Payment Failed: ${p1}"
+//        binding.tvTransact.text = "Payment Failed: ${p1}"
         binding.tvTransact.setTextColor(Color.RED)
     }
 }

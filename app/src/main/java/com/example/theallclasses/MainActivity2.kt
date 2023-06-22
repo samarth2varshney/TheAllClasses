@@ -33,6 +33,8 @@ class MainActivity2 : AppCompatActivity() {
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Toast.makeText(this, SharedData.Mycourses.toString(), Toast.LENGTH_SHORT).show()
+
         drawerLayout = binding.drawerLayout
         navigationView = binding.navigationDrawer
         bottomNavigationView = binding.bottomNavigation
