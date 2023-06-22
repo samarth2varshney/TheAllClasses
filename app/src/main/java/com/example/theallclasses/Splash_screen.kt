@@ -31,6 +31,20 @@ class Splash_screen : AppCompatActivity() {
 
        GlobalScope.launch (Dispatchers.IO) {
 
+           val user = Firebase.auth.currentUser
+           user?.let {
+               SharedData.uid = it.uid
+
+               val courses = db.document("/users/${SharedData.uid}")
+               courses.get()
+                   .addOnSuccessListener { document ->
+                       if (document != null) {
+                           flag8 = true
+                           SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                       }
+                   }
+           }
+
            val Board = db.document("/Boards/boards")
            Board.get()
                .addOnSuccessListener { document ->
@@ -96,21 +110,8 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6&& flag7){
+        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6&& flag7&& flag8){
             if (auth.currentUser != null){
-                val user = Firebase.auth.currentUser
-                user?.let {
-                    SharedData.uid = it.uid
-
-                    val courses = db.document("/users/${SharedData.uid}")
-                    courses.get()
-                        .addOnSuccessListener { document ->
-                            if (document != null) {
-                                SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
-                            }
-                        }
-                }
-
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
             }
@@ -129,5 +130,6 @@ class Splash_screen : AppCompatActivity() {
         var flag5=false
         var flag6=false
         var flag7=false
+        var flag8=false
     }
 }

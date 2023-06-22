@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentCoursesBinding
 
@@ -22,7 +23,18 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val map = SharedData.Mycourses as? MutableMap<String, Any>
+        val MycoursesKeys = SharedData.Mycourses?.keys
+        MycoursesKeys?.forEach { key ->
+            val value = SharedData.JEEmap?.get(key)
+            if (value != null) {
+                SharedData.Mycoursesdata?.put(key, value)
+            }
+        }
+        showcourses()
+    }
+
+    private fun showcourses() {
+        val map = SharedData.Mycoursesdata
 
         val mapWithName = map
         map!!.remove("name")
@@ -35,7 +47,6 @@ class CoursesFragment : Fragment() {
         binding.mycourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
         val adapter = ExploreAndBuyAdapter(requireContext(),map!!,mapWithName!!)
         binding.mycourserecyclerview.adapter = adapter
-
     }
 
 }
