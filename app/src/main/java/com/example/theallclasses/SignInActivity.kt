@@ -78,6 +78,14 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun goToMain() {
+        SharedData.uid = auth.currentUser!!.uid
+        val courses = Firebase.firestore.document("/users/${SharedData.uid}")
+        courses.get()
+            .addOnSuccessListener { document ->
+                            if (document != null) {
+                SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                            }
+            }
         val intent = Intent(this, MainActivity2::class.java)
         startActivity(intent)
         finish()

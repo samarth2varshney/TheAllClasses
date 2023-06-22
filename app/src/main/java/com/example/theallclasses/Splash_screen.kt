@@ -101,6 +101,14 @@ class Splash_screen : AppCompatActivity() {
                 val user = Firebase.auth.currentUser
                 user?.let {
                     SharedData.uid = it.uid
+
+                    val courses = db.document("/users/${SharedData.uid}")
+                    courses.get()
+                        .addOnSuccessListener { document ->
+                            if (document != null) {
+                                SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                            }
+                        }
                 }
 
                 startActivity(Intent(this , MainActivity2::class.java))

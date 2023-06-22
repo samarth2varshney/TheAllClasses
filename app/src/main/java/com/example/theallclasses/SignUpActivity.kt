@@ -86,6 +86,7 @@ class SignUpActivity : AppCompatActivity() {
                                         "email" to email,
                                         "mycourses" to hashMapOf<String, String>()
                                     )
+                                    SharedData.Mycourses = hashMapOf<String, String>()
                                     // Set the data in the Firestore document
                                     documentRef.set(data)
                                         .addOnSuccessListener {

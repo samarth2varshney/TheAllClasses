@@ -71,6 +71,7 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             .addOnSuccessListener {
                                 // Document update success
                                 // You can perform any additional actions here
+                                SharedData.Mycourses = existingMap
                             }
                             .addOnFailureListener { e ->
                                 // Document update failed
