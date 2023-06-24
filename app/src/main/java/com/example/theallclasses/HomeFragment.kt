@@ -7,13 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theallclasses.databinding.ActivityMain2Binding
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.SliderView
+import java.io.Serializable
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding2: ActivityMain2Binding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
 
@@ -27,6 +33,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding2 = ActivityMain2Binding.inflate(layoutInflater)
 
         val OnlineCourses : Map<String,Map<String, Any>?> = mapOf("Boards" to SharedData.Boardmap,"JEE" to SharedData.JEEmap
             ,"NEET" to SharedData.NEETmap,"TeacherTraning" to SharedData.TeacherTraningCoursemap)
@@ -36,7 +43,13 @@ class HomeFragment : Fragment() {
         binding.onlinecourserecyclerview.adapter = horizontaladapter
 
         binding.offlineButton.setOnClickListener {
-            startActivity(Intent(requireContext(),OfflineMode::class.java))
+//            startActivity(Intent(requireContext(),OfflineMode::class.java))
+            val fragment = offlinemode1()
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(binding2.frameLayout.id, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         //Automatic Slider

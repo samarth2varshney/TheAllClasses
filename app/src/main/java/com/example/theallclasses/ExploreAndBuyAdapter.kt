@@ -2,23 +2,28 @@ package com.example.theallclasses
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
 class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
         val imageView = itemView.findViewById<ImageView>(R.id.pic2)
         val explorebutton = itemView.findViewById<Button>(R.id.exploreId)
@@ -26,11 +31,13 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         val courseInfo = itemView.findViewById<TextView>(R.id.courseInfo)
         val timeofcourse = itemView.findViewById<TextView>(R.id.timeofcourse)
         val exploreAndBuyBG = itemView.findViewById<ConstraintLayout>(R.id.exploreAndBuyBG)
+        val layout = activityview.findViewById<FrameLayout>(R.id.frame_layout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.explore_and_buy_item, parent, false)
-        return ViewHolder(view)
+        val activityview = LayoutInflater.from(parent.context).inflate(R.layout.activity_main2, parent, false)
+        return ViewHolder(view,activityview)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -128,10 +135,17 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
 
         holder.courseInfo.append(cousercost)
 
-        val mintent = Intent(context, Recycler1::class.java)
         holder.explorebutton.setOnClickListener {
-            mintent.putExtra("map", map2 as Serializable)
-            context.startActivity(mintent)
+            val fragment = Chapter()
+            val args = Bundle()
+            args.putSerializable("map", map2 as Serializable)
+            fragment.arguments = args
+
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(holder.layout.id, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         holder.buybutton.setOnClickListener {
