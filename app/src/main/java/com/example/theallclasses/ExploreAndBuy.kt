@@ -12,8 +12,6 @@ class ExploreAndBuy : Fragment() {
 
     private lateinit var binding: FragmentExploreAndBuyBinding
     lateinit var map:MutableMap<String,Any>
-    lateinit var mapWithName:MutableMap<String,Any>
-    lateinit var mapWithoutName:MutableMap<String,Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +31,8 @@ class ExploreAndBuy : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapWithName = map.toMutableMap()
-        mapWithoutName = map.toMutableMap()
+        var mapWithName = map.toMutableMap()
+        var mapWithoutName = map.toMutableMap()
         mapWithoutName.remove("name")
         mapWithoutName.remove("image")
         mapWithName.remove("name")
