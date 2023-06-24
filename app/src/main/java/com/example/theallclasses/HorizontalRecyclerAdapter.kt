@@ -1,31 +1,37 @@
 package com.example.theallclasses
 
 import android.content.Context
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
 class HorizontalRecyclerAdapter(private val context: Context, private val mapData: Map<String, Map<String, Any>?>) : RecyclerView.Adapter<HorizontalRecyclerAdapter.ViewHolder>(){
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
 
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView1)!!
         val imageView = itemView.findViewById<ImageView>(R.id.pic1)
         val horizontalItemBG = itemView.findViewById<ConstraintLayout>(R.id.horizontalItemBG)
+        val layout1 = activityview.findViewById<FrameLayout>(R.id.frame_layout)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val activityview = LayoutInflater.from(parent.context).inflate(R.layout.activity_main2, parent, false)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.horizontal_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view,activityview)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -105,10 +111,19 @@ class HorizontalRecyclerAdapter(private val context: Context, private val mapDat
         holder.keyTextView.text = mapData.keys.elementAt(position)
         Glide.with(holder.itemView).load(SharedData.courseImage!![mapData.keys.elementAt(position)]).fitCenter().into(holder.imageView)
 
-        val mintent = Intent(context, ExploreAndBuy::class.java)
         holder.itemView.setOnClickListener {
-            mintent.putExtra("map", mapData[mapData.keys.elementAt(position)] as Serializable)
-                context.startActivity(mintent)
+
+            val fragment = ExploreAndBuy()
+            val args = Bundle()
+            args.putSerializable("map", mapData[mapData.keys.elementAt(position)] as Serializable)
+            fragment.arguments = args
+
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(holder.layout1.id, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+
         }
     }
 

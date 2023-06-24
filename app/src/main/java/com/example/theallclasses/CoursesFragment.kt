@@ -17,7 +17,6 @@ class CoursesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCoursesBinding.inflate(layoutInflater)
-
         return (binding.root)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
