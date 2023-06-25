@@ -54,20 +54,32 @@ class offlinemode1 : Fragment() {
                 }
             }
 
+        var centre:String
         binding.newDelhiButton.setOnClickListener {
-            val centre = "/AppOfflineMode/newDelhi"
-            val fragment = offlineModeCentre()
-            val args = Bundle()
-            args.putString("centre",centre)
-            fragment.arguments = args
-
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-            transaction.replace(containerId, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            centre = "/AppOfflineMode/newDelhi"
+            openFragment(centre)
+        }
+        binding.noidaButton.setOnClickListener {
+            centre = "/AppOfflineMode/noida"
+            openFragment(centre)
+        }
+        binding.ghaziabadButton.setOnClickListener {
+            centre = "/AppOfflineMode/ghaziabad"
+            openFragment(centre)
         }
 
+    }
+
+    private fun openFragment(centre: String) {
+        val fragment = offlineModeCentre()
+        val args = Bundle()
+        args.putString("centre",centre)
+        fragment.arguments = args
+
+        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+        fragmentManager.beginTransaction().
+        replace(containerId, fragment)
+            .commit()
     }
 
     private fun intializeviews() {

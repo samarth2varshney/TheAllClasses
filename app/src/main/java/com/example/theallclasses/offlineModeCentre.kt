@@ -1,6 +1,5 @@
 package com.example.theallclasses
 
-import android.os.Binder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -65,12 +64,10 @@ class offlineModeCentre : Fragment() {
         sliderView.startAutoCycle()
 
         var mapWithName = frontPageMap!!.toMutableMap()
-        var mapWithoutName = frontPageMap!!.toMutableMap()
-        mapWithoutName.remove("sliderImage")
         mapWithName.remove("sliderImage")
 
         binding.offlinecentrecourcesrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithoutName,mapWithName)
+        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithName)
         binding.offlinecentrecourcesrecyclerview.adapter = adapter
 
 

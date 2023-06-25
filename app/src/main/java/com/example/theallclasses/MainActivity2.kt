@@ -1,10 +1,7 @@
 package com.example.theallclasses
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -114,7 +111,12 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         // Set the initial fragment
-        replaceFragment(HomeFragment())
+        val fragmentManager = supportFragmentManager // Use this if you're inside an activity
+        val currentFragment = fragmentManager.findFragmentById(binding.frameLayout.id)
+
+        if (currentFragment != HomeFragment()) {
+            replaceFragment(HomeFragment())
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

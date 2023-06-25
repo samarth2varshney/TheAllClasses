@@ -35,7 +35,7 @@ class CoursesFragment : Fragment() {
     private fun showcourses() {
         val map = SharedData.Mycoursesdata
 
-        val mapWithName = map
+        val mapWithName = map!!.toMutableMap()
         map!!.remove("name")
         map.remove("image")
         map.remove("cost")
@@ -44,7 +44,7 @@ class CoursesFragment : Fragment() {
         map.remove("originalCost")
 
         binding.mycourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(),map!!,mapWithName!!)
+        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithName)
         binding.mycourserecyclerview.adapter = adapter
     }
 

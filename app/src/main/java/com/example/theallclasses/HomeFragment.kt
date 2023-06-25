@@ -1,11 +1,9 @@
 package com.example.theallclasses
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -46,7 +44,6 @@ class HomeFragment : Fragment() {
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(containerId, fragment)
-            transaction.addToBackStack(null)
             transaction.commit()
         }
 
