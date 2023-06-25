@@ -30,5 +30,6 @@
             app:sliderIndicatorUnselectedColor="#FFF"
             app:sliderScrollTimeInSec="1"
             app:sliderStartAutoCycle="true" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

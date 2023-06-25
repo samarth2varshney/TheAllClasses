@@ -37,13 +37,5 @@ class MaterialFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-//        binding.btn.setOnClickListener{
-//            startActivity(
-//                Intent(
-//                    Intent.ACTION_VIEW,
-//                    Uri.parse("http://www.youtube.com/watch?v=cxLG2wtE7TM")
-//                )
-//            )
-//        }
     }
 }

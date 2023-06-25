@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.example.theallclasses.databinding.FragmentLiveBinding
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 
 class LiveFragment : Fragment() {
@@ -38,5 +41,25 @@ class LiveFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
+        val youtubelink = "e7RvFZ6XtkI"
+
+        lifecycle.addObserver(binding.youtubePlayerViewMaterial)
+
+        binding.youtubePlayerViewMaterial.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = youtubelink.toString()
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
+
+
+//        binding.btn.setOnClickListener{
+//            startActivity(
+//                Intent(
+//                    Intent.ACTION_VIEW,
+//                    Uri.parse("http://www.youtube.com/watch?v=cxLG2wtE7TM")
+//                )
+//            )
+//        }
     }
 }
