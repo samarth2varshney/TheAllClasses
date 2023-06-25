@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentChapterBinding
 
@@ -31,14 +30,6 @@ class Chapter : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mapWithName = map.toMutableMap()
-        val mapout = map.toMutableMap()
-        mapout.remove("name")
-        mapout.remove("image")
-        mapout.remove("cost")
-        mapout.remove("discount")
-        mapout.remove("time")
-        mapout.remove("originalCost")
-
         mapWithName.remove("name")
         mapWithName.remove("image")
         mapWithName.remove("cost")
@@ -47,7 +38,7 @@ class Chapter : Fragment() {
         mapWithName.remove("originalCost")
 
         binding.chapterrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = Adapter(requireContext(),mapout,mapWithName!!)
+        val adapter = Adapter(requireContext(),mapWithName!!)
         binding.chapterrecyclerview.adapter = adapter
 
     }

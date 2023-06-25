@@ -121,7 +121,6 @@ class HorizontalRecyclerAdapter(private val context: Context, private val mapDat
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(holder.layout1.id, fragment)
-            transaction.addToBackStack(null)
             transaction.commit()
 
         }

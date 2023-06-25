@@ -1,5 +1,7 @@
 package com.example.theallclasses
 
+import com.example.theallclasses.databinding.ActivityMain2Binding
+
 object SharedData {
 
     //courseinfo

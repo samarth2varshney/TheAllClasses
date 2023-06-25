@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
+class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
@@ -115,8 +115,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
 
 
 
-        val map: Map<String, Any> = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
-        var map2: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
+        val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
         val coursename = map["name"].toString()
         val courseimage = map["image"].toString()
@@ -138,13 +137,12 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         holder.explorebutton.setOnClickListener {
             val fragment = Chapter()
             val args = Bundle()
-            args.putSerializable("map", map2 as Serializable)
+            args.putSerializable("map", map as Serializable)
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(holder.layout.id, fragment)
-            transaction.addToBackStack(null)
             transaction.commit()
         }
 
