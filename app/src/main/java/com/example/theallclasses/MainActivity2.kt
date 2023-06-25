@@ -122,6 +122,7 @@ class MainActivity2 : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.frameLayout.id, fragment)
+            .addToBackStack(null)
             .commit()
     }
 }

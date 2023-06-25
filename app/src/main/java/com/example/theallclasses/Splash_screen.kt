@@ -124,12 +124,21 @@ class Splash_screen : AppCompatActivity() {
                        openActivity()
                    }
                }
+           val customercarenumber = db.document("/customerCareNumber/numbers")
+           customercarenumber.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.customerCareNumbers = document.data as Map<String, Any>
+                       flag11 = true
+                       openActivity()
+                   }
+               }
        }
 
     }
 
     private fun openActivity() {
-        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10){
+        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10 && flag11){
             if (auth.currentUser != null){
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
@@ -152,5 +161,6 @@ class Splash_screen : AppCompatActivity() {
         var flag8=false
         var flag9=false //LiveFragmentData
         var flag10= false //MaterialFragmentData
+        var flag11=false //customerCareNumbers
     }
 }

@@ -1,11 +1,17 @@
 package com.example.theallclasses
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.theallclasses.databinding.ActivityMain2Binding
@@ -45,6 +51,14 @@ class offlinemode1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dialIntent = Intent(Intent.ACTION_DIAL)
+        dialIntent.data = Uri.parse("tel:${SharedData.customerCareNumbers!!["offlineModeNumber"].toString()}")
+        binding.customercare.append(SharedData.customerCareNumbers!!["offlineModeNumber"].toString())
+        binding.customercare.setOnClickListener {
+            startActivity(dialIntent)
+        }
+
+
         val Board = db.document("/AppOfflineMode/frontPage")
         Board.get()
             .addOnSuccessListener { document ->
@@ -77,9 +91,10 @@ class offlinemode1 : Fragment() {
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-        fragmentManager.beginTransaction().
-        replace(containerId, fragment)
-            .commit()
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(containerId, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun intializeviews() {

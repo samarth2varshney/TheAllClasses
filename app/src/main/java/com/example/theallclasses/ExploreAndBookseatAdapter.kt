@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
+class ExploreAndBookseatAdapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBookseatAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
@@ -112,9 +112,6 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             )
         }
 
-
-
-
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
         val coursename = map["name"].toString()
@@ -135,7 +132,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         holder.courseInfo.append(cousercost)
 
         holder.explorebutton.setOnClickListener {
-            val fragment = Chapter()
+            val fragment = offlineCourseDetails()
             val args = Bundle()
             args.putSerializable("map", map as Serializable)
             fragment.arguments = args
@@ -147,6 +144,11 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             transaction.commit()
         }
 
+        holder.buybutton.text = "Book A Seat"
+        val myButton = holder.buybutton
+        val layoutParams = myButton.layoutParams
+        layoutParams.width = dpToPx(110,myButton.context) // Convert dp to pixels
+        myButton.layoutParams = layoutParams
         holder.buybutton.setOnClickListener {
             val intent = Intent(context, PurchaseActivity::class.java)
             if(cousercost!="null"){
@@ -156,6 +158,10 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             }
         }
 
+    }
+    fun dpToPx(dp: Int, context: Context): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
     }
 
     override fun getItemCount(): Int {

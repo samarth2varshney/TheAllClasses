@@ -49,6 +49,7 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(holder.layout.id, fragment)
+            transaction.addToBackStack(null)
             transaction.commit()
 
         }

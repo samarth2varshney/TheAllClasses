@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
             transaction.commit()
         }
 
@@ -57,4 +58,5 @@ class HomeFragment : Fragment() {
         sliderView.startAutoCycle()
 
     }
+
 }

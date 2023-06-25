@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentOfflineModeCentreBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -38,8 +41,13 @@ class offlineModeCentre : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val Board = db.document(centre!!)
-        Board.get()
+        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+        val centredata = db.document(centre!!)
+        centredata.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     frontPageMap = document.data as Map<String, Any>
@@ -67,9 +75,8 @@ class offlineModeCentre : Fragment() {
         mapWithName.remove("sliderImage")
 
         binding.offlinecentrecourcesrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithName)
+        val adapter = ExploreAndBookseatAdapter(requireContext(),mapWithName)
         binding.offlinecentrecourcesrecyclerview.adapter = adapter
-
 
     }
 
