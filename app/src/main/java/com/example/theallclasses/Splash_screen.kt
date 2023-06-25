@@ -105,12 +105,31 @@ class Splash_screen : AppCompatActivity() {
                        openActivity()
                    }
                }
+
+           val Live = db.document("/FragmentData/Live")
+           Live.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.LiveFragmentData = document.data as Map<String, Any>
+                       flag9=true
+                       openActivity()
+                   }
+               }
+           val Material = db.document("/FragmentData/Material")
+           Material.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.MaterialFragmentData = document.data as Map<String, Any>
+                       flag10=true
+                       openActivity()
+                   }
+               }
        }
 
     }
 
     private fun openActivity() {
-        if(flag1&&flag2&&flag3&&flag4&&flag5&& flag6&& flag7&& flag8){
+        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10){
             if (auth.currentUser != null){
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
@@ -131,5 +150,7 @@ class Splash_screen : AppCompatActivity() {
         var flag6=false
         var flag7=false
         var flag8=false
+        var flag9=false //LiveFragmentData
+        var flag10= false //MaterialFragmentData
     }
 }

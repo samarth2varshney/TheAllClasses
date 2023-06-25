@@ -41,7 +41,7 @@ class LiveFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val youtubelink = "e7RvFZ6XtkI"
+        val youtubelink = SharedData.LiveFragmentData!!["youtube"]
 
         lifecycle.addObserver(binding.youtubePlayerViewMaterial)
 
@@ -51,15 +51,5 @@ class LiveFragment : Fragment() {
                 youTubePlayer.loadVideo(videoId, 0f)
             }
         })
-
-
-//        binding.btn.setOnClickListener{
-//            startActivity(
-//                Intent(
-//                    Intent.ACTION_VIEW,
-//                    Uri.parse("http://www.youtube.com/watch?v=cxLG2wtE7TM")
-//                )
-//            )
-//        }
     }
 }

@@ -37,5 +37,38 @@ class MaterialFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
+
+        binding.btnCard1.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(SharedData.MaterialFragmentData!!["booklet"].toString())
+                )
+            )
+        }
+        binding.btnCard2.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(SharedData.MaterialFragmentData!!["testseries"].toString())
+                )
+            )
+        }
+        binding.btnCard3.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(SharedData.MaterialFragmentData!!["tshirt"].toString())
+                )
+            )
+        }
+        binding.btnCard4.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(SharedData.MaterialFragmentData!!["accessories"].toString())
+                )
+            )
+        }
     }
 }

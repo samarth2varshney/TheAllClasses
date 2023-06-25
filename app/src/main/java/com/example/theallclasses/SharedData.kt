@@ -12,6 +12,9 @@ object SharedData {
     var Mycourses: Map<String, Any>? = null
     var Mycoursesdata: MutableMap<String, Any>? = mutableMapOf()
 
+    var LiveFragmentData: Map<String, Any>? = null
+    var MaterialFragmentData: Map<String, Any>? = null
+
     // userinfo
     var uid: String = ""
     var username: String = ""
