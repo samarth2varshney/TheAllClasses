@@ -32,6 +32,7 @@ class ExploreAndBookseatAdapter(private val context: Context, private val mapDat
         val timeofcourse = itemView.findViewById<TextView>(R.id.timeofcourse)
         val exploreAndBuyBG = itemView.findViewById<ConstraintLayout>(R.id.exploreAndBuyBG)
         val layout = activityview.findViewById<FrameLayout>(R.id.frame_layout)
+        val image = itemView.findViewById<ImageView>(R.id.imageView4)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -111,16 +112,19 @@ class ExploreAndBookseatAdapter(private val context: Context, private val mapDat
                 )
             )
         }
+        holder.image.visibility = ImageView.INVISIBLE
 
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
         val coursename = map["name"].toString()
         val courseimage = map["image"].toString()
         val cousercost = map["cost"].toString()
-        val coursetime = map["time"].toString()
+        val seatsLeft = map["seatsLeft"].toString()
 
         holder.keyTextView.text = coursename
-        holder.timeofcourse.text = coursetime
+        holder.timeofcourse.textSize = 16f
+        holder.timeofcourse.append("Seats Left  ")
+        holder.timeofcourse.append(seatsLeft)
         Glide.with(holder.itemView).load(courseimage).fitCenter().into(holder.imageView)
 
         // text with horizontal cut

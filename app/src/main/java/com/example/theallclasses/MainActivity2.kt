@@ -125,4 +125,11 @@ class MainActivity2 : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
+    override fun onBackPressed() {
+        if (WebviewFragment.onBackPressed()) {
+            super.onBackPressed()
+        }
+    }
+
 }

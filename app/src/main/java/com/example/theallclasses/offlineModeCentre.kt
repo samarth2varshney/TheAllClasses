@@ -5,13 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentOfflineModeCentreBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.smarteist.autoimageslider.SliderView
 
 class offlineModeCentre : Fragment() {
@@ -19,14 +14,12 @@ class offlineModeCentre : Fragment() {
     private lateinit var binding: FragmentOfflineModeCentreBinding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
-    var centre:String? = null
     var frontPageMap: Map<String, Any>? = null
-    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            centre = it.getString("centre")
+            frontPageMap = (it.getSerializable("map") as? MutableMap<String, Any>)!!
         }
     }
 
@@ -40,25 +33,6 @@ class offlineModeCentre : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        transaction.addToBackStack(null)
-        transaction.commit()
-
-        val centredata = db.document(centre!!)
-        centredata.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    frontPageMap = document.data as Map<String, Any>
-                    intializeviews()
-                }
-            }
-
-    }
-
-    private fun intializeviews() {
-
         val imagemap = frontPageMap!!["sliderImage"]  as Map<String, Any>
         val slideimages = imagemap.keys.toTypedArray()
 
@@ -77,7 +51,6 @@ class offlineModeCentre : Fragment() {
         binding.offlinecentrecourcesrecyclerview.layoutManager = LinearLayoutManager(requireContext())
         val adapter = ExploreAndBookseatAdapter(requireContext(),mapWithName)
         binding.offlinecentrecourcesrecyclerview.adapter = adapter
-
     }
 
 }

@@ -110,7 +110,7 @@ class Splash_screen : AppCompatActivity() {
            Live.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       SharedData.LiveFragmentData = document.data as Map<String, Any>?
+                       SharedData.LiveFragmentData = document.data as Map<String, Any>
                        flag9=true
                        openActivity()
                    }
@@ -119,17 +119,17 @@ class Splash_screen : AppCompatActivity() {
            Material.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       SharedData.MaterialFragmentData = document.data as Map<String, Any>?
+                       SharedData.MaterialFragmentData = document.data as Map<String, Any>
                        flag10=true
                        openActivity()
                    }
                }
-           val HomeTuition = db.document("/FragmentData/HomeTuition")
-           HomeTuition.get()
+           val HomeTution = db.document("/AppHomeTuttion/HomeTuttion")
+           HomeTution.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>?
-                       flag12=true
+                       SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>
+                       flag11 = true
                        openActivity()
                    }
                }
@@ -138,7 +138,6 @@ class Splash_screen : AppCompatActivity() {
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.customerCareNumbers = document.data as Map<String, Any>
-                       flag11 = true
                        openActivity()
                    }
                }
@@ -147,7 +146,7 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10) {
+        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10 && flag11){
             if (auth.currentUser != null){
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
@@ -170,8 +169,6 @@ class Splash_screen : AppCompatActivity() {
         var flag8=false
         var flag9=false //LiveFragmentData
         var flag10= false //MaterialFragmentData
-
         var flag11=false //customerCareNumbers
-        var flag12=false //HomeTuitionFragment
     }
 }

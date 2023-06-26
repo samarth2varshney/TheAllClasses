@@ -1,20 +1,16 @@
 package com.example.theallclasses
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theallclasses.databinding.FragmentHomeBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.theallclasses.databinding.FragmentHomeTuitionBinding
-import com.example.theallclasses.databinding.FragmentLiveBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 
 class HomeTuitionFragment : Fragment() {
@@ -22,11 +18,13 @@ class HomeTuitionFragment : Fragment() {
     private lateinit var binding: FragmentHomeTuitionBinding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
+    var containerId:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        containerId = container?.id!!
         binding = FragmentHomeTuitionBinding.inflate(layoutInflater)
         return (binding.root)
     }
@@ -34,26 +32,64 @@ class HomeTuitionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.FindingTuttorbutton.setOnClickListener {
+            val fragment = WebviewFragment()
+            val args = Bundle()
+            args.putString("formlink",SharedData.HomeTuitionFragmentData!!["findingTuttorFrom"].toString())
+            fragment.arguments = args
+
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        binding.JoinasTutorbutton.setOnClickListener {
+            val fragment = joinTutor()
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         binding.tvBanner.text = SharedData.HomeTuitionFragmentData!!["banner"].toString()
+
         //Automatic Slider
-        val imageurl = SharedData.HomeTuitionFragmentData!!["slider"] as? List<String>
+        val imageurl = SharedData.HomeTuitionFragmentData!!["slider"] as Map<String, Any>
         sliderView = binding.imageSliderHomeTuition
-        sliderAdapter = SliderAdapter(imageurl!!.toTypedArray())
+        sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val youtubelink = SharedData.HomeTuitionFragmentData!!["youtube"]
+        val imageurl2 = SharedData.HomeTuitionFragmentData!!["slider2"] as Map<String, Any>
+        sliderView = binding.imageSliderHomeTuition2
+        sliderAdapter = SliderAdapter(imageurl2.keys.toTypedArray())
+        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+        sliderView.setSliderAdapter(sliderAdapter)
+        sliderView.scrollTimeInSec = 3
+        sliderView.isAutoCycle = true
+        sliderView.startAutoCycle()
 
         lifecycle.addObserver(binding.youtubePlayerViewHometuition)
-
         binding.youtubePlayerViewHometuition.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = youtubelink.toString()
-                youTubePlayer.loadVideo(videoId, 0f)
+                val videoId = SharedData.HomeTuitionFragmentData!!["exporeHomeTuition"].toString()
+                youTubePlayer.cueVideo(videoId, 0f)
             }
         })
+
+        lifecycle.addObserver(binding.studentsExperience)
+        binding.studentsExperience.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = SharedData.HomeTuitionFragmentData!!["studentExperience"].toString()
+                youTubePlayer.cueVideo(videoId, 0f)
+            }
+        })
+
     }
 }

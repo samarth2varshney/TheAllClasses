@@ -70,15 +70,15 @@ class offlinemode1 : Fragment() {
 
         var centre:String
         binding.newDelhiButton.setOnClickListener {
-            centre = "/AppOfflineMode/newDelhi"
+            centre = "newDelhi"
             openFragment(centre)
         }
         binding.noidaButton.setOnClickListener {
-            centre = "/AppOfflineMode/noida"
+            centre = "noida"
             openFragment(centre)
         }
         binding.ghaziabadButton.setOnClickListener {
-            centre = "/AppOfflineMode/ghaziabad"
+            centre = "ghaziabad"
             openFragment(centre)
         }
 
@@ -87,7 +87,7 @@ class offlinemode1 : Fragment() {
     private fun openFragment(centre: String) {
         val fragment = offlineModeCentre()
         val args = Bundle()
-        args.putString("centre",centre)
+        args.putSerializable("map", frontPageMap!![centre] as Serializable)
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
