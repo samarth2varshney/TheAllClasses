@@ -2,6 +2,7 @@ package com.example.theallclasses
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,8 +34,9 @@ class LiveFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Automatic Slider
+        val imageurl = SharedData.LiveFragmentData!!["slider"] as? List<String>
         sliderView = binding.imageSliderLive
-        sliderAdapter = SliderAdapter(SharedData.imagename)
+        sliderAdapter = SliderAdapter(imageurl!!.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3

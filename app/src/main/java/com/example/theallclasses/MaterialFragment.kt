@@ -29,8 +29,9 @@ class MaterialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Automatic Slider
+        val imageurl = SharedData.MaterialFragmentData!!["slider"] as? List<String>
         sliderView = binding.imageSliderMaterial
-        sliderAdapter = SliderAdapter(SharedData.imagename)
+        sliderAdapter = SliderAdapter(imageurl!!.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
