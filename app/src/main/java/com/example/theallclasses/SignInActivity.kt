@@ -66,6 +66,10 @@ class SignInActivity : AppCompatActivity() {
                 }
 
         }
+        binding.tvFP.setOnClickListener {
+            val intent = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     public override fun onStart() {

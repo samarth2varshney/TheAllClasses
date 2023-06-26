@@ -17,6 +17,9 @@
         android:theme="@style/Theme.TheAllClasses"
         tools:targetApi="31">
         <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".OfflineMode"
             android:exported="false" />
         <activity
