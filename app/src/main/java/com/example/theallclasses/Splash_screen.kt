@@ -124,12 +124,21 @@ class Splash_screen : AppCompatActivity() {
                        openActivity()
                    }
                }
+           val HomeTuition = db.document("/FragmentData/HomeTuition")
+           HomeTuition.get()
+               .addOnSuccessListener { document ->
+                   if (document != null) {
+                       SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>?
+                       flag12=true
+                       openActivity()
+                   }
+               }
            val customercarenumber = db.document("/customerCareNumber/numbers")
            customercarenumber.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.customerCareNumbers = document.data as Map<String, Any>
-//                       flag11 = true
+                       flag11 = true
                        openActivity()
                    }
                }
@@ -162,6 +171,7 @@ class Splash_screen : AppCompatActivity() {
         var flag9=false //LiveFragmentData
         var flag10= false //MaterialFragmentData
 
-//        var flag11=false //customerCareNumbers
+        var flag11=false //customerCareNumbers
+        var flag12=false //HomeTuitionFragment
     }
 }

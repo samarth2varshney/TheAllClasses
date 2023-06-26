@@ -48,6 +48,15 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
+        binding.button3.setOnClickListener {
+            val fragment = HomeTuitionFragment()
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         //Automatic Slider
         sliderView = binding.imageSlider
         sliderAdapter = SliderAdapter(SharedData.imagename)

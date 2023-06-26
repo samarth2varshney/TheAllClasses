@@ -16,6 +16,7 @@ object SharedData {
 
     var LiveFragmentData: Map<String, Any>? = null
     var MaterialFragmentData: Map<String, Any>? = null
+    var HomeTuitionFragmentData: Map<String, Any>? = null
 
     // userinfo
     var uid: String = ""
