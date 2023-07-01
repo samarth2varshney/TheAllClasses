@@ -36,7 +36,7 @@ class joinTutor : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageurl = SharedData.HomeTuitionFragmentData!!["jointutorslider"] as Map<String, Any>
+        val imageurl = SharedData.HomeTuitionData!!["jointutorslider"] as Map<String, Any>
         sliderView = binding.imageSliderjoinTutor
         sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
@@ -46,9 +46,9 @@ class joinTutor : Fragment() {
         sliderView.startAutoCycle()
 
         binding.joinTeacherbutton.setOnClickListener {
-            val fragment = offlineModeCentre()
+            val fragment = ShowCourses()
             val args = Bundle()
-            args.putSerializable("map", SharedData.HomeTuitionFragmentData!!["teacherTraningProgram"] as Serializable)
+            args.putSerializable("map", SharedData.HomeTuitionData!!["teacherTraningProgram"] as Serializable)
             args.putBoolean("bookSeat",true)
             fragment.arguments = args
 
@@ -62,7 +62,7 @@ class joinTutor : Fragment() {
         binding.IhaveExperincebutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
-            args.putString("formlink",SharedData.HomeTuitionFragmentData!!["jointutorihaveexperinceform"].toString())
+            args.putString("formlink",SharedData.HomeTuitionData!!["jointutorihaveexperinceform"].toString())
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

@@ -1,35 +1,25 @@
 package com.example.theallclasses
 
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.theallclasses.databinding.ActivityMain2Binding
-import com.example.theallclasses.databinding.FragmentOfflinemode1Binding
+import com.example.theallclasses.databinding.FragmentOfflineModeBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.loadOrCueVideo
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 import java.io.Serializable
 
-class offlinemode1 : Fragment() {
-    private lateinit var binding: FragmentOfflinemode1Binding
+class OfflineMode : Fragment() {
+    private lateinit var binding: FragmentOfflineModeBinding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
-    var frontPageMap: MutableMap<String, Any>? = null
     val db = Firebase.firestore
     var containerId:Int = 0
 
@@ -44,21 +34,26 @@ class offlinemode1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         containerId = container?.id!!
-        binding = FragmentOfflinemode1Binding.inflate(layoutInflater)
+        binding = FragmentOfflineModeBinding.inflate(layoutInflater)
         return (binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val Board = db.document("/AppOfflineMode/frontPage")
-        Board.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    frontPageMap = document.data as MutableMap<String, Any>
-                    intializeviews()
+        if(SharedData.OfflineModeData==null) {
+            val Board = db.document("/AppOfflineMode/frontPage")
+            Board.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        SharedData.OfflineModeData = document.data as MutableMap<String, Any>
+                        intializeviews()
+                    }
                 }
-            }
+        }
+        else{
+            intializeviews()
+        }
 
         var centre:String
         binding.newDelhiButton.setOnClickListener {
@@ -77,9 +72,9 @@ class offlinemode1 : Fragment() {
     }
 
     private fun openFragment(centre: String) {
-        val fragment = offlineModeCentre()
+        val fragment = ShowCourses()
         val args = Bundle()
-        args.putSerializable("map", frontPageMap!![centre] as Serializable)
+        args.putSerializable("map", SharedData.OfflineModeData!![centre] as Serializable)
         args.putBoolean("bookSeat",true)
         fragment.arguments = args
 
@@ -92,7 +87,7 @@ class offlinemode1 : Fragment() {
 
     private fun intializeviews() {
 
-        val imagemap = frontPageMap!!["sliderImage"]  as Map<String, Any>
+        val imagemap = SharedData.OfflineModeData!!["sliderImage"]  as Map<String, Any>
         val slideimages = imagemap.keys.toTypedArray()
 
         //Automatic Slider
@@ -104,7 +99,7 @@ class offlinemode1 : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val imagemap2 = frontPageMap!!["2sliderImage"]  as Map<String, Any>
+        val imagemap2 = SharedData.OfflineModeData!!["2sliderImage"]  as Map<String, Any>
         val slideimages2 = imagemap2.keys.toTypedArray()
 
         sliderView = binding.offlineModeSlider2
@@ -115,8 +110,7 @@ class offlinemode1 : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-
-        val youtubelink = frontPageMap!!["exploreTheCentreVideoLink"].toString()
+        val youtubelink = SharedData.OfflineModeData!!["exploreTheCentreVideoLink"].toString()
         lifecycle.addObserver(binding.youtubePlayerView2)
 
         binding.youtubePlayerView2.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
@@ -125,7 +119,7 @@ class offlinemode1 : Fragment() {
             }
         })
 
-        val youtubelink2 = frontPageMap!!["studentExperinceVideoLink"].toString()
+        val youtubelink2 = SharedData.OfflineModeData!!["studentExperinceVideoLink"].toString()
         lifecycle.addObserver(binding.youtubePlayerView3)
 
         binding.youtubePlayerView3.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {

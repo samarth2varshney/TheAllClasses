@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.theallclasses.databinding.FragmentOfflineCourseDetailsBinding
+import com.example.theallclasses.databinding.FragmentCourseDetailsBinding
 
-class offlineCourseDetails : Fragment() {
+class CourseDetails : Fragment() {
 
-    private lateinit var binding: FragmentOfflineCourseDetailsBinding
+    private lateinit var binding: FragmentCourseDetailsBinding
     lateinit var map:MutableMap<String,Any>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class offlineCourseDetails : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentOfflineCourseDetailsBinding.inflate(layoutInflater)
+        binding = FragmentCourseDetailsBinding.inflate(layoutInflater)
         return (binding.root)
     }
 
@@ -60,6 +60,7 @@ class offlineCourseDetails : Fragment() {
             binding.freecourserecyclerview.adapter = adapter
         }else{
             binding.freecourserecyclerview.visibility = View.GONE
+            binding.textView6.visibility = View.GONE
         }
     }
 

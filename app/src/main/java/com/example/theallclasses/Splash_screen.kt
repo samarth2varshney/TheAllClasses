@@ -104,6 +104,16 @@ class Splash_screen : AppCompatActivity() {
                        openActivity()
                    }
                }
+
+           val JEEadvanced = db.document("/ADVANCE/ADVANCE")
+           JEEadvanced.get()
+               .addOnSuccessListener {document->
+                   if(document != null){
+                       //SharedData.JEE_Advanced = document.data as Map<String, Any>
+                       flag7 = true
+                   }
+               }
+
        }
 
     }
@@ -128,5 +138,6 @@ class Splash_screen : AppCompatActivity() {
         var flag4=false
         var flag5=false
         var flag6=false
+        var flag7=false
     }
 }

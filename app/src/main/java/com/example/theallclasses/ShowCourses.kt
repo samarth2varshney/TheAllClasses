@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theallclasses.databinding.FragmentOfflineModeCentreBinding
+import com.example.theallclasses.databinding.FragmentShowCoursesBinding
 import com.smarteist.autoimageslider.SliderView
 
-class offlineModeCentre : Fragment() {
+class ShowCourses : Fragment() {
 
-    private lateinit var binding: FragmentOfflineModeCentreBinding
+    private lateinit var binding: FragmentShowCoursesBinding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
     var map: Map<String, Any>? = null
@@ -32,7 +31,7 @@ class offlineModeCentre : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOfflineModeCentreBinding.inflate(layoutInflater)
+        binding = FragmentShowCoursesBinding.inflate(layoutInflater)
         return (binding.root)
     }
 

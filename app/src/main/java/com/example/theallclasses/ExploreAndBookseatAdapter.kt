@@ -146,7 +146,7 @@ class ExploreAndBookseatAdapter(
         holder.courseInfo.append(cousercost)
 
         holder.explorebutton.setOnClickListener {
-            val fragment = offlineCourseDetails()
+            val fragment = CourseDetails()
             val args = Bundle()
             args.putSerializable("map", map as Serializable)
             fragment.arguments = args

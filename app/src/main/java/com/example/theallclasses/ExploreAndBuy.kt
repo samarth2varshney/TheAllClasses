@@ -31,12 +31,12 @@ class ExploreAndBuy : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mapWithName = map.toMutableMap()
+        val mapWithName = map.toMutableMap()
         mapWithName.remove("name")
         mapWithName.remove("image")
 
         binding.explorerecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(), mapWithName,true)
+        val adapter = ExploreAdapter(requireContext(), mapWithName,true)
         binding.explorerecyclerview.adapter = adapter
 
     }

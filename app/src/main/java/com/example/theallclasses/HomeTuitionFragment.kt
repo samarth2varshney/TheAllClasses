@@ -35,22 +35,26 @@ class HomeTuitionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val HomeTution = db.document("/AppHomeTuttion/HomeTuttion")
-        HomeTution.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>
-                    openActivity()
+        if(SharedData.HomeTuitionData == null) {
+            val HomeTution = db.document("/AppHomeTuttion/HomeTuttion")
+            HomeTution.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        SharedData.HomeTuitionData = document.data as Map<String, Any>
+                        intializeviews()
+                    }
                 }
-            }
+        }else{
+            intializeviews()
+        }
 
     }
 
-    private fun openActivity() {
+    private fun intializeviews() {
         binding.FindingTuttorbutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
-            args.putString("formlink",SharedData.HomeTuitionFragmentData!!["findingTuttorFrom"].toString())
+            args.putString("formlink",SharedData.HomeTuitionData!!["findingTuttorFrom"].toString())
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -69,10 +73,10 @@ class HomeTuitionFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.tvBanner.text = SharedData.HomeTuitionFragmentData!!["banner"].toString()
+        binding.tvBanner.text = SharedData.HomeTuitionData!!["banner"].toString()
 
         //Automatic Slider
-        val imageurl = SharedData.HomeTuitionFragmentData!!["slider"] as Map<String, Any>
+        val imageurl = SharedData.HomeTuitionData!!["slider"] as Map<String, Any>
         sliderView = binding.imageSliderHomeTuition
         sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
@@ -81,7 +85,7 @@ class HomeTuitionFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val imageurl2 = SharedData.HomeTuitionFragmentData!!["slider2"] as Map<String, Any>
+        val imageurl2 = SharedData.HomeTuitionData!!["slider2"] as Map<String, Any>
         sliderView = binding.imageSliderHomeTuition2
         sliderAdapter = SliderAdapter(imageurl2.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
@@ -93,7 +97,7 @@ class HomeTuitionFragment : Fragment() {
         lifecycle.addObserver(binding.youtubePlayerViewHometuition)
         binding.youtubePlayerViewHometuition.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = SharedData.HomeTuitionFragmentData!!["exporeHomeTuition"].toString()
+                val videoId = SharedData.HomeTuitionData!!["exporeHomeTuition"].toString()
                 youTubePlayer.cueVideo(videoId, 0f)
             }
         })
@@ -101,7 +105,7 @@ class HomeTuitionFragment : Fragment() {
         lifecycle.addObserver(binding.studentsExperience)
         binding.studentsExperience.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = SharedData.HomeTuitionFragmentData!!["studentExperience"].toString()
+                val videoId = SharedData.HomeTuitionData!!["studentExperience"].toString()
                 youTubePlayer.cueVideo(videoId, 0f)
             }
         })

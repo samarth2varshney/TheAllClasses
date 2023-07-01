@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="729dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".offlineModeCentre">
+    tools:context=".ShowCourses">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="8dp"
-        tools:context=".offlineModeCentre">
+        tools:context=".ShowCourses">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

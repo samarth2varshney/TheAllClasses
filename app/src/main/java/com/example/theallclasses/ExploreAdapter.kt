@@ -21,11 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class ExploreAndBuyAdapter(
+class ExploreAdapter(
     private val context: Context,
     private val mapData: Map<String, Any>,
     val showBuyButton: Boolean
-) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<ExploreAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!

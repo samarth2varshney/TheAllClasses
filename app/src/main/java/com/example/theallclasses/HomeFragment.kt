@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.SliderView
+import java.io.Serializable
 
 
 class HomeFragment : Fragment() {
@@ -33,19 +33,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val OnlineCourses: Map<String, Map<String, Any>?> = mapOf(
-            "Boards" to SharedData.Boardmap,
-            "JEE" to SharedData.JEEmap,
-            "NEET" to SharedData.NEETmap
-        )
-
-        binding.onlinecourserecyclerview.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(), OnlineCourses)
-        binding.onlinecourserecyclerview.adapter = horizontaladapter
+        binding.jeeAdvancedButton.setOnClickListener{
+            openShowCourses(SharedData.JEE_Advanced)
+        }
+        binding.jeeMainsButton.setOnClickListener {
+            openShowCourses(SharedData.JEEmap)
+        }
+        binding.neetUgButton.setOnClickListener {
+            openShowCourses(SharedData.NEETmap)
+        }
+        binding.cbseButton.setOnClickListener {
+            openShowCourses(SharedData.Boardmap)
+        }
 
         binding.offlineButton.setOnClickListener {
-            val fragment = offlinemode1()
+            val fragment = OfflineMode()
             val fragmentManager: FragmentManager =
                 (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -73,6 +75,20 @@ class HomeFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
+    }
+
+    private fun openShowCourses(course: Map<String, Any>?) {
+        val fragment = ShowCourses()
+        val args = Bundle()
+        args.putSerializable("map", course as Serializable)
+        args.putBoolean("bookSeat",false)
+        fragment.arguments = args
+
+        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(containerId, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }

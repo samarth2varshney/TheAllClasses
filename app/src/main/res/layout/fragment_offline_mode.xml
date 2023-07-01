@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="729dp"
     android:layout_margin="10dp"
-    tools:context=".offlinemode1">
+    tools:context=".OfflineMode">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".offlinemode1">
+        tools:context=".OfflineMode">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
