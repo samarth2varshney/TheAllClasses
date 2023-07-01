@@ -1,5 +1,6 @@
 package com.example.theallclasses
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,9 +33,34 @@ class offlineCourseDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(this).load(map["courseDetails"]).fitCenter().into(binding.courseDetailsImage)
-        Glide.with(this).load(map["otherDetails"]).fitCenter().into(binding.otherDetailsImage)
+        if(map["courseDetails"] != null)
+            Glide.with(this).load(map["courseDetails"]).fitCenter().into(binding.courseDetailsImage)
 
+        if(map["otherDetails"] != null)
+            Glide.with(this).load(map["otherDetails"]).fitCenter().into(binding.otherDetailsImage)
+        else{
+            binding.otherDetailsImage.visibility = View.GONE
+            binding.otherDetails.visibility = View.GONE
+        }
+
+        binding.bookSeatbutton.setOnClickListener {
+            val intent = Intent(requireContext(), PurchaseActivity::class.java)
+            if(map["cost"]!="null"){
+                intent.putExtra("courseName" ,map["name"].toString())
+                intent.putExtra("cost", map["cost"].toString().toInt())
+                startActivity(intent)
+            }
+        }
+
+        if(map["freeContent"] != null) {
+            val mapWithName = map["freeContent"] as MutableMap<String, Any>
+
+            binding.freecourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
+            val adapter = Adapter(requireContext(), mapWithName)
+            binding.freecourserecyclerview.adapter = adapter
+        }else{
+            binding.freecourserecyclerview.visibility = View.GONE
+        }
     }
 
 }

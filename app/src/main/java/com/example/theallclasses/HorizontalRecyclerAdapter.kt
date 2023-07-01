@@ -112,10 +112,10 @@ class HorizontalRecyclerAdapter(private val context: Context, private val mapDat
         Glide.with(holder.itemView).load(SharedData.courseImage!![mapData.keys.elementAt(position)]).fitCenter().into(holder.imageView)
 
         holder.itemView.setOnClickListener {
-
-            val fragment = ExploreAndBuy()
+            val fragment = offlineModeCentre()
             val args = Bundle()
             args.putSerializable("map", mapData[mapData.keys.elementAt(position)] as Serializable)
+            args.putBoolean("bookSeat",false)
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

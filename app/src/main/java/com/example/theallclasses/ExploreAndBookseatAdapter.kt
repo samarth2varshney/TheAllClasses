@@ -21,7 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class ExploreAndBookseatAdapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBookseatAdapter.ViewHolder>(){
+class ExploreAndBookseatAdapter(
+    private val context: Context,
+    private val mapData: Map<String, Any>,
+    val bookSeat: Boolean
+) : RecyclerView.Adapter<ExploreAndBookseatAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
@@ -116,7 +120,13 @@ class ExploreAndBookseatAdapter(private val context: Context, private val mapDat
 
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
-        val coursename = map["name"].toString()
+        val coursename:String
+        if(map["name"].toString()==null){
+            coursename = mapData.keys.elementAt(position)
+        }
+        else{
+            coursename = map["name"].toString()
+        }
         val courseimage = map["image"].toString()
         val cousercost = map["cost"].toString()
         val seatsLeft = map["seatsLeft"].toString()
@@ -148,7 +158,9 @@ class ExploreAndBookseatAdapter(private val context: Context, private val mapDat
             transaction.commit()
         }
 
-        holder.buybutton.text = "Book A Seat"
+        if(bookSeat)
+            holder.buybutton.text = "Book A Seat"
+
         val myButton = holder.buybutton
         val layoutParams = myButton.layoutParams
         layoutParams.width = dpToPx(110,myButton.context) // Convert dp to pixels

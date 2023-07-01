@@ -21,7 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class ExploreAndBuyAdapter (private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
+class ExploreAndBuyAdapter(
+    private val context: Context,
+    private val mapData: Map<String, Any>,
+    val showBuyButton: Boolean
+) : RecyclerView.Adapter<ExploreAndBuyAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView2)!!
@@ -137,7 +141,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
         holder.explorebutton.setOnClickListener {
             val fragment = Chapter()
             val args = Bundle()
-            args.putSerializable("map", map as Serializable)
+            args.putSerializable("map", map["paidContent"] as Serializable)
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -147,6 +151,7 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
             transaction.commit()
         }
 
+        if(showBuyButton)
         holder.buybutton.setOnClickListener {
             val intent = Intent(context, PurchaseActivity::class.java)
             if(cousercost!="null"){
@@ -155,6 +160,8 @@ class ExploreAndBuyAdapter (private val context: Context, private val mapData: M
                 context.startActivity(intent)
             }
         }
+        else
+            holder.buybutton.visibility = View.GONE
 
     }
 

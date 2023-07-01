@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import java.io.Serializable
 
-class TopicAdapter(private val context: Context, private val mapData: Map<String, Any>, private val mapWithName: Map<String, Any>) : RecyclerView.Adapter<TopicAdapter.ViewHolder>(){
+class TopicAdapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<TopicAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val keyTextView = itemView.findViewById<TextView>(R.id.topicname)
         val imageView = itemView.findViewById<ImageView>(R.id.topicimage)
-        val videobutton = itemView.findViewById<Button>(R.id.videobutton)
         val pdfbutton = itemView.findViewById<Button>(R.id.PDFbutton)
     }
 
@@ -30,17 +28,14 @@ class TopicAdapter(private val context: Context, private val mapData: Map<String
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var map: Map<String, Any> = mapWithName[mapWithName.keys.elementAt(position)] as Map<String, Any>
+        var map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
-        val pdflink = map["pdf"].toString()
-        val youtubelink = map["youtube"].toString()
-        val imagelink = map["image"].toString()
-        val topicname = map["name"].toString()
+        val pdflink = map["pdfLink"].toString()
+        val youtubelink = map["youtubeLink"].toString()
 
-        holder.keyTextView.text = topicname
-        Glide.with(holder.itemView).load(imagelink).fitCenter().into(holder.imageView)
+        Glide.with(holder.itemView).load("https://img.youtube.com/vi/$youtubelink/hqdefault.jpg").fitCenter().into(holder.imageView)
 
-        holder.videobutton.setOnClickListener{
+        holder.imageView.setOnClickListener{
             val intent2 = Intent(context,CustomUiActivity::class.java)
             intent2.putExtra("youtubelink",youtubelink)
             context.startActivity(intent2)

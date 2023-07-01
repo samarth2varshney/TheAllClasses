@@ -34,9 +34,9 @@ class LiveFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Automatic Slider
-        val imageurl = SharedData.LiveFragmentData!!["slider"] as? List<String>
+        val imageurl = SharedData.LiveFragmentData!!["slider"] as Map<String, Any>
         sliderView = binding.imageSliderLive
-        sliderAdapter = SliderAdapter(imageurl!!.toTypedArray())
+        sliderAdapter = SliderAdapter(imageurl!!.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
@@ -50,7 +50,7 @@ class LiveFragment : Fragment() {
         binding.youtubePlayerViewMaterial.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = youtubelink.toString()
-                youTubePlayer.loadVideo(videoId, 0f)
+                youTubePlayer.cueVideo(videoId, 0f)
             }
         })
     }

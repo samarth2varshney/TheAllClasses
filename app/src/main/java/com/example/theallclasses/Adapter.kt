@@ -33,8 +33,8 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
-        val chaptername = map["name"].toString()
-        val chapterimage = map["image"].toString()
+        val chaptername = map["chapterName"].toString()
+        val chapterimage = map["chapterImage"].toString()
 
         holder.keyTextView.text = chaptername
         Glide.with(holder.itemView).load(chapterimage).fitCenter().into(holder.imageView)

@@ -24,6 +24,4 @@ object SharedData {
     //bannerinfo
     var imagename:Array<String>?=null
 
-    //customerCareNumbers
-    var customerCareNumbers: Map<String,Any>? = null
 }

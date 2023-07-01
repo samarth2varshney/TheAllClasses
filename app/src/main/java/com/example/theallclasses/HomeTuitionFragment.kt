@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.theallclasses.databinding.FragmentHomeTuitionBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.smarteist.autoimageslider.SliderView
@@ -19,6 +21,7 @@ class HomeTuitionFragment : Fragment() {
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
     var containerId:Int = 0
+    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +35,18 @@ class HomeTuitionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val HomeTution = db.document("/AppHomeTuttion/HomeTuttion")
+        HomeTution.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>
+                    openActivity()
+                }
+            }
+
+    }
+
+    private fun openActivity() {
         binding.FindingTuttorbutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
@@ -90,6 +105,7 @@ class HomeTuitionFragment : Fragment() {
                 youTubePlayer.cueVideo(videoId, 0f)
             }
         })
-
     }
+
+
 }

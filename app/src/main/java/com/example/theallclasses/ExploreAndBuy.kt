@@ -36,7 +36,7 @@ class ExploreAndBuy : Fragment() {
         mapWithName.remove("image")
 
         binding.explorerecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithName)
+        val adapter = ExploreAndBuyAdapter(requireContext(), mapWithName,true)
         binding.explorerecyclerview.adapter = adapter
 
     }

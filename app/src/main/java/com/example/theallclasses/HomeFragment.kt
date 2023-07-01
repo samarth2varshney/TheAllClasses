@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -32,16 +33,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val OnlineCourses : Map<String,Map<String, Any>?> = mapOf("Boards" to SharedData.Boardmap,"JEE" to SharedData.JEEmap
-            ,"NEET" to SharedData.NEETmap,"TeacherTraning" to SharedData.TeacherTraningCoursemap)
+        val OnlineCourses: Map<String, Map<String, Any>?> = mapOf(
+            "Boards" to SharedData.Boardmap,
+            "JEE" to SharedData.JEEmap,
+            "NEET" to SharedData.NEETmap
+        )
 
-        binding.onlinecourserecyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(),OnlineCourses)
+        binding.onlinecourserecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val horizontaladapter = HorizontalRecyclerAdapter(requireContext(), OnlineCourses)
         binding.onlinecourserecyclerview.adapter = horizontaladapter
 
         binding.offlineButton.setOnClickListener {
             val fragment = offlinemode1()
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val fragmentManager: FragmentManager =
+                (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(containerId, fragment)
             transaction.addToBackStack(null)
@@ -50,7 +56,8 @@ class HomeFragment : Fragment() {
 
         binding.button3.setOnClickListener {
             val fragment = HomeTuitionFragment()
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val fragmentManager: FragmentManager =
+                (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(containerId, fragment)
             transaction.addToBackStack(null)

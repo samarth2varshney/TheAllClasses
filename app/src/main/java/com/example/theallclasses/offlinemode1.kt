@@ -29,7 +29,7 @@ class offlinemode1 : Fragment() {
     private lateinit var binding: FragmentOfflinemode1Binding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
-    var frontPageMap: Map<String, Any>? = null
+    var frontPageMap: MutableMap<String, Any>? = null
     val db = Firebase.firestore
     var containerId:Int = 0
 
@@ -51,19 +51,11 @@ class offlinemode1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dialIntent = Intent(Intent.ACTION_DIAL)
-        dialIntent.data = Uri.parse("tel:${SharedData.customerCareNumbers!!["offlineModeNumber"].toString()}")
-        binding.customercare.append(SharedData.customerCareNumbers!!["offlineModeNumber"].toString())
-        binding.customercare.setOnClickListener {
-            startActivity(dialIntent)
-        }
-
-
         val Board = db.document("/AppOfflineMode/frontPage")
         Board.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    frontPageMap = document.data as Map<String, Any>
+                    frontPageMap = document.data as MutableMap<String, Any>
                     intializeviews()
                 }
             }
@@ -88,6 +80,7 @@ class offlinemode1 : Fragment() {
         val fragment = offlineModeCentre()
         val args = Bundle()
         args.putSerializable("map", frontPageMap!![centre] as Serializable)
+        args.putBoolean("bookSeat",true)
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

@@ -30,14 +30,12 @@ class topic1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mapWithName = map.toMutableMap()
-        val mapWithoutName = map.toMutableMap()
-        mapWithoutName.remove("name")
-        mapWithoutName.remove("image")
-        mapWithName.remove("name")
-        mapWithName.remove("image")
+        mapWithName.remove("chapterName")
+        mapWithName.remove("chapterImage")
+        mapWithName.remove("chapterNumber")
 
         binding.topicrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = TopicAdapter(requireContext(),mapWithoutName,mapWithName)
+        val adapter = TopicAdapter(requireContext(),mapWithName)
         binding.topicrecyclerview.adapter = adapter
 
     }

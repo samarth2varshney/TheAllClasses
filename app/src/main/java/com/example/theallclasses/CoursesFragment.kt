@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentCoursesBinding
@@ -23,28 +24,22 @@ class CoursesFragment : Fragment() {
 
         val MycoursesKeys = SharedData.Mycourses?.keys
         MycoursesKeys?.forEach { key ->
-            val value = SharedData.JEEmap?.get(key)
+            val value = SharedData.JEEmap!![key]
             if (value != null) {
                 SharedData.Mycoursesdata?.put(key, value)
             }
         }
-        showcourses()
 
+        showcourses()
     }
 
     private fun showcourses() {
         val map = SharedData.Mycoursesdata
 
         val mapWithName = map!!.toMutableMap()
-        map!!.remove("name")
-        map.remove("image")
-        map.remove("cost")
-        map.remove("discount")
-        map.remove("time")
-        map.remove("originalCost")
 
         binding.mycourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBuyAdapter(requireContext(),mapWithName)
+        val adapter = ExploreAndBuyAdapter(requireContext(), mapWithName,false)
         binding.mycourserecyclerview.adapter = adapter
     }
 

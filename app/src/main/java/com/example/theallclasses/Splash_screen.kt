@@ -3,6 +3,7 @@ package com.example.theallclasses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.theallclasses.databinding.ActivitySplashScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -25,22 +26,21 @@ class Splash_screen : AppCompatActivity() {
         binding.imageView.animate().apply {
             duration = 1000
             rotation(360f)
-            flag7=true
+            flag6=true
             openActivity()
         }.start()
 
        GlobalScope.launch (Dispatchers.IO) {
 
-           val user = Firebase.auth.currentUser
-           user?.let {
-               SharedData.uid = it.uid
-
+           if(auth.currentUser!=null) {
+               SharedData.uid = auth.currentUser!!.uid
                val courses = db.document("/users/${SharedData.uid}")
                courses.get()
                    .addOnSuccessListener { document ->
                        if (document != null) {
-                           flag8 = true
                            SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                           flag1 = true
+                           openActivity()
                        }
                    }
            }
@@ -49,8 +49,8 @@ class Splash_screen : AppCompatActivity() {
            Board.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       SharedData.Boardmap = document.data as Map<String, Any>
-                       flag1=true
+                       //SharedData.Boardmap = document.data as Map<String, Any>
+                       flag2 = true
                        openActivity()
                    }
                }
@@ -60,7 +60,7 @@ class Splash_screen : AppCompatActivity() {
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.JEEmap = document.data as Map<String, Any>
-                       flag2=true
+                       flag3 = true
                        openActivity()
                    }
                }
@@ -70,74 +70,37 @@ class Splash_screen : AppCompatActivity() {
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.NEETmap = document.data as Map<String, Any>
-                       flag3=true
+                       flag4 = true
                        openActivity()
                    }
                }
+       }
+           GlobalScope.launch (Dispatchers.IO) {
 
-           val docRef = db.document("/HeroSectionSliderImages/appslider")
+           val docRef = db.document("/HeroSectionSliderImages/appslider") // TODO remove this and merge it in data base with others
            docRef.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
                        map = document.data as Map<String,Any>
                        SharedData.imagename = map!!.keys.toTypedArray()
-                       flag5=true
-                       openActivity()
                    }
                }
 
-           val Teachertraningcourse = db.document("/TeacherTraningCourse/teachertraningcourse")
-           Teachertraningcourse.get()
-               .addOnSuccessListener { document ->
-                   if (document != null) {
-                       SharedData.TeacherTraningCoursemap = document.data as Map<String, Any>
-                       flag4=true
-                       openActivity()
-                   }
-               }
-
-           val courseImage = db.document("/CourseImage/image")
+           val courseImage = db.document("/CourseImage/image") // TODO remove this and merge it in data base with others
            courseImage.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
                        SharedData.courseImage = document.data as Map<String, String>
-                       flag6=true
-                       openActivity()
                    }
                }
-
-           val Live = db.document("/FragmentData/Live")
-           Live.get()
+           val LiveAndMaterial = db.document("/LiveAndMaterial/LiveAndMaterail")
+           LiveAndMaterial.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       SharedData.LiveFragmentData = document.data as Map<String, Any>
-                       flag9=true
-                       openActivity()
-                   }
-               }
-           val Material = db.document("/FragmentData/Material")
-           Material.get()
-               .addOnSuccessListener { document ->
-                   if (document != null) {
-                       SharedData.MaterialFragmentData = document.data as Map<String, Any>
-                       flag10=true
-                       openActivity()
-                   }
-               }
-           val HomeTution = db.document("/AppHomeTuttion/HomeTuttion")
-           HomeTution.get()
-               .addOnSuccessListener { document ->
-                   if (document != null) {
-                       SharedData.HomeTuitionFragmentData = document.data as Map<String, Any>
-                       flag11 = true
-                       openActivity()
-                   }
-               }
-           val customercarenumber = db.document("/customerCareNumber/numbers")
-           customercarenumber.get()
-               .addOnSuccessListener { document ->
-                   if (document != null) {
-                       SharedData.customerCareNumbers = document.data as Map<String, Any>
+                       var tempmap = document.data as Map<String, Any>
+                       SharedData.MaterialFragmentData = tempmap["Material"] as Map<String, Any>
+                       SharedData.LiveFragmentData = tempmap["Live"] as Map<String, Any>
+                       flag5=true
                        openActivity()
                    }
                }
@@ -146,7 +109,7 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10 && flag11){
+        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6){
             if (auth.currentUser != null){
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
@@ -165,10 +128,5 @@ class Splash_screen : AppCompatActivity() {
         var flag4=false
         var flag5=false
         var flag6=false
-        var flag7=false
-        var flag8=false
-        var flag9=false //LiveFragmentData
-        var flag10= false //MaterialFragmentData
-        var flag11=false //customerCareNumbers
     }
 }

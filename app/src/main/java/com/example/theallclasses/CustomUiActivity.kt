@@ -39,7 +39,7 @@ class CustomUiActivity : AppCompatActivity() {
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = youtubelink.toString()
-                youTubePlayer.cueVideo(videoId, 0f)
+                youTubePlayer.loadVideo(videoId, 0f)
             }
         })
 

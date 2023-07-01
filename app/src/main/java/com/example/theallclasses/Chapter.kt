@@ -29,16 +29,10 @@ class Chapter : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mapWithName = map.toMutableMap()
-        mapWithName.remove("name")
-        mapWithName.remove("image")
-        mapWithName.remove("cost")
-        mapWithName.remove("discount")
-        mapWithName.remove("time")
-        mapWithName.remove("originalCost")
+        val mapWithName = map.toMutableMap().toSortedMap()
 
         binding.chapterrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = Adapter(requireContext(),mapWithName!!)
+        val adapter = Adapter(requireContext(),mapWithName)
         binding.chapterrecyclerview.adapter = adapter
 
     }

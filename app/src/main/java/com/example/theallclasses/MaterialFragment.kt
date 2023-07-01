@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.example.theallclasses.databinding.FragmentMaterialBinding
 import com.smarteist.autoimageslider.SliderView
 
-
 class MaterialFragment : Fragment() {
 
     private lateinit var binding: FragmentMaterialBinding
@@ -29,15 +28,14 @@ class MaterialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Automatic Slider
-        val imageurl = SharedData.MaterialFragmentData!!["slider"] as? List<String>
+        val imageurl = SharedData.MaterialFragmentData!!["slider"] as Map<String, Any>
         sliderView = binding.imageSliderMaterial
-        sliderAdapter = SliderAdapter(imageurl!!.toTypedArray())
+        sliderAdapter = SliderAdapter(imageurl!!.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
-
 
         binding.btnCard1.setOnClickListener {
             startActivity(

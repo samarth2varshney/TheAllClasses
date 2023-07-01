@@ -38,9 +38,12 @@ class SignInActivity : AppCompatActivity() {
                 binding.etEmail.error = "Email is required."
                 return@setOnClickListener
             }
-
-            if (password.isEmpty()) {
+            if (password.isEmpty()){
                 binding.etPassword.error = "Password is required."
+                return@setOnClickListener
+            }
+            if (password.length<=7){
+                binding.etPassword.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
 
