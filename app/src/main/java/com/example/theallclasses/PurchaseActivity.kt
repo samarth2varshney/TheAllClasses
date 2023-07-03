@@ -14,6 +14,10 @@ import java.util.Date
 class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     private lateinit var binding: ActivityPurchaseBinding
     lateinit var courseName:String
+    var location:String = ""
+    var type:String = ""
+    var startDate:String =""
+    var endDate:String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +25,14 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         setContentView(binding.root)
 
         var cost = intent.getIntExtra("cost",0)
+        // TODO all of this inside users
         courseName = intent.getStringExtra("courseName").toString()
+        location = intent.getStringExtra("location").toString()
+        type = intent.getStringExtra("type").toString()
+        startDate = intent.getStringExtra("startDate").toString()
+        endDate = intent.getStringExtra("endDate").toString()
+
+        Toast.makeText(this,"$startDate $endDate ",Toast.LENGTH_LONG).show()
 
         Checkout.preload(this@PurchaseActivity)
 

@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -24,7 +25,9 @@ import java.io.Serializable
 class ExploreAndBookseatAdapter(
     private val context: Context,
     private val mapData: Map<String, Any>,
-    val bookSeat: Boolean
+    val bookSeat: Boolean,
+    val location: String,
+    val type: String
 ) : RecyclerView.Adapter<ExploreAndBookseatAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
@@ -127,7 +130,7 @@ class ExploreAndBookseatAdapter(
         else{
             coursename = map["name"].toString()
         }
-        val courseimage = map["image"].toString()
+        val courseimage = map["courseImage"].toString()
         val cousercost = map["cost"].toString()
         val seatsLeft = map["seatsLeft"].toString()
 
@@ -149,8 +152,11 @@ class ExploreAndBookseatAdapter(
             val fragment = CourseDetails()
             val args = Bundle()
             args.putSerializable("map", map as Serializable)
+            args.putString("location",location)
+            args.putString("type",type)
+            args.putString("startDate",map["startDate"].toString())
+            args.putString("endDate",map["endDate"].toString())
             fragment.arguments = args
-
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(holder.layout.id, fragment)
@@ -165,11 +171,16 @@ class ExploreAndBookseatAdapter(
         val layoutParams = myButton.layoutParams
         layoutParams.width = dpToPx(110,myButton.context) // Convert dp to pixels
         myButton.layoutParams = layoutParams
+
         holder.buybutton.setOnClickListener {
             val intent = Intent(context, PurchaseActivity::class.java)
             if(cousercost!="null"){
                 intent.putExtra("courseName" ,mapData.keys.elementAt(position))
                 intent.putExtra("cost", cousercost.toInt())
+                intent.putExtra("location",location)
+                intent.putExtra("type",type)
+                intent.putExtra("startDate",map["startDate"].toString())
+                intent.putExtra("endDate",map["endDate"].toString())
                 context.startActivity(intent)
             }
         }

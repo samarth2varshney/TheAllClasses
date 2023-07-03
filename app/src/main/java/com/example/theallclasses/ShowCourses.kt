@@ -16,14 +16,18 @@ class ShowCourses : Fragment() {
     private lateinit var binding: FragmentShowCoursesBinding
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
-    var map: Map<String, Any>? = null
-    var bookSeat:Boolean = true
+    lateinit var map: Map<String, Any>
+    var location:String = ""
+    var type:String = ""
+    var bookSeat:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             map = (it.getSerializable("map") as? MutableMap<String, Any>)!!
             bookSeat = it.getBoolean("bookSeat")
+            location = it.getString("location").toString()
+            type = it.getString("type").toString()
         }
     }
 
@@ -38,9 +42,9 @@ class ShowCourses : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(map!!["sliderImage"] != null){
+        if(map!!["slider"] != null){
             //Automatic Slider
-            val imagemap = map!!["sliderImage"]  as Map<String, Any>
+            val imagemap = map!!["slider"]  as Map<String, Any>
             val slideimages = imagemap.keys.toTypedArray()
 
             sliderView = binding.offlineModeCentreSlider
@@ -67,11 +71,11 @@ class ShowCourses : Fragment() {
         }
 
         var mapWithName = map!!.toMutableMap()
-        mapWithName.remove("sliderImage")
+        mapWithName.remove("slider")
         mapWithName.remove("contactInfo")
 
         binding.offlinecentrecourcesrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBookseatAdapter(requireContext(), mapWithName,bookSeat)
+        val adapter = ExploreAndBookseatAdapter(requireContext(), mapWithName,bookSeat,location,type)
         binding.offlinecentrecourcesrecyclerview.adapter = adapter
     }
 

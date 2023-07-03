@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.theallclasses.databinding.FragmentJoinTutorBinding
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.smarteist.autoimageslider.SliderView
 import java.io.Serializable
 
@@ -36,6 +39,14 @@ class joinTutor : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        lifecycle.addObserver(binding.youtubePlayerViewJoinTutor)
+        binding.youtubePlayerViewJoinTutor.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = SharedData.HomeTuitionData!!["joinTutorVideo"].toString()
+                youTubePlayer.cueVideo(videoId, 0f)
+            }
+        })
+
         val imageurl = SharedData.HomeTuitionData!!["jointutorslider"] as Map<String, Any>
         sliderView = binding.imageSliderjoinTutor
         sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
@@ -48,8 +59,10 @@ class joinTutor : Fragment() {
         binding.joinTeacherbutton.setOnClickListener {
             val fragment = ShowCourses()
             val args = Bundle()
-            args.putSerializable("map", SharedData.HomeTuitionData!!["teacherTraningProgram"] as Serializable)
+            args.putSerializable("map", SharedData.HomeTuitionData!!["teacherTrainingProgram"] as Serializable)
             args.putBoolean("bookSeat",true)
+            args.putString("location","homeTuttion")
+            args.putString("type","teacherTrainingProgram")
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -62,7 +75,7 @@ class joinTutor : Fragment() {
         binding.IhaveExperincebutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
-            args.putString("formlink",SharedData.HomeTuitionData!!["jointutorihaveexperinceform"].toString())
+            args.putString("formlink",SharedData.HomeTuitionData!!["jointutorihaveexperienceform"].toString())
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentCourseDetailsBinding
@@ -14,10 +15,15 @@ class CourseDetails : Fragment() {
 
     private lateinit var binding: FragmentCourseDetailsBinding
     lateinit var map:MutableMap<String,Any>
+    var location:String = ""
+    var type:String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             map = (it.getSerializable("map") as? MutableMap<String, Any>)!!
+            location = it.getString("location").toString()
+            type = it.getString("type").toString()
         }
     }
 
@@ -48,6 +54,10 @@ class CourseDetails : Fragment() {
             if(map["cost"]!="null"){
                 intent.putExtra("courseName" ,map["name"].toString())
                 intent.putExtra("cost", map["cost"].toString().toInt())
+                intent.putExtra("location",location)
+                intent.putExtra("type",type)
+                intent.putExtra("startDate",map["startDate"].toString())
+                intent.putExtra("endDate",map["endDate"].toString())
                 startActivity(intent)
             }
         }

@@ -42,7 +42,7 @@ class OfflineMode : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(SharedData.OfflineModeData==null) {
-            val Board = db.document("/AppOfflineMode/frontPage")
+            val Board = db.document("/Offline/Offline")
             Board.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
@@ -76,6 +76,8 @@ class OfflineMode : Fragment() {
         val args = Bundle()
         args.putSerializable("map", SharedData.OfflineModeData!![centre] as Serializable)
         args.putBoolean("bookSeat",true)
+        args.putString("location","offline")
+        args.putString("type",centre)
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -87,7 +89,7 @@ class OfflineMode : Fragment() {
 
     private fun intializeviews() {
 
-        val imagemap = SharedData.OfflineModeData!!["sliderImage"]  as Map<String, Any>
+        val imagemap = SharedData.OfflineModeData!!["slider1"]  as Map<String, Any>
         val slideimages = imagemap.keys.toTypedArray()
 
         //Automatic Slider
@@ -99,7 +101,7 @@ class OfflineMode : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val imagemap2 = SharedData.OfflineModeData!!["2sliderImage"]  as Map<String, Any>
+        val imagemap2 = SharedData.OfflineModeData!!["slider2"]  as Map<String, Any>
         val slideimages2 = imagemap2.keys.toTypedArray()
 
         sliderView = binding.offlineModeSlider2
@@ -110,7 +112,7 @@ class OfflineMode : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val youtubelink = SharedData.OfflineModeData!!["exploreTheCentreVideoLink"].toString()
+        val youtubelink = SharedData.OfflineModeData!!["exploreTheCentreVideo"].toString()
         lifecycle.addObserver(binding.youtubePlayerView2)
 
         binding.youtubePlayerView2.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
@@ -119,7 +121,7 @@ class OfflineMode : Fragment() {
             }
         })
 
-        val youtubelink2 = SharedData.OfflineModeData!!["studentExperinceVideoLink"].toString()
+        val youtubelink2 = SharedData.OfflineModeData!!["studentExperienceVideo"].toString()
         lifecycle.addObserver(binding.youtubePlayerView3)
 
         binding.youtubePlayerView3.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
