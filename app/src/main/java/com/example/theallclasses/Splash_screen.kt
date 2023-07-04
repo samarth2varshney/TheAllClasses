@@ -30,19 +30,6 @@ class Splash_screen : AppCompatActivity() {
 
        GlobalScope.launch (Dispatchers.IO) {
 
-           if(auth.currentUser!=null) {
-               SharedData.uid = auth.currentUser!!.uid
-               val courses = db.document("/users/${SharedData.uid}")
-               courses.get()
-                   .addOnSuccessListener { document ->
-                       if (document != null) {
-                           SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
-                           flag2 = true
-                           openActivity()
-                       }
-                   }
-           }
-
            val Board = db.document("/CBSE/CBSE")
            Board.get()
                .addOnSuccessListener { document ->
@@ -113,7 +100,7 @@ class Splash_screen : AppCompatActivity() {
     }
 
     private fun openActivity() {
-        if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8){
+        if(flag1 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8){
             if (auth.currentUser != null){
                 startActivity(Intent(this , MainActivity2::class.java))
                 finish()
@@ -127,7 +114,6 @@ class Splash_screen : AppCompatActivity() {
 
     companion object{
         var flag1=false
-        var flag2=false
         var flag3=false
         var flag4=false
         var flag5=false

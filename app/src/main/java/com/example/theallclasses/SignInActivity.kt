@@ -10,7 +10,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
@@ -29,8 +28,8 @@ class SignInActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-
         binding.btnSignUp.setOnClickListener {
+
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
 
@@ -56,15 +55,13 @@ class SignInActivity : AppCompatActivity() {
                             baseContext, "Authentication successfull.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        goToMain()
+                        val intent = Intent(this, MainActivity2::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         // Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
+                        Toast.makeText(baseContext, "Don't have a account signup", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -80,21 +77,9 @@ class SignInActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            goToMain()
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+            finish()
         }
-    }
-
-    fun goToMain() {
-        SharedData.uid = auth.currentUser!!.uid
-        val courses = Firebase.firestore.document("/users/${SharedData.uid}")
-        courses.get()
-            .addOnSuccessListener { document ->
-                            if (document != null) {
-                SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
-                            }
-            }
-        val intent = Intent(this, MainActivity2::class.java)
-        startActivity(intent)
-        finish()
     }
 }
