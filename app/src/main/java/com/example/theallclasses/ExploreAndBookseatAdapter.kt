@@ -62,6 +62,7 @@ class ExploreAndBookseatAdapter(
                     R.color.RoyalBlue
                 )
             )
+            holder.exploreAndBuyBG.clipToOutline = true
         }
         else if (position % 5 == 1) {
             holder.exploreAndBuyBG.setBackgroundColor(
@@ -76,6 +77,7 @@ class ExploreAndBookseatAdapter(
                     R.color.Rojo
                 )
             )
+            holder.exploreAndBuyBG.clipToOutline = true
         }
         else if (position % 5 == 2) {
             holder.exploreAndBuyBG.setBackgroundColor(
@@ -90,6 +92,7 @@ class ExploreAndBookseatAdapter(
                     R.color.BlueViolet
                 )
             )
+            holder.exploreAndBuyBG.clipToOutline = true
         }
         else if (position % 5 == 3) {
             holder.exploreAndBuyBG.setBackgroundColor(
@@ -104,6 +107,7 @@ class ExploreAndBookseatAdapter(
                     R.color.DavyGray
                 )
             )
+            holder.exploreAndBuyBG.clipToOutline = true
         }
         else if (position % 5 == 4) {
             holder.exploreAndBuyBG.setBackgroundColor(
@@ -118,6 +122,7 @@ class ExploreAndBookseatAdapter(
                     R.color.PigmentGreen
                 )
             )
+            holder.exploreAndBuyBG.clipToOutline = true
         }
         holder.image.visibility = ImageView.INVISIBLE
 

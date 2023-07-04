@@ -7,8 +7,8 @@
     <!--Image we will display is our slider view-->
     <ImageView
         android:id="@+id/myimage"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:elevation="8dp"
         android:contentDescription="@string/app_name" />
