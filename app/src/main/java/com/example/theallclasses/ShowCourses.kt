@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentShowCoursesBinding
 import com.smarteist.autoimageslider.SliderView
@@ -55,16 +56,28 @@ class ShowCourses : Fragment() {
             sliderView.isAutoCycle = true
             sliderView.startAutoCycle()
         }else{
-           binding.offlineModeCentreSlider.visibility = View.GONE
+            binding.offlineModeCentreSlider.visibility = View.GONE
+            //making the top margin to 0dp offlinecentrecourcesrecyclerview
+            val layoutParams = binding.offlinecentrecourcesrecyclerview.layoutParams as ConstraintLayout.LayoutParams
+            layoutParams.topMargin = 0
+            binding.offlinecentrecourcesrecyclerview.layoutParams = layoutParams
         }
 
         if(map!!["contactInfo"] != null) {
-            //phone and address
             val dialIntent = Intent(Intent.ACTION_DIAL)
             dialIntent.data =
                 Uri.parse("tel:${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]}")
             binding.customercare2.append("${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]} \n")
             binding.customercare2.append((map!!["contactInfo"] as Map<String, String>)["address"])
+            binding.customercare2.setOnClickListener {
+                startActivity(dialIntent)
+            }
+        }else if(SharedData.customerCare!=null){
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+
+            dialIntent.data =
+                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
+            binding.customercare2.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
             binding.customercare2.setOnClickListener {
                 startActivity(dialIntent)
             }

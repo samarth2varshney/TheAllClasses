@@ -76,8 +76,8 @@ class OfflineMode : Fragment() {
         val args = Bundle()
         args.putSerializable("map", SharedData.OfflineModeData!![centre] as Serializable)
         args.putBoolean("bookSeat",true)
-        args.putString("location","offline")
-        args.putString("type",centre)
+        args.putString("location",centre)
+        args.putString("type","offline")
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

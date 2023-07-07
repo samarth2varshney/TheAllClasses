@@ -22,8 +22,10 @@
           android:id="@+id/toolbar"
           android:layout_width="match_parent"
           android:layout_height="?attr/actionBarSize"
-          android:background="?attr/colorPrimary"
-          app:title="My App" />
+          android:background="#111827"
+          app:subtitleTextColor="@color/white"
+          app:title="ALLTHECLASSES"
+          app:titleTextColor="@color/white" />
 
       <!-- Main Content -->
       <FrameLayout

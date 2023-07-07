@@ -3,6 +3,8 @@ package com.example.theallclasses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import com.example.theallclasses.databinding.ActivitySplashScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -21,12 +23,12 @@ class Splash_screen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageView.animate().apply {
-            duration = 1000
-            rotation(360f)
-            flag1=true
+        val delayMillis = 2000L // 2 seconds
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            flag1 = true
             openActivity()
-        }.start()
+        }, delayMillis)
 
        GlobalScope.launch (Dispatchers.IO) {
 
@@ -34,7 +36,7 @@ class Splash_screen : AppCompatActivity() {
            Board.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       //SharedData.Boardmap = document.data as Map<String, Any> TODO remove the comment after putting entries
+                       SharedData.Boardmap = document.data as Map<String, Any>
                        flag3 = true
                        openActivity()
                    }
@@ -57,7 +59,7 @@ class Splash_screen : AppCompatActivity() {
            NEET.get()
                .addOnSuccessListener { document ->
                    if (document != null) {
-                       //SharedData.NEETmap = document.data as Map<String, Any> TODO remove the comment after putting entries
+                       SharedData.NEETmap = document.data as Map<String, Any>
                        flag5 = true
                        openActivity()
                    }
@@ -89,7 +91,7 @@ class Splash_screen : AppCompatActivity() {
            JEEadvanced.get()
                .addOnSuccessListener {document->
                    if(document != null){
-                       //SharedData.JEE_Advanced = document.data as Map<String, Any> TODO remove the comment after putting entries
+                       SharedData.JEE_Advanced = document.data as Map<String, Any>
                        flag8 = true
                        openActivity()
                    }

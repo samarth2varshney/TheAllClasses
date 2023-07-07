@@ -1,6 +1,7 @@
 package com.example.theallclasses
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,6 +73,27 @@ class CourseDetails : Fragment() {
             binding.freecourserecyclerview.visibility = View.GONE
             binding.textView6.visibility = View.GONE
         }
+
+        if(map!!["contactInfo"] != null) {
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data =
+                Uri.parse("tel:${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]}")
+            binding.customercare.append("${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]} \n")
+            binding.customercare.append((map!!["contactInfo"] as Map<String, String>)["address"])
+            binding.customercare.setOnClickListener {
+                startActivity(dialIntent)
+            }
+        }else if(SharedData.customerCare!=null){
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+
+            dialIntent.data =
+                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
+            binding.customercare.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
+            binding.customercare.setOnClickListener {
+                startActivity(dialIntent)
+            }
+        }
+
     }
 
 }

@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.theallclasses.databinding.FragmentHomeBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.smarteist.autoimageslider.SliderView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.Serializable
-// sending loaction in home fragment
 
 class HomeFragment : Fragment() {
 
@@ -19,6 +23,7 @@ class HomeFragment : Fragment() {
     lateinit var sliderView: SliderView
     lateinit var sliderAdapter: SliderAdapter
     var containerId:Int = 0
+    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,17 +37,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        GlobalScope.launch (Dispatchers.IO) {
+            val Board = db.document("/customerCareNumber/numbers")
+            Board.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        SharedData.customerCare = document.data as Map<String, Any>
+                    }
+                }
+        }
+
         binding.jeeAdvancedButton.setOnClickListener{
-            openShowCourses(SharedData.JEE_Advanced,"ADVANCED")
+            openShowCourses(SharedData.JEE_Advanced,"jeeadvance")
         }
         binding.jeeMainsButton.setOnClickListener {
-            openShowCourses(SharedData.JEEmap, "JEE")
+            openShowCourses(SharedData.JEEmap, "jeemains")
         }
         binding.neetUgButton.setOnClickListener {
-            openShowCourses(SharedData.NEETmap, "NEET")
+            openShowCourses(SharedData.NEETmap, "neet")
         }
         binding.cbseButton.setOnClickListener {
-            openShowCourses(SharedData.Boardmap, "BOARDS")
+            openShowCourses(SharedData.Boardmap, "cbse")
         }
 
         binding.offlineButton.setOnClickListener {
@@ -81,8 +96,8 @@ class HomeFragment : Fragment() {
         val args = Bundle()
         args.putSerializable("map", course as Serializable)
         args.putBoolean("bookSeat",false)
-        args.putString("location","online")
-        args.putString("type",s)
+        args.putString("location",s)
+        args.putString("type","online")
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

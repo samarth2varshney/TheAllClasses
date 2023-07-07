@@ -7,7 +7,7 @@ object SharedData {
     var JEEmap: Map<String, Any>? = null
     var NEETmap: Map<String, Any>? = null
     var JEE_Advanced: Map<String, Any>? = null
-    var courseImage: Map<String,String>? = null
+    var teacherTrainingProgram: Map<String,Any>? = null
 
     // user courses info
     var Mycourses: Map<String, Any>? = null
@@ -24,7 +24,9 @@ object SharedData {
     // userinfo
     var uid: String = ""
 
-    //bannerinfo
-    var imagename:Array<String>?=null
+    //customercarenumbers
+    var customerCare: Map<String, Any>? = null
+
+
 
 }
