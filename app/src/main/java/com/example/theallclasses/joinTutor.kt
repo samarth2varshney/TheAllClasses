@@ -57,12 +57,13 @@ class joinTutor : Fragment() {
         sliderView.startAutoCycle()
 
         binding.joinTeacherbutton.setOnClickListener {
+            SharedData.teacherTrainingProgram = SharedData.HomeTuitionData!!["teacherTrainingProgram"] as Map<String,Any>
             val fragment = ShowCourses()
             val args = Bundle()
-            args.putSerializable("map", SharedData.HomeTuitionData!!["teacherTrainingProgram"] as Serializable)
+            args.putSerializable("map", SharedData.teacherTrainingProgram as Serializable)
             args.putBoolean("bookSeat",true)
-            args.putString("location","homeTuttion")
-            args.putString("type","teacherTrainingProgram")
+            args.putString("location","teacherTrainingProgram")
+            args.putString("type","hometution")
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

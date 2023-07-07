@@ -23,7 +23,7 @@ class MaterialRecyclerAdapter(private val context: Context, private val mapData:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.horizontal_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.buyed_course_item, parent, false)
         return ViewHolder(view)
     }
 

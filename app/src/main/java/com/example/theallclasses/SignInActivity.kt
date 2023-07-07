@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
                 binding.etPassword.error = "Password is required."
                 return@setOnClickListener
             }
-            if (password.length<=7){
+            if (password.length<7){
                 binding.etPassword.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
