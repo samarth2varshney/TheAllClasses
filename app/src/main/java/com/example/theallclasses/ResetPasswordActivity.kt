@@ -15,8 +15,8 @@ class ResetPasswordActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val auth = FirebaseAuth.getInstance()
-        binding.btnSendLink.setOnClickListener {
-            val email = binding.etFPEmail.text.toString().trim()
+        binding.btnReset.setOnClickListener {
+            val email = binding.etEmail3.text.toString().trim()
 
             if (email.isEmpty()) {
                 Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()

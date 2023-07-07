@@ -20,7 +20,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvSignUp.setOnClickListener {
+        binding.tvRegister.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
@@ -28,21 +28,21 @@ class SignInActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        binding.btnSignUp.setOnClickListener {
+        binding.btnSignIn.setOnClickListener {
 
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val email = binding.etEmail1.text.toString()
+            val password = binding.etPassword1.text.toString()
 
             if (email.isEmpty()) {
-                binding.etEmail.error = "Email is required."
+                binding.etEmail1.error = "Email is required."
                 return@setOnClickListener
             }
             if (password.isEmpty()){
-                binding.etPassword.error = "Password is required."
+                binding.etPassword1.error = "Password is required."
                 return@setOnClickListener
             }
             if (password.length<=7){
-                binding.etPassword.error = "Password should be greater than 7 words"
+                binding.etPassword1.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
 
