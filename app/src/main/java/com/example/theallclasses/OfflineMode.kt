@@ -1,5 +1,7 @@
 package com.example.theallclasses
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -136,6 +138,15 @@ class OfflineMode : Fragment() {
             }
         })
 
+        if(SharedData.customerCare!=null){
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data =
+                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
+            binding.customercare4.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
+            binding.button2.setOnClickListener {
+                startActivity(dialIntent)
+            }
+        }
 
     }
 
