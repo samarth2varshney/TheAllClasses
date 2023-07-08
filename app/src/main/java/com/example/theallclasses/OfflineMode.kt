@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentOfflineModeBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -91,6 +92,11 @@ class OfflineMode : Fragment() {
 
         val imagemap = SharedData.OfflineModeData!!["slider1"]  as Map<String, Any>
         val slideimages = imagemap.keys.toTypedArray()
+        val centreImages = SharedData.OfflineModeData!!["centreImages"] as Map<String,Any>
+
+        Glide.with(this).load(centreImages["newDelhi"]).fitCenter().into(binding.newDelhiButton)
+        Glide.with(this).load(centreImages["ghaziabad"]).fitCenter().into(binding.ghaziabadButton)
+        Glide.with(this).load(centreImages["noida"]).fitCenter().into(binding.noidaButton)
 
         //Automatic Slider
         sliderView = binding.offlineModeSlider

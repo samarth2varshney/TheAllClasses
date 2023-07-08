@@ -78,7 +78,7 @@ class ShowCourses : Fragment() {
             dialIntent.data =
                 Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
             binding.customercare2.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
-            binding.customercare2.setOnClickListener {
+            binding.button2.setOnClickListener {
                 startActivity(dialIntent)
             }
         }

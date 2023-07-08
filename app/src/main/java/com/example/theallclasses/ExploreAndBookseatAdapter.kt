@@ -40,6 +40,7 @@ class ExploreAndBookseatAdapter(
         val exploreAndBuyBG = itemView.findViewById<ConstraintLayout>(R.id.exploreAndBuyBG)
         val layout = activityview.findViewById<FrameLayout>(R.id.frame_layout)
         val image = itemView.findViewById<ImageView>(R.id.imageView4)
+        val durationtext = itemView.findViewById<TextView>(R.id.textView9)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -137,12 +138,14 @@ class ExploreAndBookseatAdapter(
         }
         val courseimage = map["courseImage"].toString()
         val cousercost = map["cost"].toString()
-        val seatsLeft = map["seatsLeft"].toString()
 
-        holder.keyTextView.text = coursename
+        if(map["seatsLeft"]!=null){
+        val seatsLeft = map["seatsLeft"].toString()
         holder.timeofcourse.textSize = 16f
         holder.timeofcourse.append("Seats Left  ")
-        holder.timeofcourse.append(seatsLeft)
+        holder.timeofcourse.append(seatsLeft)}
+
+        holder.keyTextView.text = coursename
         Glide.with(holder.itemView).load(courseimage).fitCenter().into(holder.imageView)
 
         // text with horizontal cut
@@ -150,8 +153,11 @@ class ExploreAndBookseatAdapter(
         spannableString.setSpan(StrikethroughSpan(), 0, map["originalCost"].toString().length, 0)
         holder.courseInfo.append(spannableString)
         holder.courseInfo.append("   ")
-
         holder.courseInfo.append(cousercost)
+
+        holder.durationtext.append(map["startDate"].toString())
+        holder.durationtext.append(" to ")
+        holder.durationtext.append(map["endDate"].toString())
 
         holder.explorebutton.setOnClickListener {
             val fragment = CourseDetails()

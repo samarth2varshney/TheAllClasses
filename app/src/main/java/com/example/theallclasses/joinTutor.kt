@@ -62,8 +62,8 @@ class joinTutor : Fragment() {
             val args = Bundle()
             args.putSerializable("map", SharedData.teacherTrainingProgram as Serializable)
             args.putBoolean("bookSeat",true)
-            args.putString("location","teacherTrainingProgram")
-            args.putString("type","hometution")
+            args.putString("location","teachertraining")
+            args.putString("type","offline")
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
