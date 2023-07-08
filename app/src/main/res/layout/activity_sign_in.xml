@@ -10,7 +10,7 @@
         android:id="@+id/headerSignIn"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/gradient"
+        android:background="@drawable/texture"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilEmail1"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
             android:textColor="#FFFFFF"
             android:textSize="35sp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="150dp"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:textColor="#D3D3D3"
             android:textSize="15dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="200dp"
             />
 
     </RelativeLayout>
@@ -49,7 +49,6 @@
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:boxStrokeWidth="2dp"
-        app:hintTextColor="@color/textSecondary"
         app:layout_constraintTop_toBottomOf="@id/headerSignIn"
         app:layout_constraintBottom_toTopOf="@id/tilPassword1"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +77,6 @@
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:boxStrokeWidth="2dp"
-        app:hintTextColor="@color/textSecondary"
         app:layout_constraintTop_toBottomOf="@id/tilEmail1"
         app:layout_constraintBottom_toTopOf="@id/tvFP"
         app:layout_constraintStart_toStartOf="parent"

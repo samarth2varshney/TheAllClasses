@@ -24,7 +24,7 @@
           android:layout_height="?attr/actionBarSize"
           android:background="#111827"
           app:subtitleTextColor="@color/white"
-          app:title="ALLTHECLASSES"
+          app:title="The All Classes"
           app:titleTextColor="@color/white" />
 
       <!-- Main Content -->
