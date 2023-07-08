@@ -23,37 +23,37 @@ class SignUpActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        binding.tvSignIn.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnSignUp.setOnClickListener {
-            val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            val cpassword = binding.etConfirmPassword.text.toString()
+            val name = binding.etName2.text.toString()
+            val email = binding.etEmail2.text.toString()
+            val password = binding.etPassword2.text.toString()
+            val cpassword = binding.etConfirmPass2.text.toString()
 
             if (name.isEmpty()) {
-                binding.etName.error = "Name is required."
+                binding.etName2.error = "Name is required."
                 return@setOnClickListener
             }
 
             if (email.isEmpty()) {
-                binding.etEmail.error = "Email is required."
+                binding.etEmail2.error = "Email is required."
                 return@setOnClickListener
             }
 
             if (password.isEmpty()) {
-                binding.etPassword.error = "Password is required."
+                binding.etPassword2.error = "Password is required."
                 return@setOnClickListener
             }
             if (cpassword.isEmpty()) {
-                binding.etConfirmPassword.error = "Password Confirmation is required."
+                binding.etConfirmPass2.error = "Password Confirmation is required."
                 return@setOnClickListener
             }
             if (cpassword != password) {
-                binding.etConfirmPassword.error = "Password doesn't match"
+                binding.etConfirmPass2.error = "Password doesn't match"
                 return@setOnClickListener
             }
 
