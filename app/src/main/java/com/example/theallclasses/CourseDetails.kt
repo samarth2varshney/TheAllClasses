@@ -80,7 +80,7 @@ class CourseDetails : Fragment() {
                 Uri.parse("tel:${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]}")
             binding.customercare.append("${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]} \n")
             binding.customercare.append((map!!["contactInfo"] as Map<String, String>)["address"])
-            binding.customercare.setOnClickListener {
+            binding.button.setOnClickListener {
                 startActivity(dialIntent)
             }
         }else if(SharedData.customerCare!=null){

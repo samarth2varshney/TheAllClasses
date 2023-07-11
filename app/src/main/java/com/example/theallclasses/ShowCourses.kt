@@ -69,7 +69,7 @@ class ShowCourses : Fragment() {
                 Uri.parse("tel:${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]}")
             binding.customercare2.append("${(map!!["contactInfo"] as Map<String, String>)["phoneNo"]} \n")
             binding.customercare2.append((map!!["contactInfo"] as Map<String, String>)["address"])
-            binding.customercare2.setOnClickListener {
+            binding.button2.setOnClickListener {
                 startActivity(dialIntent)
             }
         }else if(SharedData.customerCare!=null){
@@ -87,9 +87,15 @@ class ShowCourses : Fragment() {
         mapWithName.remove("slider")
         mapWithName.remove("contactInfo")
 
-        binding.offlinecentrecourcesrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExploreAndBookseatAdapter(requireContext(), mapWithName,bookSeat,location,type)
-        binding.offlinecentrecourcesrecyclerview.adapter = adapter
+        if(mapWithName.isNotEmpty()) {
+            binding.textView15.visibility = View.GONE
+            binding.offlinecentrecourcesrecyclerview.layoutManager =
+                LinearLayoutManager(requireContext())
+            val adapter =
+                ExploreAndBookseatAdapter(requireContext(), mapWithName, bookSeat, location, type)
+            binding.offlinecentrecourcesrecyclerview.adapter = adapter
+        }
+
     }
 
 }

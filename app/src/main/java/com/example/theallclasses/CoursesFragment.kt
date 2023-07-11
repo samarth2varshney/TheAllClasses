@@ -15,6 +15,9 @@ class CoursesFragment : Fragment() {
     private lateinit var binding: FragmentCoursesBinding
     val auth = FirebaseAuth.getInstance()
     val db = Firebase.firestore
+    var flag1=false
+    var flag2=false
+    var flag3=false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +29,7 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.textView16.visibility = View.GONE
 
         if(auth.currentUser!=null) {
             SharedData.uid = auth.currentUser!!.uid
@@ -74,6 +77,25 @@ class CoursesFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if(auth.currentUser!=null) {
+            SharedData.uid = auth.currentUser!!.uid
+            val courses = db.document("/users/${SharedData.uid}")
+            courses.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                        flag1 = true
+                        checkifloaded()
+                    }
+                }
+        }
+
+
+    }
+
     fun showcourses() {
         binding.spinner.visibility = View.GONE
 
@@ -89,11 +111,15 @@ class CoursesFragment : Fragment() {
     fun copyCourses(){
         val MycoursesKeys = SharedData.Mycourses?.keys
         MycoursesKeys?.forEach { key ->
+
             val map = SharedData.Mycourses!![key] as Map<String, Any>
+
              if(map["location"].toString() == "jeemains"){
                 val value = SharedData.JEEmap!![map["courseName"]]
 
                 if (value != null) {
+                    var nodename = key
+                    nodename = nodename + ""
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
@@ -125,13 +151,30 @@ class CoursesFragment : Fragment() {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
-            else if(map["location"].toString() == "offline"){
-                val value = SharedData.JEEmap!![map["courseName"]]
+            else if(map["location"].toString() == "newDelhi"){
+                val newDelhimap = SharedData.OfflineModeData!!["newDelhi"] as Map<String,Any>
+                val value = newDelhimap[map["courseName"]]
 
                 if (value != null) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
+//             else if(map["location"].toString() == "noida"){
+//                 val newDelhimap = SharedData.OfflineModeData!!["noida"] as Map<String,Any>
+//                 val value = newDelhimap[map["courseName"]]
+//
+//                 if (value != null) {
+//                     SharedData.Mycoursesdata?.put(key, value)
+//                 }
+//             }
+             else if(map["location"].toString() == "ghaziabad"){
+                 val newDelhimap = SharedData.OfflineModeData!!["ghaziabad"] as Map<String,Any>
+                 val value = newDelhimap[map["courseName"]]
+
+                 if (value != null) {
+                     SharedData.Mycoursesdata?.put(key, value)
+                 }
+             }
 
         }
 
@@ -140,15 +183,15 @@ class CoursesFragment : Fragment() {
 
     private fun checkifloaded() {
         if(flag1 && flag2 && flag3){
-            copyCourses()
+            if(SharedData.Mycourses!!.isEmpty()) {
+                binding.spinner.visibility = View.GONE
+                binding.textView16.visibility = View.VISIBLE
+            }
+            else{
+                copyCourses()
+            }
+
         }
     }
-
-    companion object{
-        var flag1=false
-        var flag2=false
-        var flag3=false
-    }
-
 
 }

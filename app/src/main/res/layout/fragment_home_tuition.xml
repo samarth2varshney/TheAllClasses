@@ -18,6 +18,11 @@
                 android:id="@+id/imageSliderHomeTuition"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +67,11 @@
                 android:id="@+id/youtube_player_view_hometuition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textBanner">
@@ -94,7 +103,11 @@
                 android:id="@+id/studentsExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -113,7 +126,11 @@
                 android:id="@+id/imageSliderHomeTuition2"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginTop="50dp"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/youtube_player_view_hometuition"
@@ -131,38 +148,63 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <ImageView
-                android:id="@+id/imageView5"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="101dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/white_rounder_corner"
+                android:backgroundTint="#FFD977"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/studentsExperience"
-                app:srcCompat="@drawable/img" />
-
-            <TextView
-                android:id="@+id/customercare"
-                android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:text="Need Clarity ?\nTalk to our helpful mentor for more information \n"
-                app:layout_constraintStart_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="93dp"
-                android:layout_height="65dp"
-                android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView5"
-                app:srcCompat="@drawable/customersupporticon" />
+                app:layout_constraintTop_toBottomOf="@id/studentsExperience">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/button2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customercare5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintWidth_percent="0.333"
+                    app:srcCompat="@drawable/customersupporticon" />
+
+                <TextView
+                    android:id="@+id/customercare5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:autoSizeMaxTextSize="24sp"
+                    android:autoSizeMinTextSize="15sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:text="Need Clarity ?\nTalk to our helpful mentor for more information  "
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.666" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="79dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#07557C"
+                    android:text="DIAL"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customercare5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

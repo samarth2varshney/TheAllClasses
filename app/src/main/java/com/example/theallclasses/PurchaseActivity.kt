@@ -107,6 +107,7 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                 }
             }
         }
+
 //        binding.tvTransact.text = "Payment ID: ${p0}"
         binding.tvTransact.setTextColor(Color.GREEN)
     }
