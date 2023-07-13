@@ -78,6 +78,15 @@ class MainActivity2 : AppCompatActivity() {
 //                    // Handle navigation item 3 click
 //                    // Replace with your own logic
 //                    replaceFragment(Item3Fragment())
+                val sharedPreferences =
+                    getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                val myEdit = sharedPreferences.edit()
+
+                // write all the data entered by the user in SharedPreference and apply
+
+                // write all the data entered by the user in SharedPreference and apply
+                myEdit.putString("uid", "")
+                myEdit.apply()
                     FirebaseAuth.getInstance().signOut()
                     startActivity(Intent(this@MainActivity2, SignInActivity::class.java))
                     finish()
