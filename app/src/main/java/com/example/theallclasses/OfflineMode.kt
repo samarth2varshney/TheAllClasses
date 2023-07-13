@@ -77,7 +77,7 @@ class OfflineMode : Fragment() {
     private fun openFragment(centre: String) {
         val fragment = ShowCourses()
         val args = Bundle()
-        args.putSerializable("map", SharedData.OfflineModeData!![centre] as Serializable)
+        args.putSerializable("map", SharedData.OfflineModeData?.get(centre) as Serializable)
         args.putBoolean("bookSeat",true)
         args.putString("location",centre)
         args.putString("type","offline")

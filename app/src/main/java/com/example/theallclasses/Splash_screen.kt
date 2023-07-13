@@ -23,33 +23,31 @@ class Splash_screen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val delayMillis = 2000L // 2 seconds
-
         Handler(Looper.getMainLooper()).postDelayed({
             flag1 = true
             openActivity()
-        }, delayMillis)
+        }, 2000L)
 
        GlobalScope.launch (Dispatchers.IO) {
 
            val Board = db.document("/CBSE/CBSE")
            Board.get()
                .addOnSuccessListener { document ->
-                   if (document != null) {
+                   if (document != null && document.data!=null){
                        SharedData.Boardmap = document.data as Map<String, Any>
-                       flag3 = true
-                       openActivity()
                    }
+                   flag3 = true
+                   openActivity()
                }
 
            val JEE = db.document("/JEE/JEE")
            JEE.get()
                .addOnSuccessListener { document ->
-                   if (document != null) {
+                   if (document != null && document.data!=null) {
                        SharedData.JEEmap = document.data as Map<String, Any>
-                       flag4 = true
-                       openActivity()
                    }
+                   flag4 = true
+                   openActivity()
                }
        }
 
@@ -58,43 +56,43 @@ class Splash_screen : AppCompatActivity() {
            val NEET = db.document("/NEET/NEET")
            NEET.get()
                .addOnSuccessListener { document ->
-                   if (document != null) {
+                   if (document != null && document.data!=null) {
                        SharedData.NEETmap = document.data as Map<String, Any>
-                       flag5 = true
-                       openActivity()
                    }
+                   flag5 = true
+                   openActivity()
                }
 
            val frontPage = db.document("/Online/Online")
            frontPage.get()
                .addOnSuccessListener { document ->
-                   if (document != null) {
+                   if (document != null && document.data!=null) {
                        SharedData.HomeFragmentData = document.data as Map<String, Any>
-                       flag6=true
-                       openActivity()
                    }
+                   flag6=true
+                   openActivity()
                }
 
            val LiveAndMaterial = db.document("/LiveAndMaterial/LiveAndMaterail")
            LiveAndMaterial.get()
                .addOnSuccessListener { document ->
-                   if (document != null) {
+                   if (document != null && document.data!=null) {
                        var tempmap = document.data as Map<String, Any>
                        SharedData.MaterialFragmentData = tempmap["Material"] as Map<String, Any>
                        SharedData.LiveFragmentData = tempmap["Live"] as Map<String, Any>
-                       flag7=true
-                       openActivity()
                    }
+                   flag7=true
+                   openActivity()
                }
 
            val JEEadvanced = db.document("/JEE_ADVANCE/JEE_ADVANCE")
            JEEadvanced.get()
                .addOnSuccessListener {document->
-                   if(document != null){
+                   if(document != null && document.data!=null){
                        SharedData.JEE_Advanced = document.data as Map<String, Any>
-                       flag8 = true
-                       openActivity()
                    }
+                   flag8 = true
+                   openActivity()
                }
 
        }

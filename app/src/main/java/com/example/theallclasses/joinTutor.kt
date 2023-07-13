@@ -1,11 +1,12 @@
 package com.example.theallclasses
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -84,6 +85,16 @@ class joinTutor : Fragment() {
             transaction.replace(containerId, fragment)
             transaction.addToBackStack(null)
             transaction.commit()
+        }
+
+        if(SharedData.customerCare!=null){
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data =
+                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
+            binding.customercare6.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
+            binding.button2.setOnClickListener {
+                startActivity(dialIntent)
+            }
         }
 
     }

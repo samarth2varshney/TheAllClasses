@@ -18,7 +18,8 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/offlineModeSlider"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="W,1:1"
                 android:background="@drawable/white_round_corner"
                 android:clipToOutline="true"
                 android:layout_marginStart="7dp"
@@ -48,8 +49,9 @@
                 android:layout_marginTop="50dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
                 android:src="@drawable/offline_delhi"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toStartOf="@+id/noidaButton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +64,9 @@
                 android:layout_height="95dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
                 android:src="@drawable/offline_noida"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toStartOf="@+id/ghaziabadButton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/newDelhiButton"
@@ -75,8 +78,9 @@
                 android:layout_height="95dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
                 android:src="@drawable/offline_ghazibad"
+                android:background="@drawable/white_round_corner"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/noidaButton"
@@ -87,13 +91,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="15dp"
                 android:text="Explore the centre"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/noidaButton" />
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/youtube_player_view2"
@@ -208,6 +212,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/offlineModeSlider2">
 
             </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="NewDelhi"
+                app:layout_constraintEnd_toEndOf="@+id/newDelhiButton"
+                app:layout_constraintStart_toStartOf="@+id/newDelhiButton"
+                app:layout_constraintTop_toBottomOf="@+id/newDelhiButton" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Noida"
+                app:layout_constraintEnd_toEndOf="@+id/noidaButton"
+                app:layout_constraintStart_toStartOf="@+id/noidaButton"
+                app:layout_constraintTop_toBottomOf="@+id/noidaButton" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Ghaziabad"
+                app:layout_constraintEnd_toEndOf="@+id/ghaziabadButton"
+                app:layout_constraintStart_toStartOf="@+id/ghaziabadButton"
+                app:layout_constraintTop_toBottomOf="@+id/ghaziabadButton" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

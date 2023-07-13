@@ -12,7 +12,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
-
 class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth //for accessing Firebase features
     private lateinit var binding: ActivitySignUpBinding
@@ -54,6 +53,10 @@ class SignUpActivity : AppCompatActivity() {
             }
             if (cpassword != password) {
                 binding.etConfirmPass2.error = "Password doesn't match"
+                return@setOnClickListener
+            }
+            if (password.length<7){
+                binding.etConfirmPass2.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
 

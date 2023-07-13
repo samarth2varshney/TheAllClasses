@@ -120,17 +120,22 @@ class BuyedCourseAdapter(
         holder.keyTextView.text = coursename
         Glide.with(holder.itemView).load(courseimage).fitCenter().into(holder.imageView)
 
-        holder.explorebutton.setOnClickListener {
-            val fragment = Chapter()
-            val args = Bundle()
-            args.putSerializable("map", map["paidContent"] as Serializable)
-            fragment.arguments = args
+        if(map["paidContent"]!=null) {
+            holder.explorebutton.setOnClickListener {
+                val fragment = Chapter()
+                val args = Bundle()
+                args.putSerializable("map", map["paidContent"] as Serializable)
+                fragment.arguments = args
 
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-            transaction.replace(holder.layout.id, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+                val fragmentManager: FragmentManager =
+                    (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(holder.layout.id, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }else{
+            holder.explorebutton.visibility = View.GONE
         }
 
     }
