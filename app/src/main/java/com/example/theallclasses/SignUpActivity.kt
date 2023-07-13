@@ -83,8 +83,6 @@ class SignUpActivity : AppCompatActivity() {
 
                                     // write all the data entered by the user in SharedPreference and apply
                                     myEdit.putString("uid", user.uid)
-                                    myEdit.putString("username", name)
-                                    myEdit.putString("email", email)
                                     myEdit.apply()
 
 //                                    SharedData.username = name

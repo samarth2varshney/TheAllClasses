@@ -6,10 +6,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.theallclasses.databinding.ActivityMain2Binding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.example.theallclasses.databinding.ActivityMain2Binding
 import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
@@ -30,6 +31,9 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        SharedData.uid = sh.getString("uid", "")
 
         drawerLayout = binding.drawerLayout
         navigationView = binding.navigationDrawer

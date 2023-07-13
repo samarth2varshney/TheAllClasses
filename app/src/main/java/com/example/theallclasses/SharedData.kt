@@ -22,7 +22,7 @@ object SharedData {
     var OfflineModeData: Map<String, Any>? = null
 
     // userinfo
-    var uid: String = "sTRTpk7W8UVWgIXMuUWHbyg05Zq2"
+    var uid: String? = ""
 
     //customercarenumbers
     var customerCare: Map<String, Any>? = null

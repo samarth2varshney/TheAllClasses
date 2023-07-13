@@ -78,6 +78,17 @@ class SignInActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
+
+            val sharedPreferences =
+                getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val myEdit = sharedPreferences.edit()
+
+            // write all the data entered by the user in SharedPreference and apply
+
+            // write all the data entered by the user in SharedPreference and apply
+            myEdit.putString("uid", currentUser.uid)
+            myEdit.apply()
+
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()

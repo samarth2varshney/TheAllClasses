@@ -71,7 +71,7 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onPaymentSuccess(p0: String?) {
         Toast.makeText(this@PurchaseActivity,"Payment Complete", Toast.LENGTH_SHORT ).show()
-        val documentRef = FirebaseFirestore.getInstance().collection("users").document(SharedData.uid)
+        val documentRef = FirebaseFirestore.getInstance().collection("users").document(SharedData.uid!!)
         documentRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
                 val data = documentSnapshot.data
