@@ -1,12 +1,12 @@
 package com.example.theallclasses
 
+import android.R.attr
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.theallclasses.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -75,18 +75,31 @@ class SignUpActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     SharedData.uid = user.uid
+                                    val sharedPreferences =
+                                        getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                                    val myEdit = sharedPreferences.edit()
+
+                                    // write all the data entered by the user in SharedPreference and apply
+
+                                    // write all the data entered by the user in SharedPreference and apply
+                                    myEdit.putString("uid", user.uid)
+                                    myEdit.putString("username", name)
+                                    myEdit.putString("email", email)
+                                    myEdit.apply()
+
 //                                    SharedData.username = name
 //                                    SharedData.email = email
                                     val collectionRef = FirebaseFirestore.getInstance().collection("users")
                                     val documentRef = collectionRef.document(user.uid)
 
                                     // Create the data for the document
+                                    var testmap: HashMap<String, HashMap<String, String>>? =
+                                        HashMap<String, HashMap<String, String>>()
                                     val data = hashMapOf(
                                         "username" to name,
                                         "email" to email,
-                                        "mycourses" to hashMapOf<String, String>()
+                                        "mycourses" to testmap
                                     )
-                                    SharedData.Mycourses = hashMapOf<String, String>()
                                     // Set the data in the Firestore document
                                     documentRef.set(data)
                                         .addOnSuccessListener {

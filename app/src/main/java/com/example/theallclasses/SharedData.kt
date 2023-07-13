@@ -10,7 +10,7 @@ object SharedData {
     var teacherTrainingProgram: Map<String,Any>? = null
 
     // user courses info
-    var Mycourses: Map<String, Any>? = null
+    var Mycourses: HashMap<String, HashMap<String,String>>? = null
     var Mycoursesdata: MutableMap<String, Any>? = mutableMapOf()
 
     var HomeFragmentData: Map<String, Any>? = null
@@ -22,7 +22,7 @@ object SharedData {
     var OfflineModeData: Map<String, Any>? = null
 
     // userinfo
-    var uid: String = ""
+    var uid: String = "sTRTpk7W8UVWgIXMuUWHbyg05Zq2"
 
     //customercarenumbers
     var customerCare: Map<String, Any>? = null

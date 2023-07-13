@@ -1,14 +1,19 @@
 package com.example.theallclasses
 
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.theallclasses.databinding.ActivityPurchaseBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
@@ -63,19 +68,32 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onPaymentSuccess(p0: String?) {
         Toast.makeText(this@PurchaseActivity,"Payment Complete", Toast.LENGTH_SHORT ).show()
         val documentRef = FirebaseFirestore.getInstance().collection("users").document(SharedData.uid)
         documentRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
                 val data = documentSnapshot.data
+                val currentDate = LocalDate.now()
+                val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                val formattedDate = currentDate.format(dateFormat)
                 if (data != null) {
                     // Get the existing map
-                    val existingMap = data["mycourses"] as? HashMap<String, String>
-
-                    if (existingMap != null) {
+                    val existingMap = data["mycourses"] as? HashMap<String, HashMap<String, String>>
+                    Log.d("course", data.toString())
+                    if (existingMap?.get("0") != null) {
+                        Log.d("course", existingMap.toString())
                         // Add new key-value pairs to the existing map
-                        existingMap[courseName] = Date().toString()
+                        val innermap = hashMapOf(
+                            "courseName" to courseName,
+                            "date" to formattedDate,
+                            "endDate" to endDate,
+                            "startDate" to startDate,
+                            "location" to location,
+                            "type" to type
+                        )
+                        existingMap[existingMap.size.toString()] = innermap
 
                         // Update the document with the modified map
                         documentRef.update("mycourses", existingMap)
@@ -83,14 +101,25 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                                 // Document update success
                                 // You can perform any additional actions here
                                 SharedData.Mycourses = existingMap
+                                Log.d("course", "Updated mycourses")
                             }
                             .addOnFailureListener { e ->
                                 // Document update failed
                                 // Handle the error here
+                                Log.d("course", "Failed to updated mycourses")
                             }
                     } else {
-                        val data = hashMapOf(
-                            courseName to Date().toString()
+                        Log.d("course", "null")
+                        val innermap = hashMapOf(
+                            "courseName" to courseName,
+                            "date" to formattedDate,
+                            "endDate" to endDate,
+                            "startDate" to startDate,
+                            "location" to location,
+                            "type" to type
+                        )
+                        data["mycourses"] = hashMapOf(
+                            "0" to innermap
                         )
 
                         // Set the data in the Firestore document
@@ -98,10 +127,11 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             .addOnSuccessListener {
                                 // Document creation success
                                 // You can perform any additional actions here
+                                Log.d("course", "mycourses 0th added")
                             }
                             .addOnFailureListener { e ->
                                 // Document creation failed
-
+                                Log.d("course", "Failed to add mycourses 0th index")
                             }
                     }
                 }

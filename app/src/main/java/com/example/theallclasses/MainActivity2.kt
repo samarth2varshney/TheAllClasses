@@ -103,7 +103,9 @@ class MainActivity2 : AppCompatActivity() {
                 R.id.navigation_courses -> {
                     // Handle notifications item click
                     // Replace with your own logic
-                    replaceFragment(CoursesFragment())
+
+
+//                    replaceFragment(CoursesFragment())
                     true
                 }
                 else -> false
