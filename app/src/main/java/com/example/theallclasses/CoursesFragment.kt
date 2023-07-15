@@ -37,7 +37,7 @@ class CoursesFragment : Fragment() {
             courses.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                        SharedData.Mycourses = document.data!!["mycourses"] as? HashMap<String, HashMap<String,String>>?
                         flag1 = true
                         checkifloaded()
                     }
@@ -86,7 +86,7 @@ class CoursesFragment : Fragment() {
             courses.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        SharedData.Mycourses = document.data!!["mycourses"] as Map<String, Any>?
+                        SharedData.Mycourses = document.data!!["mycourses"] as? HashMap<String, HashMap<String,String>>?
                         flag1 = true
                         checkifloaded()
                     }
@@ -112,7 +112,7 @@ class CoursesFragment : Fragment() {
         val MycoursesKeys = SharedData.Mycourses?.keys
         MycoursesKeys?.forEach { key ->
 
-            val map = SharedData.Mycourses!![key] as Map<String, Any>
+            val map = SharedData.Mycourses!![key] as HashMap<String, Any>
 
              if(map["location"].toString() == "jeemains"){
                 val value = SharedData.JEEmap!![map["courseName"]]

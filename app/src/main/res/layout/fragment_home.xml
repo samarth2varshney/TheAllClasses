@@ -1,136 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="729dp"
-    tools:layout_editor_absoluteX = "1dp"
-    tools:layout_editor_absoluteY = "1dp"
-    android:fillViewport="true">
+    android:layout_height="match_parent"
+    >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/imageSlider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/white_round_corner"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toTopOf="@id/llmodemenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="1"
+        app:sliderStartAutoCycle="true" />
+    <LinearLayout
+        android:id="@+id/llmodemenu"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/white_rounder_corner"
+        android:backgroundTint="#D5D5D5"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSlider"
+        app:layout_constraintVertical_bias="0.5">
 
-        <com.smarteist.autoimageslider.SliderView
-            android:id="@+id/imageSlider"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="W,1:1"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/white_round_corner"
-            android:clipToOutline="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:sliderAnimationDuration="600"
-            app:sliderAutoCycleDirection="back_and_forth"
-            app:sliderAutoCycleEnabled="true"
-            app:sliderIndicatorAnimationDuration="600"
-            app:sliderIndicatorGravity="center_horizontal|bottom"
-            app:sliderIndicatorMargin="15dp"
-            app:sliderIndicatorOrientation="horizontal"
-            app:sliderIndicatorPadding="3dp"
-            app:sliderIndicatorRadius="2dp"
-            app:sliderIndicatorSelectedColor="#5A5A5A"
-            app:sliderIndicatorUnselectedColor="#FFF"
-            app:sliderScrollTimeInSec="1"
-            app:sliderStartAutoCycle="true" />
-
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
+            android:id="@+id/llOnline"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/newstyle"
-            android:text="Course"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/neetUgButton"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonbackground"
-            android:backgroundTint="@color/Rojo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/jeeMainsButton"
-            app:layout_constraintTop_toTopOf="@+id/jeeMainsButton">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="0.3">
 
             <ImageView
-                android:id="@+id/imageVie"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textVi"
-                app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/doctor"
-                app:tint="@color/white"/>
+                android:id="@+id/btnOnline"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/onlinebutton" />
 
             <TextView
-                android:id="@+id/textVi"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:autoSizeMaxTextSize="20sp"
-                android:autoSizeMinTextSize="12sp"
+                android:id="@+id/tvOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeMinTextSize="15sp"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
-                android:fontFamily="@font/gilroylight"
-                android:text="  NEET-UG \n  class 11&amp;12"
-                android:textIsSelectable="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageVie"
-                android:textColor="@color/white"/>
+                android:text="Online " />
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/llOffline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="0.3">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/btnOffline"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/offlinebutton" />
+
+            <TextView
+                android:id="@+id/tvOffline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeMinTextSize="15sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="Offline " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llHomeTuition"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="0.3">
+
+            <ImageView
+                android:id="@+id/btnHomeTuition"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/onlinebutton" />
+
+            <TextView
+                android:id="@+id/tvHomeTuition"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeMinTextSize="15sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:text="Home Tuition" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/newstyle"
+        android:text="Course"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llmodemenu"
+        app:layout_constraintBottom_toTopOf="@id/llcoursemenurow1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llcoursemenurow1"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintBottom_toTopOf="@id/llcoursemenurow2">
+
+        <LinearLayout
             android:id="@+id/jeeMainsButton"
-            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="200dp"
             android:layout_height="140dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonbackground"
-            app:layout_constraintEnd_toStartOf="@+id/neetUgButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            android:background="@drawable/buttonbackground">
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/tex"
-                app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 app:srcCompat="@drawable/engineer"
                 app:tint="@color/white"/>
 
             <TextView
                 android:id="@+id/tex"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="20sp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
@@ -138,49 +179,74 @@
                 android:fontFamily="@font/gilroylight"
                 android:text="  JEE Mains \n class 11 &amp; 12"
                 android:textIsSelectable="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image"
                 android:textColor="@color/white"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/jeeAdvancedButton"
-            android:layout_width="0dp"
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/neetUgButton"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="200dp"
             android:layout_height="140dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
+            android:layout_marginTop="15dp"
             android:background="@drawable/buttonbackground"
-            android:backgroundTint="@color/PigmentGreen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cbseButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jeeMainsButton">
+            android:backgroundTint="@color/Rojo">
+
+            <ImageView
+                android:id="@+id/imageVie"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                app:srcCompat="@drawable/doctor"
+                app:tint="@color/white"/>
+
+            <TextView
+                android:id="@+id/textVi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/gilroylight"
+                android:text="  NEET-UG \n  class 11&amp;12"
+                android:textIsSelectable="false"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llcoursemenurow2"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llcoursemenurow1"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/jeeAdvancedButton"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/buttonbackground"
+            android:backgroundTint="@color/PigmentGreen">
 
             <ImageView
                 android:id="@+id/ima"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textVie"
-                app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 app:srcCompat="@drawable/engineer"
                 app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/textVie"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="20sp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
@@ -194,39 +260,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/ima"
                 android:textColor="@color/white"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <LinearLayout
             android:id="@+id/cbseButton"
-            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="200dp"
             android:layout_height="140dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/buttonbackground"
-            android:backgroundTint="@color/BlueViolet"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/jeeAdvancedButton"
-            app:layout_constraintTop_toTopOf="@+id/jeeAdvancedButton">
+            android:backgroundTint="@color/BlueViolet">
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_marginBottom="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView7"
-                app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/student"
                 app:tint="@color/white"/>
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:autoSizeMaxTextSize="20sp"
                 android:autoSizeMinTextSize="12sp"
@@ -235,115 +294,14 @@
                 android:fontFamily="@font/gilroylight"
                 android:text="  CBSE \n  class 11 &amp; 12"
                 android:textIsSelectable="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
                 android:textColor="@color/white"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/white_rounder_corner"
-            android:backgroundTint="#D5D5D5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageSlider">
 
-            <ImageView
-                android:id="@+id/offlineButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView10"
-                app:layout_constraintEnd_toStartOf="@+id/button3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/offlinebutton" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView8"
-                app:layout_constraintEnd_toStartOf="@+id/offlineButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/onlinebutton" />
 
-            <ImageView
-                android:id="@+id/button3"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView11"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/offlineButton"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/hometutionbutton" />
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="24sp"
-                android:autoSizeMinTextSize="15sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:text="HomeTuition  "
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/button3"
-                app:layout_constraintHeight_percent="0.3333333"
-                app:layout_constraintStart_toEndOf="@+id/offlineButton"
-                app:layout_constraintTop_toBottomOf="@+id/button3"
-                app:layout_constraintVertical_bias="0.5" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="24sp"
-                android:autoSizeMinTextSize="15sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:text="Offline "
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/offlineButton"
-                app:layout_constraintHeight_percent="0.3333333"
-                app:layout_constraintStart_toStartOf="@+id/offlineButton"
-                app:layout_constraintTop_toBottomOf="@+id/offlineButton"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="24sp"
-                android:autoSizeMinTextSize="15sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:text="Online "
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/offlineButton"
-                app:layout_constraintHeight_percent="0.3333333"
-                app:layout_constraintStart_toStartOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/button"
-                app:layout_constraintVertical_bias="0.5" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
