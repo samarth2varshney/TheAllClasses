@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
             openShowCourses(SharedData.Boardmap, "cbse")
         }
 
-        binding.btnOffline.setOnClickListener {
+        binding.llOffline.setOnClickListener {
             val fragment = OfflineMode()
             val fragmentManager: FragmentManager =
                 (context as AppCompatActivity).supportFragmentManager
@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnHomeTuition.setOnClickListener {
+        binding.llHomeTuition.setOnClickListener {
             val fragment = HomeTuitionFragment()
             val fragmentManager: FragmentManager =
                 (context as AppCompatActivity).supportFragmentManager

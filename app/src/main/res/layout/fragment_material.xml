@@ -35,11 +35,14 @@
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/LightSkyBlue">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tvCard1"
@@ -78,6 +81,8 @@
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/SalmonPink">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,6 +126,8 @@
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/Mauve">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,6 +171,8 @@
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/Timberwolf">
 
             <androidx.constraintlayout.widget.ConstraintLayout

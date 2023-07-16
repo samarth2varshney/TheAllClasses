@@ -164,6 +164,7 @@
                     android:layout_height="46dp"
                     android:layout_marginEnd="5dp"
                     android:backgroundTint="#07557C"
+                    android:textColor="@color/white"
                     android:text="DIAL"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

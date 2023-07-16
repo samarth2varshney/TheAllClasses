@@ -37,10 +37,11 @@
         android:id="@+id/llmodemenu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/white_rounder_corner"
         android:backgroundTint="#D5D5D5"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +54,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_weight="0.3">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/btnOnline"
@@ -63,12 +64,13 @@
 
             <TextView
                 android:id="@+id/tvOnline"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="15sp"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
+                android:maxLines="1"
                 android:text="Online " />
         </LinearLayout>
 
@@ -78,7 +80,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_weight="0.3">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/btnOffline"
@@ -88,10 +90,11 @@
 
             <TextView
                 android:id="@+id/tvOffline"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="15sp"
+                android:maxLines="1"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:text="Offline " />
@@ -103,7 +106,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_weight="0.3">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/btnHomeTuition"
