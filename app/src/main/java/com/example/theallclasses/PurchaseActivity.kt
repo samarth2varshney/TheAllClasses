@@ -30,14 +30,12 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         setContentView(binding.root)
 
         var cost = intent.getIntExtra("cost",0)
-        // TODO all of this inside users
+
         courseName = intent.getStringExtra("courseName").toString()
         location = intent.getStringExtra("location").toString()
         type = intent.getStringExtra("type").toString()
         startDate = intent.getStringExtra("startDate").toString()
         endDate = intent.getStringExtra("endDate").toString()
-
-        Toast.makeText(this,"$startDate $endDate ",Toast.LENGTH_LONG).show()
 
         Checkout.preload(this@PurchaseActivity)
 

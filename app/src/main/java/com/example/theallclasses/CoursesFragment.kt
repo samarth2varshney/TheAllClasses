@@ -3,12 +3,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.databinding.FragmentCoursesBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class CoursesFragment : Fragment() {
 
@@ -88,6 +91,8 @@ class CoursesFragment : Fragment() {
                     if (document != null) {
                         SharedData.Mycourses = document.data!!["mycourses"] as? HashMap<String, HashMap<String,String>>?
                         flag1 = true
+                        flag2 = true
+                        flag3 = true
                         checkifloaded()
                     }
                 }
@@ -110,68 +115,85 @@ class CoursesFragment : Fragment() {
 
     fun copyCourses(){
         val MycoursesKeys = SharedData.Mycourses?.keys
+        val currentDate = LocalDate.now()
+        val dateFormat = DateTimeFormatter.ofPattern("d/M/yyyy")
+
         MycoursesKeys?.forEach { key ->
 
             val map = SharedData.Mycourses!![key] as HashMap<String, Any>
 
              if(map["location"].toString() == "jeemains"){
-                val value = SharedData.JEEmap!![map["courseName"]]
+                 val value = SharedData.JEEmap!![map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
-                    var nodename = key
-                    nodename = nodename + ""
+                 if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "jeeadvance"){
                 val value = SharedData.JEE_Advanced!![map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
+                if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "neet"){
                 val value = SharedData.NEETmap!![map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
+                if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "cbse"){
                 val value = SharedData.Boardmap!![map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
+                if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "teachertraining"){ //teachertraining
                 val value = SharedData.teacherTrainingProgram!![map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
+                if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "newDelhi"){
                 val newDelhimap = SharedData.OfflineModeData!!["newDelhi"] as Map<String,Any>
                 val value = newDelhimap[map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                if (value != null) {
+                if (value != null && comparisonResult<0) {
                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
-//             else if(map["location"].toString() == "noida"){
-//                 val newDelhimap = SharedData.OfflineModeData!!["noida"] as Map<String,Any>
-//                 val value = newDelhimap[map["courseName"]]
-//
-//                 if (value != null) {
-//                     SharedData.Mycoursesdata?.put(key, value)
-//                 }
-//             }
+             else if(map["location"].toString() == "noida"){
+                 val newDelhimap = SharedData.OfflineModeData!!["noida"] as Map<String,Any>
+                 val value = newDelhimap[map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
+
+                 if (value != null && comparisonResult<0) {
+                     SharedData.Mycoursesdata?.put(key, value)
+                 }
+             }
              else if(map["location"].toString() == "ghaziabad"){
                  val newDelhimap = SharedData.OfflineModeData!!["ghaziabad"] as Map<String,Any>
                  val value = newDelhimap[map["courseName"]]
+                 val dateFromInput = LocalDate.parse(map["endDate"].toString(), dateFormat)
+                 val comparisonResult = currentDate.compareTo(dateFromInput)
 
-                 if (value != null) {
+                 if (value != null && comparisonResult<0) {
                      SharedData.Mycoursesdata?.put(key, value)
                  }
              }
@@ -182,7 +204,9 @@ class CoursesFragment : Fragment() {
     }
 
     private fun checkifloaded() {
+
         if(flag1 && flag2 && flag3){
+
             if(SharedData.Mycourses!!.isEmpty()) {
                 binding.spinner.visibility = View.GONE
                 binding.textView16.visibility = View.VISIBLE

@@ -25,6 +25,7 @@ class OfflineMode : Fragment() {
     lateinit var sliderAdapter: SliderAdapter
     val db = Firebase.firestore
     var containerId:Int = 0
+    var dataLoaded = false
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,26 +51,28 @@ class OfflineMode : Fragment() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         SharedData.OfflineModeData = document.data as MutableMap<String, Any>
+                        dataLoaded = true
                         intializeviews()
                     }
                 }
         }
         else{
+            dataLoaded = true
             intializeviews()
         }
 
         var centre:String
         binding.newDelhiButton.setOnClickListener {
             centre = "newDelhi"
-            openFragment(centre)
+            if(dataLoaded) openFragment(centre)
         }
         binding.noidaButton.setOnClickListener {
             centre = "noida"
-            openFragment(centre)
+            if(dataLoaded) openFragment(centre)
         }
         binding.ghaziabadButton.setOnClickListener {
             centre = "ghaziabad"
-            openFragment(centre)
+            if(dataLoaded) openFragment(centre)
         }
 
     }

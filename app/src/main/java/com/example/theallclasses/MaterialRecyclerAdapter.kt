@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class MaterialRecyclerAdapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<MaterialRecyclerAdapter.ViewHolder>(){
 
@@ -103,7 +104,7 @@ class MaterialRecyclerAdapter(private val context: Context, private val mapData:
         val map = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
         holder.keyTextView.text = map["name"].toString()
-        //Glide.with(holder.itemView).load(SharedData.courseImage!![mapData.keys.elementAt(position)]).fitCenter().into(holder.imageView)
+        Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(map["link"].toString()))
