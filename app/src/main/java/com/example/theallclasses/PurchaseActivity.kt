@@ -37,6 +37,11 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         startDate = intent.getStringExtra("startDate").toString()
         endDate = intent.getStringExtra("endDate").toString()
 
+        binding.courseName.text = courseName
+        binding.endDate.text = endDate
+        binding.cost.text = cost.toString()
+        binding.tvTransact.text = cost.toString()
+
         Checkout.preload(this@PurchaseActivity)
 
         binding.btnPayNow.setOnClickListener {
