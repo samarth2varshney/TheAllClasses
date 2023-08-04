@@ -2,23 +2,64 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_header"
-        android:title=""
-        app:actionLayout="@layout/profile_section" />
-<!--    <item-->
-<!--        android:id="@+id/navigation_item1"-->
-<!--        android:icon="@drawable/ic_home"-->
-<!--        android:title="Item 1" />-->
-<!--    <item-->
-<!--        android:id="@+id/navigation_item2"-->
-<!--        android:icon="@drawable/ic_courses"-->
-<!--        android:title="Item 2" />-->
-<!--    <item-->
-<!--        android:id="@+id/navigation_item3"-->
-<!--        android:icon="@drawable/ic_purchase"-->
-<!--        android:title="Item 3" />-->
+        android:id="@+id/mycourses"
+        android:icon="@drawable/ic_courses"
+        android:title="MyCourses"/>
+    <item
+        android:id="@+id/material"
+        android:icon="@drawable/ic_material"
+        android:title="Material" />
+    <item
+        android:id="@+id/live"
+        android:icon="@drawable/ic_live"
+        android:title="Live" />
+    <item
+        android:id="@+id/Blog"
+        android:icon="@drawable/ic_material"
+        android:title="Blog" />
+    <item
+        android:id="@+id/Motivation"
+        android:icon="@drawable/youtube"
+        android:title="Motivation"/>
+    <item
+        android:id="@+id/offline"
+        android:icon="@drawable/offlinebutton"
+        android:title="Offline"/>
+    <item
+        android:id="@+id/hometution"
+        android:icon="@drawable/hometutionbutton"
+        android:title="HomeTution"/>
+    <item
+        android:id="@+id/insta"
+        android:icon="@drawable/instagram"
+        android:title="Instagram" />
+    <item
+        android:id="@+id/telegram"
+        android:icon="@drawable/telegram"
+        android:title="Telegram" />
+    <item
+        android:id="@+id/facebook"
+        android:icon="@drawable/facebook"
+        android:title="Facebook" />
+    <item
+        android:id="@+id/youtube"
+        android:icon="@drawable/youtube"
+        android:title="Youtube" />
+    <item
+        android:id="@+id/twitter"
+        android:icon="@drawable/twitter"
+        android:title="Twitter" />
+    <item
+        android:id="@+id/contactus"
+        android:icon="@drawable/contact"
+        android:title="ContactUs" />
     <item
         android:id="@+id/navigation_logout"
         android:icon="@drawable/ic_logout"
         android:title="Logout" />
+    <item
+        android:id="@+id/terms_conditions"
+        android:icon="@drawable/terms_conditions"
+        android:title="Terms&amp;Conditions" />
+
 </menu>

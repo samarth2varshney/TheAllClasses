@@ -17,7 +17,8 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSliderHomeTuition"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1920:886"
                 android:background="@drawable/white_round_corner"
                 android:clipToOutline="true"
                 android:layout_marginStart="7dp"
@@ -41,27 +42,21 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/textBanner"
+            <ImageView
+                android:id="@+id/textBanner2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/SalmonPink"
-                app:layout_constraintBottom_toTopOf="@id/youtube_player_view_hometuition"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="7dp"
+                android:elevation="20dp"
+                android:background="@drawable/white_round_corner"
+                android:backgroundTint="#15803D"
+                android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FindingTuttorbutton">
-
-                <TextView
-                    android:id="@+id/tvBanner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="20dp"
-                    android:textColor="@color/white" />
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@id/FindingTuttorbutton" />
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/youtube_player_view_hometuition"
@@ -74,26 +69,30 @@
                 android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textBanner">
+                app:layout_constraintTop_toBottomOf="@+id/textBanner2">
 
             </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/FindingTuttorbutton"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Finding Tuttor"
+                android:background="@drawable/white_rounder_corner"
+                android:backgroundTint="#2563EB"
                 app:layout_constraintEnd_toStartOf="@+id/JoinasTutorbutton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageSliderHomeTuition" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/JoinasTutorbutton"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Join as Tutor"
+                android:background="@drawable/white_rounder_corner"
+                android:backgroundTint="#EF4444"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/FindingTuttorbutton"
@@ -208,7 +207,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 </FrameLayout>

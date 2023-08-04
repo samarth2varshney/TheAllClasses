@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentHomeTuitionBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -55,6 +56,8 @@ class HomeTuitionFragment : Fragment() {
 
     private fun intializeviews() {
 
+        Glide.with(requireContext()).load(SharedData.HomeTuitionData!!["bannerImage"]).fitCenter().into(binding.textBanner2)
+
         binding.FindingTuttorbutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
@@ -76,8 +79,6 @@ class HomeTuitionFragment : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-
-        binding.tvBanner.text = SharedData.HomeTuitionData!!["banner"].toString()
 
         //Automatic Slider
         val imageurl = SharedData.HomeTuitionData!!["slider1"] as Map<String, Any>

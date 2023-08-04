@@ -20,7 +20,7 @@
                 android:id="@+id/offlineModeCentreSlider"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="W,1:1"
+                app:layout_constraintDimensionRatio="1920:886"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -45,17 +45,18 @@
 
             </com.smarteist.autoimageslider.SliderView>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/offlinecentrecourcesrecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/offlineModeCentreSlider">
+                app:layout_constraintTop_toBottomOf="@+id/button4">
 
             </androidx.recyclerview.widget.RecyclerView>
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
@@ -121,7 +122,6 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
                 android:fontFamily="@font/newstyle"
                 android:text="Course Coming Soon"
@@ -129,7 +129,31 @@
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/offlinecentrecourcesrecyclerview" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="282dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="5dp"
+                android:text="FillFormforInfo"
+                app:layout_constraintBottom_toTopOf="@+id/offlinecentrecourcesrecyclerview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Fill This Form Before Buying course"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/offlineModeCentreSlider" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

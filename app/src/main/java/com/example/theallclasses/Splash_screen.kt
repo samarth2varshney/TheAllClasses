@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 
 class Splash_screen : AppCompatActivity() {
     val db = Firebase.firestore
-    val auth = FirebaseAuth.getInstance()
     var map: Map<String, Any>? = null
     private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,18 +96,34 @@ class Splash_screen : AppCompatActivity() {
 
        }
 
+        GlobalScope.launch (Dispatchers.IO) {
+            val Foundation = db.document("/Foundation/Foundation")
+            Foundation.get()
+                .addOnSuccessListener {document->
+                    if(document != null && document.data!=null){
+                        SharedData.foundation = document.data as Map<String, Any>
+                    }
+                    flag8 = true
+                    openActivity()
+                }
+            val Others = db.document("/Others/Others")
+            Others.get()
+                .addOnSuccessListener {document->
+                    if(document != null && document.data!=null){
+                        SharedData.others = document.data as Map<String, Any>
+                    }
+                    flag8 = true
+                    openActivity()
+                }
+
+        }
+
     }
 
     private fun openActivity() {
         if(flag1 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8){
-            if (auth.currentUser != null){
-                startActivity(Intent(this , MainActivity2::class.java))
-                finish()
-            }
-            else{
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
-            }
+            startActivity(Intent(this , MainActivity2::class.java))
+            finish()
         }
     }
 

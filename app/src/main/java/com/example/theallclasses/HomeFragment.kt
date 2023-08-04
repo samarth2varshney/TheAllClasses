@@ -1,16 +1,22 @@
 package com.example.theallclasses
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,6 +30,7 @@ class HomeFragment : Fragment() {
     lateinit var sliderAdapter: SliderAdapter
     var containerId:Int = 0
     val db = Firebase.firestore
+    private var set = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +45,19 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         GlobalScope.launch (Dispatchers.IO) {
-            val Board = db.document("/customerCareNumber/numbers")
-            Board.get()
+            val customerCareNumber = db.document("/customerCareNumber/numbers")
+            customerCareNumber.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         SharedData.customerCare = document.data as Map<String, Any>
                     }
                 }
+        }
+
+        binding.button.setOnClickListener {
+            if(set){binding.onlinecontainer.setBackgroundColor(Color.parseColor("#BCEEFF"))}
+            else{binding.onlinecontainer.setBackgroundColor(Color.parseColor("#FFFFFF"))}
+            set = !set
         }
 
         binding.jeeAdvancedButton.setOnClickListener{
@@ -59,8 +72,14 @@ class HomeFragment : Fragment() {
         binding.cbseButton.setOnClickListener {
             openShowCourses(SharedData.Boardmap, "cbse")
         }
+        binding.othersButton.setOnClickListener {
+            openShowCourses(SharedData.others,"others")
+        }
+        binding.foundationButton.setOnClickListener {
+            openShowCourses(SharedData.foundation,"foundation")
+        }
 
-        binding.llOffline.setOnClickListener {
+        binding.offlineButton.setOnClickListener {
             val fragment = OfflineMode()
             val fragmentManager: FragmentManager =
                 (context as AppCompatActivity).supportFragmentManager
@@ -70,7 +89,7 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.llHomeTuition.setOnClickListener {
+        binding.button3.setOnClickListener {
             val fragment = HomeTuitionFragment()
             val fragmentManager: FragmentManager =
                 (context as AppCompatActivity).supportFragmentManager
@@ -80,15 +99,53 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        //Automatic Slider
-        sliderView = binding.imageSlider
-        sliderAdapter = SliderAdapter((SharedData.HomeFragmentData!!["homePageSlider1"] as Map<String, Any>).keys.toTypedArray())
+        intializeslider(binding.imageSlider,"homePageSlider1")
+        intializeslider(binding.imageSlider2,"offlineCenterSlider")
+        intializeslider(binding.imageSlider3,"homeTutionSlider")
+        intializeslider(binding.imageSlider4,"successfulStudentSlider")
+        intializeslider(binding.imageSlider5,"studentSlider")
+        intializeslider(binding.imageSlider6,"facultiesSlider")
+
+        intializeyoutubeplayer(binding.bookletVideo,"bookletVideo")
+        intializeyoutubeplayer(binding.onlineSystematicContentVideo,"onlineSystematicContentVideo")
+        intializeyoutubeplayer(binding.offlinecentervideo,"offlineCenterVideo")
+        intializeyoutubeplayer(binding.hometutionvideo,"homeTutionVidoe")
+        intializeyoutubeplayer(binding.successfulStudentvideo,"successfulStudentVideo")
+        intializeyoutubeplayer(binding.studentVideo,"studentVideo")
+
+        setImages("onlineImage",binding.onlineImage)
+        setImages("indiaFirstImage",binding.indiaFirst)
+        setImages("delhiNcrImage",binding.delhiNcr)
+        setImages("trainedHomeTutorImage",binding.trainedHometutor)
+        setImages("dreamTurnQuote",binding.dreamTurnQuote)
+        setImages("memberofDreamImage",binding.memberOfDream)
+        setImages("freeContentImage",binding.freeContent)
+
+    }
+
+    private fun setImages(s: String, Imageview: ImageView) {
+        Glide.with(requireContext()).load(SharedData.HomeFragmentData!![s]).fitCenter().into(Imageview)
+    }
+
+    private fun intializeyoutubeplayer(VideoPlayer: YouTubePlayerView, s: String) {
+        val youtubelink = SharedData.HomeFragmentData!![s]
+        lifecycle.addObserver(VideoPlayer)
+        VideoPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = youtubelink.toString()
+                youTubePlayer.cueVideo(videoId, 0f)
+            }
+        })
+    }
+
+    private fun intializeslider(imageSlider: SliderView, s: String) {
+        sliderView = imageSlider
+        sliderAdapter = SliderAdapter((SharedData.HomeFragmentData!![s] as Map<String, Any>).keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
-
     }
 
     private fun openShowCourses(course: Map<String, Any>?, s: String) {

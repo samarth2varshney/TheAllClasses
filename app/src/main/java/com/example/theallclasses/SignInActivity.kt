@@ -3,6 +3,7 @@ package com.example.theallclasses
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.theallclasses.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -13,20 +14,21 @@ import com.google.firebase.ktx.Firebase
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
-    private lateinit var auth: FirebaseAuth //for accessing Firebase features
+    var auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvRegister.setOnClickListener {
+        binding.spinner2.visibility = View.GONE
+        binding.transparentImage.visibility = View.GONE
+
+        binding.llSignIn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
-
-        // Initialize Firebase Auth
-        auth = Firebase.auth
 
         binding.btnSignIn.setOnClickListener {
 
@@ -47,11 +49,12 @@ class SignInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            binding.spinner2.visibility = View.VISIBLE
+            binding.transparentImage.visibility = View.VISIBLE
+
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        // Log.d(TAG, "signInWithEmail:success")
                         Toast.makeText(
                             baseContext, "Authentication successfull.",
                             Toast.LENGTH_SHORT
@@ -60,8 +63,8 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        // If sign in fails, display a message to the user.
-                        // Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        binding.spinner2.visibility = View.GONE
+                        binding.transparentImage.visibility = View.GONE
                         Toast.makeText(baseContext, "Don't have a account signup", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -82,10 +85,6 @@ class SignInActivity : AppCompatActivity() {
             val sharedPreferences =
                 getSharedPreferences("MySharedPref", MODE_PRIVATE)
             val myEdit = sharedPreferences.edit()
-
-            // write all the data entered by the user in SharedPreference and apply
-
-            // write all the data entered by the user in SharedPreference and apply
             myEdit.putString("uid", currentUser.uid)
             myEdit.apply()
 

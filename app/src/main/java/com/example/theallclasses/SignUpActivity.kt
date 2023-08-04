@@ -1,8 +1,11 @@
 package com.example.theallclasses
 
-import android.R.attr
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.theallclasses.databinding.ActivitySignUpBinding
@@ -13,36 +16,71 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth //for accessing Firebase features
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.transparentImage2.visibility = View.GONE
+        binding.spinner3.visibility = View.GONE
+
+        var gender = "Male"
+        val languages = resources.getStringArray(R.array.programming_languages)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_menu, languages)
+        val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        autocompleteTV.setAdapter(arrayAdapter)
+
+        autocompleteTV.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedLanguage = parent.getItemAtPosition(position) as String
+                gender = selectedLanguage
+            }
+
         auth = Firebase.auth
 
-        binding.tvLogin.setOnClickListener {
+        binding.llSignUp.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.btnSignUp.setOnClickListener {
             val name = binding.etName2.text.toString()
+            val Class = binding.etClass.text.toString()
+            val state = binding.etState.text.toString()
+            val dateOfBirth = binding.etDateOfBirth.text.toString()
+            val number = binding.etnumber.text.toString()
             val email = binding.etEmail2.text.toString()
             val password = binding.etPassword2.text.toString()
             val cpassword = binding.etConfirmPass2.text.toString()
+
 
             if (name.isEmpty()) {
                 binding.etName2.error = "Name is required."
                 return@setOnClickListener
             }
-
+            if(Class.isEmpty()){
+                binding.etClass.error = "class is required."
+                return@setOnClickListener
+            }
+            if(state.isEmpty()){
+                binding.etState.error = "state is required."
+                return@setOnClickListener
+            }
+            if(dateOfBirth.isEmpty()){
+                binding.etDateOfBirth.error = "Date of Birth is required."
+                return@setOnClickListener
+            }
+            if(number.isEmpty()){
+                binding.etnumber.error = "Number is required"
+                return@setOnClickListener
+            }
             if (email.isEmpty()) {
                 binding.etEmail2.error = "Email is required."
                 return@setOnClickListener
             }
-
             if (password.isEmpty()) {
                 binding.etPassword2.error = "Password is required."
                 return@setOnClickListener
@@ -51,6 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etConfirmPass2.error = "Password Confirmation is required."
                 return@setOnClickListener
             }
+
             if (cpassword != password) {
                 binding.etConfirmPass2.error = "Password doesn't match"
                 return@setOnClickListener
@@ -59,6 +98,9 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etConfirmPass2.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
+
+            binding.spinner3.visibility = View.VISIBLE
+            binding.transparentImage2.visibility = View.VISIBLE
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
@@ -82,39 +124,33 @@ class SignUpActivity : AppCompatActivity() {
                                         getSharedPreferences("MySharedPref", MODE_PRIVATE)
                                     val myEdit = sharedPreferences.edit()
 
-                                    // write all the data entered by the user in SharedPreference and apply
-
-                                    // write all the data entered by the user in SharedPreference and apply
                                     myEdit.putString("uid", user.uid)
                                     myEdit.apply()
 
-//                                    SharedData.username = name
-//                                    SharedData.email = email
                                     val collectionRef = FirebaseFirestore.getInstance().collection("users")
                                     val documentRef = collectionRef.document(user.uid)
 
-                                    // Create the data for the document
                                     var testmap: HashMap<String, HashMap<String, String>>? =
                                         HashMap<String, HashMap<String, String>>()
                                     val data = hashMapOf(
                                         "username" to name,
+                                        "gender" to gender,
+                                        "date_of_birth" to dateOfBirth,
+                                        "class" to Class,
+                                        "state" to state,
+                                        "number" to number,
                                         "email" to email,
-                                        "mycourses" to testmap
+                                        "mycourses" to testmap,
                                     )
-                                    // Set the data in the Firestore document
+
                                     documentRef.set(data)
                                         .addOnSuccessListener {
-                                            // Document creation success
-                                            // You can perform any additional actions here
                                             goToMain()
                                         }
                                         .addOnFailureListener { e ->
-                                            // Document creation failed
-                                            // Handle the error here
                                         }
 
                                 } else {
-                                    // Display name update failed
                                     Toast.makeText(
                                         baseContext, "Failed to update display name.",
                                         Toast.LENGTH_SHORT
@@ -122,7 +158,9 @@ class SignUpActivity : AppCompatActivity() {
                                 }
                             }
                     } else {
-                        // If sign up fails, display a message to the user.
+                        binding.spinner3.visibility = View.GONE
+                        binding.transparentImage2.visibility = View.GONE
+
                         Toast.makeText(
                             baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT
@@ -138,4 +176,5 @@ class SignUpActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }

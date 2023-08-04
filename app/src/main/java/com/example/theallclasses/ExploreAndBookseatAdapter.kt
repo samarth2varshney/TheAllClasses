@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -20,7 +19,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import java.io.Serializable
+
+val auth = FirebaseAuth.getInstance()
 
 class ExploreAndBookseatAdapter(
     private val context: Context,
@@ -160,19 +162,19 @@ class ExploreAndBookseatAdapter(
         holder.durationtext.append(map["endDate"].toString())
 
         holder.explorebutton.setOnClickListener {
-            val fragment = CourseDetails()
-            val args = Bundle()
-            args.putSerializable("map", map as Serializable)
-            args.putString("location",location)
-            args.putString("type",type)
-            args.putString("startDate",map["startDate"].toString())
-            args.putString("endDate",map["endDate"].toString())
-            fragment.arguments = args
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-            transaction.replace(holder.layout.id, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+                val fragment = CourseDetails()
+                val args = Bundle()
+                args.putSerializable("map", map as Serializable)
+                args.putString("location",location)
+                args.putString("type",type)
+                args.putString("startDate",map["startDate"].toString())
+                args.putString("endDate",map["endDate"].toString())
+                fragment.arguments = args
+                val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(holder.layout.id, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
         }
 
         if(bookSeat)
@@ -185,7 +187,7 @@ class ExploreAndBookseatAdapter(
 
         holder.buybutton.setOnClickListener {
             val intent = Intent(context, PurchaseActivity::class.java)
-            if(cousercost!="null"){
+            if (auth.currentUser != null && cousercost!="null"){
                 intent.putExtra("courseName" ,mapData.keys.elementAt(position))
                 intent.putExtra("cost", cousercost.toInt())
                 intent.putExtra("location",location)
@@ -193,6 +195,10 @@ class ExploreAndBookseatAdapter(
                 intent.putExtra("startDate",map["startDate"].toString())
                 intent.putExtra("endDate",map["endDate"].toString())
                 context.startActivity(intent)
+            }
+            else{
+                val intent1 = Intent(context, SignInActivity::class.java)
+                context.startActivity(intent1)
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.theallclasses
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -138,11 +139,12 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             }
                     }
                 }
+
             }
         }
-
 //        binding.tvTransact.text = "Payment ID: ${p0}"
         binding.tvTransact.setTextColor(Color.GREEN)
+        startActivity(Intent(this,MainActivity2::class.java))
     }
 
 

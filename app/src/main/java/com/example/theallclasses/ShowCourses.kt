@@ -43,6 +43,16 @@ class ShowCourses : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(map["joinTeacherTranningProgramForm"]!=null){
+            binding.button4.setOnClickListener {
+                val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(map!!["joinTeacherTranningProgramForm"].toString()))
+                startActivity(intent3)
+            }
+        }else{
+            binding.button4.visibility = View.GONE
+            binding.textView17.visibility = View.GONE
+        }
+
         if(map!!["slider"] != null){
             //Automatic Slider
             val imagemap = map!!["slider"]  as Map<String, Any>
@@ -86,6 +96,7 @@ class ShowCourses : Fragment() {
         var mapWithName = map!!.toMutableMap()
         mapWithName.remove("slider")
         mapWithName.remove("contactInfo")
+        mapWithName.remove("joinTeacherTranningProgramForm")
 
         if(mapWithName.isNotEmpty()) {
             binding.textView15.visibility = View.GONE

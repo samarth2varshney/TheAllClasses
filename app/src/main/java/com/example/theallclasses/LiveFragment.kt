@@ -44,9 +44,7 @@ class LiveFragment : Fragment() {
         sliderView.startAutoCycle()
 
         val youtubelink = SharedData.LiveFragmentData!!["youtube"]
-
         lifecycle.addObserver(binding.youtubePlayerViewMaterial)
-
         binding.youtubePlayerViewMaterial.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = youtubelink.toString()

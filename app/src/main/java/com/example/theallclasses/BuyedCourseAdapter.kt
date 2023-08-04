@@ -110,8 +110,6 @@ class BuyedCourseAdapter(
         }
 
 
-
-
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
         val coursename = map["name"].toString()
