@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theallclasses.Adapters.Adapter
 import com.example.theallclasses.databinding.FragmentChapterBinding
 
 class Chapter : Fragment() {

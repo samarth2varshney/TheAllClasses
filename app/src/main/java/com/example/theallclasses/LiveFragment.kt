@@ -1,19 +1,14 @@
 package com.example.theallclasses
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theallclasses.databinding.FragmentHomeBinding
+import com.example.theallclasses.Adapters.LiveVideoAdapter
+import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentLiveBinding
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 
 class LiveFragment : Fragment() {
@@ -43,13 +38,20 @@ class LiveFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
 
-        val youtubelink = SharedData.LiveFragmentData!!["youtube"]
-        lifecycle.addObserver(binding.youtubePlayerViewMaterial)
-        binding.youtubePlayerViewMaterial.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = youtubelink.toString()
-                youTubePlayer.cueVideo(videoId, 0f)
-            }
-        })
+        if(SharedData.LiveFragmentData!!["liveVideos"]!=null) {
+            binding.liverecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val adapter = LiveVideoAdapter(requireContext(),
+                SharedData.LiveFragmentData!!["liveVideos"] as Map<String, Any>,false)
+            binding.liverecyclerView.adapter = adapter
+        }
+
+        if(SharedData.LiveFragmentData!!["zoomMeetings"]!=null) {
+            binding.zoomMeetingrecyclerview.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val adapter = LiveVideoAdapter(requireContext(),
+                SharedData.LiveFragmentData!!["zoomMeetings"] as Map<String, Any>,true)
+            binding.zoomMeetingrecyclerview.adapter = adapter
+        }
+
     }
 }

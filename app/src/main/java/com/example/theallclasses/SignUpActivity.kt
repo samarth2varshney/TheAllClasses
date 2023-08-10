@@ -1,12 +1,10 @@
 package com.example.theallclasses
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.theallclasses.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -14,10 +12,14 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivitySignUpBinding
+    var dateOfBirth = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -38,6 +40,10 @@ class SignUpActivity : AppCompatActivity() {
                 gender = selectedLanguage
             }
 
+        binding.dateOfBirth.setOnClickListener{
+            showDatePickerDialog()
+        }
+
         auth = Firebase.auth
 
         binding.llSignUp.setOnClickListener {
@@ -49,8 +55,8 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnSignUp.setOnClickListener {
             val name = binding.etName2.text.toString()
             val Class = binding.etClass.text.toString()
+            val city = binding.etCity.text.toString()
             val state = binding.etState.text.toString()
-            val dateOfBirth = binding.etDateOfBirth.text.toString()
             val number = binding.etnumber.text.toString()
             val email = binding.etEmail2.text.toString()
             val password = binding.etPassword2.text.toString()
@@ -61,19 +67,23 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etName2.error = "Name is required."
                 return@setOnClickListener
             }
-            if(Class.isEmpty()){
+            if (Class.isEmpty()) {
                 binding.etClass.error = "class is required."
                 return@setOnClickListener
             }
-            if(state.isEmpty()){
+            if(city.isEmpty()){
+                binding.etCity.error = "state is required."
+                return@setOnClickListener
+            }
+            if (state.isEmpty()) {
                 binding.etState.error = "state is required."
                 return@setOnClickListener
             }
-            if(dateOfBirth.isEmpty()){
-                binding.etDateOfBirth.error = "Date of Birth is required."
+            if (dateOfBirth.isEmpty()) {
+                binding.dateOfBirth.error = "Date of Birth is required."
                 return@setOnClickListener
             }
-            if(number.isEmpty()){
+            if (number.isEmpty()) {
                 binding.etnumber.error = "Number is required"
                 return@setOnClickListener
             }
@@ -94,7 +104,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etConfirmPass2.error = "Password doesn't match"
                 return@setOnClickListener
             }
-            if (password.length<7){
+            if (password.length < 7) {
                 binding.etConfirmPass2.error = "Password should be greater than 7 words"
                 return@setOnClickListener
             }
@@ -127,7 +137,8 @@ class SignUpActivity : AppCompatActivity() {
                                     myEdit.putString("uid", user.uid)
                                     myEdit.apply()
 
-                                    val collectionRef = FirebaseFirestore.getInstance().collection("users")
+                                    val collectionRef =
+                                        FirebaseFirestore.getInstance().collection("users")
                                     val documentRef = collectionRef.document(user.uid)
 
                                     var testmap: HashMap<String, HashMap<String, String>>? =
@@ -137,6 +148,7 @@ class SignUpActivity : AppCompatActivity() {
                                         "gender" to gender,
                                         "date_of_birth" to dateOfBirth,
                                         "class" to Class,
+                                        "city" to city,
                                         "state" to state,
                                         "number" to number,
                                         "email" to email,
@@ -175,6 +187,29 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity2::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            R.style.CustomDatePickerDialog,
+            DatePickerDialog.OnDateSetListener { view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                // Handle the selected date here
+                dateOfBirth = "$dayOfMonth/${monthOfYear + 1}/$year"
+                binding.dateOfBirth.append("    ")
+                binding.dateOfBirth.append(dateOfBirth)
+            },
+            year,
+            month,
+            day
+        )
+
+        datePickerDialog.show()
     }
 
 }

@@ -24,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.Serializable
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
@@ -126,6 +127,9 @@ class MainActivity2 : AppCompatActivity() {
                     val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(SharedData.socialMediaLinks!!["blogLink"].toString()))
                     startActivity(intent3)
                 }
+                R.id.Test->{
+                    openShowMaterial(SharedData.MaterialFragmentData!!["testSeries"] as Map<String,Any>)
+                }
                 R.id.Motivation->{
                     val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(SharedData.socialMediaLinks!!["motivationLink"].toString()))
                     startActivity(intent3)
@@ -227,4 +231,16 @@ class MainActivity2 : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun openShowMaterial(course: Map<String, Any>?) {
+        val fragment = ShowMaterial()
+        val args = Bundle()
+        args.putSerializable("map", course as Serializable)
+        fragment.arguments = args
+
+        val fragmentManager: FragmentManager = (this as AppCompatActivity).supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(binding.frameLayout.id, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }

@@ -92,84 +92,99 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
+                android:textColor="#949494"
                 android:text="Gender"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Class"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:hint="Class"
-        app:boxBackgroundColor="@android:color/white"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/colorAccent"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateOfBirth">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etClass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Class"
-            android:inputType="text" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/state"
+            android:id="@+id/Class"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
-            android:hint="State"
+            android:hint="Class"
             app:boxBackgroundColor="@android:color/white"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="@color/colorAccent"
             app:boxStrokeWidth="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Class">
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etState"
+                android:id="@+id/etClass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="State"
+                android:hint="Class"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dateOfBirth"
+        android:id="@+id/City"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:hint="DateOfBirth"
+        android:hint="City"
         app:boxBackgroundColor="@android:color/white"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/colorAccent"
         app:boxStrokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gender">
+        app:layout_constraintTop_toBottomOf="@id/Class">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDateOfBirth"
+            android:id="@+id/etCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="DateOfBirth (dd/mm/yy)"
-            android:inputType="date" />
+            android:hint="City"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:hint="State"
+        app:boxBackgroundColor="@android:color/white"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/colorAccent"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/City">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="State"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/dateOfBirth"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_border_radius"
+        android:gravity="center_vertical"
+        android:textSize="17dp"
+        android:hint="    Date"
+        app:layout_constraintEnd_toEndOf="@+id/gender"
+        app:layout_constraintStart_toStartOf="@+id/gender"
+        app:layout_constraintTop_toBottomOf="@id/gender" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail2"

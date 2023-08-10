@@ -65,7 +65,7 @@ class SignInActivity : AppCompatActivity() {
                     } else {
                         binding.spinner2.visibility = View.GONE
                         binding.transparentImage.visibility = View.GONE
-                        Toast.makeText(baseContext, "Don't have a account signup", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Don't have a account signup/password is wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
 

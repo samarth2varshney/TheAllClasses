@@ -1,7 +1,6 @@
-package com.example.theallclasses
+package com.example.theallclasses.Adapters
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.theallclasses.R
+import com.example.theallclasses.topic1
 import java.io.Serializable
 
 class Adapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<Adapter.ViewHolder>(){

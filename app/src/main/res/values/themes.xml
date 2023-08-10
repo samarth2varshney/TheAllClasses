@@ -37,4 +37,10 @@
     <style name="Theme.TheAllClasses.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TheAllClasses.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
 </resources>

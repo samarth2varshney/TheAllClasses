@@ -1,4 +1,4 @@
-package com.example.theallclasses
+package com.example.theallclasses.Adapters
 
 import android.content.Context
 import android.os.Bundle
@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.theallclasses.Chapter
+import com.example.theallclasses.R
 import java.io.Serializable
 
 class BuyedCourseAdapter(
@@ -24,7 +24,7 @@ class BuyedCourseAdapter(
 ) : RecyclerView.Adapter<BuyedCourseAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
-        val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView1)!!
+        //val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView1)!!
         val imageView = itemView.findViewById<ImageView>(R.id.pic1)
         val explorebutton = itemView.findViewById<Button>(R.id.studybt)
         val exploreAndBuyBG = itemView.findViewById<ConstraintLayout>(R.id.horizontalItemBG)
@@ -38,76 +38,76 @@ class BuyedCourseAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position % 5 == 0) {
-            holder.exploreAndBuyBG.setBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.LightSkyBlue
-                )
-            )
-            holder.keyTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.RoyalBlue
-                )
-            )
-        }
-        else if (position % 5 == 1) {
-            holder.exploreAndBuyBG.setBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.SalmonPink
-                )
-            )
-            holder.keyTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.Rojo
-                )
-            )
-        }
-        else if (position % 5 == 2) {
-            holder.exploreAndBuyBG.setBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.Mauve
-                )
-            )
-            holder.keyTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.BlueViolet
-                )
-            )
-        }
-        else if (position % 5 == 3) {
-            holder.exploreAndBuyBG.setBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.Timberwolf
-                )
-            )
-            holder.keyTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.DavyGray
-                )
-            )
-        }
-        else if (position % 5 == 4) {
-            holder.exploreAndBuyBG.setBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.Aquamarine
-                )
-            )
-            holder.keyTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.PigmentGreen
-                )
-            )
-        }
+//        if (position % 5 == 0) {
+//            holder.exploreAndBuyBG.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.LightSkyBlue
+//                )
+//            )
+//            holder.keyTextView.setTextColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.RoyalBlue
+//                )
+//            )
+//        }
+//        else if (position % 5 == 1) {
+//            holder.exploreAndBuyBG.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.SalmonPink
+//                )
+//            )
+//            holder.keyTextView.setTextColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.Rojo
+//                )
+//            )
+//        }
+//        else if (position % 5 == 2) {
+//            holder.exploreAndBuyBG.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.Mauve
+//                )
+//            )
+//            holder.keyTextView.setTextColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.BlueViolet
+//                )
+//            )
+//        }
+//        else if (position % 5 == 3) {
+//            holder.exploreAndBuyBG.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.Timberwolf
+//                )
+//            )
+//            holder.keyTextView.setTextColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.DavyGray
+//                )
+//            )
+//        }
+//        else if (position % 5 == 4) {
+//            holder.exploreAndBuyBG.setBackgroundColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.Aquamarine
+//                )
+//            )
+//            holder.keyTextView.setTextColor(
+//                ContextCompat.getColor(
+//                    holder.itemView.context,
+//                    R.color.PigmentGreen
+//                )
+//            )
+//        }
 
 
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
@@ -115,7 +115,7 @@ class BuyedCourseAdapter(
         val coursename = map["name"].toString()
         val courseimage = map["courseImage"].toString()
 
-        holder.keyTextView.text = coursename
+        //holder.keyTextView.text = coursename
         Glide.with(holder.itemView).load(courseimage).fitCenter().into(holder.imageView)
 
         if(map["paidContent"]!=null) {

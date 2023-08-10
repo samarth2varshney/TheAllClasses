@@ -1,6 +1,5 @@
 package com.example.theallclasses
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentHomeBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -54,11 +54,12 @@ class HomeFragment : Fragment() {
                 }
         }
 
-        binding.button.setOnClickListener {
-            if(set){binding.onlinecontainer.setBackgroundColor(Color.parseColor("#BCEEFF"))}
-            else{binding.onlinecontainer.setBackgroundColor(Color.parseColor("#FFFFFF"))}
-            set = !set
-        }
+        //TODO online button
+//        binding.button.setOnClickListener {
+//            if(set){binding.onlinecontainer.setBackgroundColor(Color.parseColor("#BCEEFF"))}
+//            else{binding.onlinecontainer.setBackgroundColor(Color.parseColor("#FFFFFF"))}
+//            set = !set
+//        }
 
         binding.jeeAdvancedButton.setOnClickListener{
             openShowCourses(SharedData.JEE_Advanced,"jeeadvance")
@@ -127,13 +128,14 @@ class HomeFragment : Fragment() {
         Glide.with(requireContext()).load(SharedData.HomeFragmentData!![s]).fitCenter().into(Imageview)
     }
 
-    private fun intializeyoutubeplayer(VideoPlayer: YouTubePlayerView, s: String) {
+    fun intializeyoutubeplayer(VideoPlayer: YouTubePlayerView, s: String) {
         val youtubelink = SharedData.HomeFragmentData!![s]
         lifecycle.addObserver(VideoPlayer)
         VideoPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = youtubelink.toString()
                 youTubePlayer.cueVideo(videoId, 0f)
+                youTubePlayer.mute()
             }
         })
     }

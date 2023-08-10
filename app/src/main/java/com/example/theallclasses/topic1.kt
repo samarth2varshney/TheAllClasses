@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theallclasses.Adapters.TopicAdapter
 import com.example.theallclasses.databinding.FragmentTopic1Binding
 
 class topic1 : Fragment() {

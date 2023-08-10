@@ -1,7 +1,5 @@
 package com.example.theallclasses
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentMaterialBinding
 import com.smarteist.autoimageslider.SliderView
 import java.io.Serializable
@@ -47,6 +46,7 @@ class MaterialFragment : Fragment() {
             openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
         }
         binding.btnCard2.setOnClickListener {
+
             openShowMaterial(SharedData.MaterialFragmentData!!["testSeries"] as Map<String,Any>)
         }
         binding.btnCard3.setOnClickListener {

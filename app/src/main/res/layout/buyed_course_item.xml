@@ -2,56 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/horizontalItemBG"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="10dp"
     android:background="@drawable/rounded_message_gray"
-    android:elevation="8dp"
-    android:padding="20dp"
-    android:id="@+id/horizontalItemBG">
+    android:elevation="5dp">
 
     <ImageView
         android:id="@+id/pic1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_message_gray"
+        android:clipToOutline="true"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/studybt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/keyTextView1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/keyTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeMaxTextSize="24sp"
-        android:autoSizeMinTextSize="12sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:maxWidth="250dp"
-        android:padding="10dp"
-        android:paddingLeft="5dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/pic1"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="This is a message" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/studybt"
-        android:layout_width="215dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Study"
-        android:autoSizeMaxTextSize="24sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:autoSizeMaxTextSize="20sp"
         android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
+        android:background="@drawable/buttonbackground"
+        android:backgroundTint="#B41A00"
+        android:text="Order Now"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pic1" />
+        app:layout_constraintTop_toBottomOf="@+id/pic1"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

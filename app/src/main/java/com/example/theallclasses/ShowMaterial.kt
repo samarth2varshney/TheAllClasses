@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theallclasses.Adapters.MaterialRecyclerAdapter
 import com.example.theallclasses.databinding.FragmentShowMaterialBinding
 
 class ShowMaterial : Fragment() {

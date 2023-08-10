@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theallclasses.Adapters.ExploreAndBookseatAdapter
+import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentShowCoursesBinding
 import com.smarteist.autoimageslider.SliderView
 
@@ -102,8 +104,7 @@ class ShowCourses : Fragment() {
             binding.textView15.visibility = View.GONE
             binding.offlinecentrecourcesrecyclerview.layoutManager =
                 LinearLayoutManager(requireContext())
-            val adapter =
-                ExploreAndBookseatAdapter(requireContext(), mapWithName, bookSeat, location, type)
+            val adapter = ExploreAndBookseatAdapter(requireContext(), mapWithName, bookSeat, location, type)
             binding.offlinecentrecourcesrecyclerview.adapter = adapter
         }
 

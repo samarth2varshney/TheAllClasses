@@ -3,7 +3,16 @@
     <!-- App Colors -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-<!--    <color name="colorAccent">#FF4081</color>-->
+
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="orange">#FF644E</color>
+    <color name="darkGreen">#669C34</color>
+    <color name="lightBlue">#00A0FE</color>
+
+
+    <!--    <color name="colorAccent">#FF4081</color>-->
     <color name="colorAccent">#2563EA</color>
 
     <!-- Text Colors -->

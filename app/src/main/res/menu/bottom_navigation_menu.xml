@@ -10,10 +10,10 @@
         android:title="Live" />
     <item
         android:id="@+id/navigation_material"
-        android:icon="@drawable/ic_material"
-        android:title="Material" />
+        android:icon="@drawable/material"
+        android:title="Study Material" />
     <item
         android:id="@+id/navigation_courses"
-        android:icon="@drawable/ic_courses"
+        android:icon="@drawable/courses"
         android:title="My Courses" />
 </menu>
