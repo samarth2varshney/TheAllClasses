@@ -130,6 +130,10 @@ class ExploreAndBookseatAdapter(
 
         val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
+        if(type=="offline"){
+            holder.explorebutton.text = "Explore the Center"
+        }
+
         val coursename:String
         if(map["name"].toString()==null){
             coursename = mapData.keys.elementAt(position)
@@ -161,7 +165,6 @@ class ExploreAndBookseatAdapter(
 //        holder.durationtext.append(map["endDate"].toString())
 
         holder.explorebutton.setOnClickListener {
-            if (auth.currentUser != null){
             val fragment = CourseDetails()
                 val args = Bundle()
                 args.putSerializable("map", map as Serializable)
@@ -175,10 +178,6 @@ class ExploreAndBookseatAdapter(
                 transaction.replace(holder.layout.id, fragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
-            }else{
-                val intent1 = Intent(context, SignInActivity::class.java)
-                context.startActivity(intent1)
-            }
         }
 
 //        if(bookSeat)

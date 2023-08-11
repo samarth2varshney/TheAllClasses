@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashbg2"
+    android:background="@color/black"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,7 +18,7 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_white"
             tools:layout_editor_absoluteX="141dp"
             tools:layout_editor_absoluteY="28dp" />
     </androidx.constraintlayout.motion.widget.MotionLayout>

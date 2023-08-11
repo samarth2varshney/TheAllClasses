@@ -9,12 +9,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="8dp"
         tools:context=".CourseDetails">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/textView4"
@@ -31,9 +31,7 @@
                 android:id="@+id/courseDetailsImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
                 android:adjustViewBounds="true"
                 android:background="@color/white"
                 android:scaleType="fitCenter"
@@ -45,21 +43,20 @@
             <TextView
                 android:id="@+id/otherDetails"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginTop="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Other Details"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/courseDetailsImage" />
+                app:layout_constraintTop_toBottomOf="@+id/bookSeatbutton" />
 
             <ImageView
                 android:id="@+id/otherDetailsImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
+
                 android:adjustViewBounds="true"
                 android:background="@color/white"
                 android:scaleType="fitCenter"
@@ -71,9 +68,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/white_rounder_corner"
                 android:backgroundTint="#FFD977"
@@ -81,7 +76,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/freecourserecyclerview">
+                app:layout_constraintTop_toBottomOf="@id/button13">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -116,12 +111,12 @@
                     android:id="@+id/button"
                     android:layout_width="79dp"
                     android:layout_height="46dp"
+                    android:layout_marginEnd="63dp"
                     android:backgroundTint="#07557C"
                     android:text="DIAL"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/customercare"
                     app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -134,29 +129,87 @@
                 android:background="@drawable/buttonbackground"
                 android:backgroundTint="@color/orange"
                 android:text="Enroll Now"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="@+id/courseDetailsImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button9"
                 app:layout_constraintTop_toBottomOf="@+id/courseDetailsImage" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/freecourserecyclerview"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button9"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/buttonbackground"
+                android:backgroundTint="@color/darkGreen"
+                android:text="Free Content"
+                app:layout_constraintEnd_toStartOf="@+id/bookSeatbutton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courseDetailsImage" />
+
+            <ImageView
+                android:id="@+id/teacherImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/offline_delhi"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otherDetailsImage" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tests"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/teacherImage" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button12"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttonbackground"
+                android:backgroundTint="@color/orange"
+                android:text="Click Here"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView34" />
+
+            <ImageView
+                android:id="@+id/studyMaterial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/offline_delhi"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView6" />
+                app:layout_constraintTop_toBottomOf="@id/button12" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button13"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Free Content"
-                android:textSize="20dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/buttonbackground"
+                android:backgroundTint="@color/orange"
+                android:text="Click Here"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otherDetailsImage" />
+                app:layout_constraintTop_toBottomOf="@id/studyMaterial" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

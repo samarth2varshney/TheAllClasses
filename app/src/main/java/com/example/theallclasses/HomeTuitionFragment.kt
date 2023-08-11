@@ -80,7 +80,6 @@ class HomeTuitionFragment : Fragment() {
             transaction.commit()
         }
 
-        //Automatic Slider
         val imageurl = SharedData.HomeTuitionData!!["slider1"] as Map<String, Any>
         sliderView = binding.imageSliderHomeTuition
         sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())

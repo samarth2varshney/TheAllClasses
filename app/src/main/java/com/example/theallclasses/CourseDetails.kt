@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
-import com.example.theallclasses.Adapters.Adapter
 import com.example.theallclasses.databinding.FragmentCourseDetailsBinding
+import java.io.Serializable
 
 class CourseDetails : Fragment() {
 
@@ -18,6 +20,7 @@ class CourseDetails : Fragment() {
     lateinit var map:MutableMap<String,Any>
     var location:String = ""
     var type:String = ""
+    var containerId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class CourseDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        containerId = container?.id!!
         binding = FragmentCourseDetailsBinding.inflate(layoutInflater)
         return (binding.root)
     }
@@ -40,8 +43,33 @@ class CourseDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.button12.setOnClickListener {
+            val fragment = Tests()
+            val args = Bundle()
+            args.putSerializable("map", SharedData.MaterialFragmentData!!["testSeries"] as Map<String,Any> as Serializable)
+            fragment.arguments = args
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         if(map["courseDetails"] != null)
             Glide.with(this).load(map["courseDetails"]).fitCenter().into(binding.courseDetailsImage)
+
+        binding.button13.setOnClickListener {
+            openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
+        }
+
+        Glide.with(this).load(map["teachersImage"]).fitCenter().into(binding.teacherImage)
+
+
+        Glide.with(this).load(map["studyMaterailImage"]).fitCenter().into(binding.studyMaterial)
+
+        if(map["studyMaterailImage"]==null){
+            binding.button13.visibility = View.GONE
+        }
 
         if(map["otherDetails"] != null)
             Glide.with(this).load(map["otherDetails"]).fitCenter().into(binding.otherDetailsImage)
@@ -64,14 +92,27 @@ class CourseDetails : Fragment() {
         }
 
         if(map["freeContent"] != null) {
-            val mapWithName = map["freeContent"] as MutableMap<String, Any>
-
-            binding.freecourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
-            val adapter = Adapter(requireContext(), mapWithName)
-            binding.freecourserecyclerview.adapter = adapter
+//            val mapWithName = map["freeContent"] as MutableMap<String, Any>
+//
+//            binding.freecourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
+//            val adapter = Adapter(requireContext(), mapWithName)
+//            binding.freecourserecyclerview.adapter = adapter
+//
+            binding.button9.setOnClickListener {
+                val fragment = ShowFreeContent()
+                val args = Bundle()
+                args.putString("location",location)
+                args.putString("type",type)
+                args.putSerializable("map", map as Serializable)
+                fragment.arguments = args
+                val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(containerId, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
         }else{
-            binding.freecourserecyclerview.visibility = View.GONE
-            binding.textView6.visibility = View.GONE
+            binding.button9.visibility = View.GONE
         }
 
         if(map!!["contactInfo"] != null) {
@@ -94,6 +135,19 @@ class CourseDetails : Fragment() {
             }
         }
 
+    }
+
+    private fun openShowMaterial(course: Map<String, Any>?) {
+        val fragment = ShowMaterial()
+        val args = Bundle()
+        args.putSerializable("map", course as Serializable)
+        fragment.arguments = args
+
+        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(containerId, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }
