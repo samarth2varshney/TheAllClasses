@@ -14,9 +14,9 @@
         <!-- Set the background color -->
         <item name="android:windowBackground">@android:color/white</item>
 
-<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+        <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
         <item name="android:fitsSystemWindows">true</item>
-        <item name="android:statusBarColor" >@color/blackishblue</item>
+        <item name="android:statusBarColor">@color/blackishblue</item>
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <!-- Set the hint color for EditText -->
@@ -30,12 +30,14 @@
         <item name="android:background">@color/buttonBackground</item>
         <item name="android:textColor">@color/buttonText</item>
     </style>
+
     <style name="Theme.TheAllClasses.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.TheAllClasses.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TheAllClasses.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.TheAllClasses.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">

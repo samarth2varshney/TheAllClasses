@@ -31,11 +31,8 @@ class WebviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val webView = binding.webView
-        // Enable JavaScript (optional)
         webView.settings.javaScriptEnabled = true
-        // Set a WebViewClient to handle page navigation and loading
         webView.webViewClient = WebViewClient()
-        // Load a web page
         webView.loadUrl(URL!!)
     }
 

@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theallclasses.Adapters.ExploreAndBookseatAdapter
 import com.example.theallclasses.Adapters.SliderAdapter
@@ -23,6 +26,7 @@ class ShowCourses : Fragment() {
     var location:String = ""
     var type:String = ""
     var bookSeat:Boolean = false
+    var containerId:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,7 @@ class ShowCourses : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        containerId = container?.id!!
         binding = FragmentShowCoursesBinding.inflate(layoutInflater)
         return (binding.root)
     }
@@ -47,8 +52,16 @@ class ShowCourses : Fragment() {
 
         if(map["joinTeacherTranningProgramForm"]!=null){
             binding.button4.setOnClickListener {
-                val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse(map!!["joinTeacherTranningProgramForm"].toString()))
-                startActivity(intent3)
+                val fragment = WebviewFragment()
+                val args = Bundle()
+                args.putString("formlink",map!!["joinTeacherTranningProgramForm"].toString())
+                fragment.arguments = args
+
+                val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(containerId, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
         }else{
             binding.button4.visibility = View.GONE

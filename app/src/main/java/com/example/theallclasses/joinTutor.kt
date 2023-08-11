@@ -78,7 +78,7 @@ class joinTutor : Fragment() {
         binding.IhaveExperincebutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
-            args.putString("formlink",SharedData.HomeTuitionData!!["jointutorihaveexperienceform"].toString())
+            args.putString("formlink",SharedData.HomeTuitionData!!["joinTeacherTranningProgramForm"].toString())
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

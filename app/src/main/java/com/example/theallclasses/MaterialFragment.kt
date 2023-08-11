@@ -46,8 +46,15 @@ class MaterialFragment : Fragment() {
             openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
         }
         binding.btnCard2.setOnClickListener {
-
-            openShowMaterial(SharedData.MaterialFragmentData!!["testSeries"] as Map<String,Any>)
+            val fragment = Tests()
+            val args = Bundle()
+            args.putSerializable("map", SharedData.MaterialFragmentData!!["testSeries"] as Map<String,Any> as Serializable)
+            fragment.arguments = args
+            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
         binding.btnCard3.setOnClickListener {
             openShowMaterial(SharedData.MaterialFragmentData!!["tShirts"] as Map<String,Any>)
