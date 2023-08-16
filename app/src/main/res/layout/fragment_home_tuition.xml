@@ -42,37 +42,6 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <ImageView
-                android:id="@+id/textBanner2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="7dp"
-                android:background="@drawable/white_round_corner"
-                android:backgroundTint="#15803D"
-                android:clipToOutline="true"
-                android:elevation="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FindingTuttorbutton" />
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/youtube_player_view_hometuition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="7dp"
-                android:background="@drawable/white_round_corner"
-                android:clipToOutline="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textBanner2">
-
-            </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/FindingTuttorbutton"
                 android:layout_width="150dp"
@@ -91,67 +60,128 @@
                 android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_rounder_corner"
-                android:backgroundTint="#EF4444"
+                android:backgroundTint="@color/orange"
                 android:text="Join as the Tutor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/FindingTuttorbutton"
                 app:layout_constraintTop_toTopOf="@+id/FindingTuttorbutton" />
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/studentsExperience"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bannerContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="7dp"
-                android:background="@drawable/white_round_corner"
-                android:clipToOutline="true"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/JoinasTutorbutton">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="Student Experince"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageSliderHomeTuition2" />
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/image2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-            <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/imageSliderHomeTuition2"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="7dp"
-                android:background="@drawable/white_round_corner"
-                android:clipToOutline="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/youtube_player_view_hometuition"
-                app:sliderAnimationDuration="600"
-                app:sliderAutoCycleDirection="back_and_forth"
-                app:sliderAutoCycleEnabled="true"
-                app:sliderIndicatorAnimationDuration="600"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
-                app:sliderIndicatorMargin="15dp"
-                app:sliderIndicatorOrientation="horizontal"
-                app:sliderIndicatorPadding="3dp"
-                app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="#5A5A5A"
-                app:sliderIndicatorUnselectedColor="#FFF"
-                app:sliderScrollTimeInSec="1"
-                app:sliderStartAutoCycle="true" />
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/video1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image1"
+                    app:layout_constraintVertical_bias="0.5"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/video1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/white_round_corner"
+                    android:clipToOutline="true"
+                    app:layout_constraintBottom_toTopOf="@+id/image3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image2"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/video2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/video1"
+                    app:layout_constraintVertical_bias="0.5"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/video2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/white_round_corner"
+                    android:clipToOutline="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image3" />
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/Slider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/white_round_corner"
+                    android:clipToOutline="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1920:886"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/video2"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="true" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/white_rounder_corner"
@@ -160,7 +190,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/studentsExperience">
+                app:layout_constraintTop_toBottomOf="@+id/bannerContainer">
 
                 <ImageView
                     android:id="@+id/imageView6"

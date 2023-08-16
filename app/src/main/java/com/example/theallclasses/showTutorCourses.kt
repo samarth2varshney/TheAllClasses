@@ -12,12 +12,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.theallclasses.Adapters.ExploreAndBookseatAdapter
 import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentShowCoursesBinding
 import com.smarteist.autoimageslider.SliderView
+import java.io.Serializable
 
-class ShowCourses : Fragment() {
+class showTutorCourses : Fragment() {
 
     private lateinit var binding: FragmentShowCoursesBinding
     lateinit var sliderView: SliderView
@@ -50,11 +52,14 @@ class ShowCourses : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(map["joinTeacherTranningProgramForm"]!=null){
+        Glide.with(this).load(SharedData.HomeTuitionData!!["teacherTraningOfflineImage"]).fitCenter().into(binding.imageView11)
+        Glide.with(this).load(SharedData.HomeTuitionData!!["teacherTraningOnlineImage"]).fitCenter().into(binding.imageView12)
+
+        if(SharedData.HomeTuitionData!!["joinTeacherTranningProgramForm"]!=null){
             binding.button4.setOnClickListener {
                 val fragment = WebviewFragment()
                 val args = Bundle()
-                args.putString("formlink",map!!["joinTeacherTranningProgramForm"].toString())
+                args.putString("formlink",SharedData.HomeTuitionData!!["joinTeacherTranningProgramForm"].toString())
                 fragment.arguments = args
 
                 val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -63,14 +68,49 @@ class ShowCourses : Fragment() {
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
-        }else{
-            binding.button4.visibility = View.GONE
-            binding.textView17.visibility = View.GONE
         }
 
-        if(map!!["slider"] != null){
-            //Automatic Slider
-            val imagemap = map!!["slider"]  as Map<String, Any>
+        binding.button15.setOnClickListener {
+            if(SharedData.HomeTuitionData!!["teacherTrainingProgram"]!=null) {
+                val tutormap = SharedData.HomeTuitionData!!["teacherTrainingProgram"] as Map<String, Any>
+                val fragment = showOnlineCourses()
+                val args = Bundle()
+                args.putSerializable("map", tutormap as Serializable)
+                args.putBoolean("bookSeat", false)
+                args.putString("location", location)
+                args.putString("type", "online")
+                fragment.arguments = args
+                val fragmentManager: FragmentManager =
+                    (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(containerId, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        binding.button17.setOnClickListener {
+            if(SharedData.HomeTuitionData!!["teacherTrainingProgramoffline"]!=null) {
+                val tutormap = SharedData.HomeTuitionData!!["teacherTrainingProgramoffline"] as Map<String, Any>
+                val fragment = showOfflineCourses()
+                val args = Bundle()
+                args.putSerializable("map", tutormap as Serializable)
+                args.putBoolean("bookSeat", true)
+                args.putString("location", "teachertraning")
+                args.putString("type", "offline")
+                fragment.arguments = args
+
+                val fragmentManager: FragmentManager =
+                    (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(containerId, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        if(SharedData.HomeTuitionData!!["joinAsTeacherSlider"] != null){
+            val imagemap = SharedData.HomeTuitionData!!["joinAsTeacherSlider"]  as Map<String, Any>
             val slideimages = imagemap.keys.toTypedArray()
 
             sliderView = binding.offlineModeCentreSlider
@@ -80,12 +120,6 @@ class ShowCourses : Fragment() {
             sliderView.scrollTimeInSec = 3
             sliderView.isAutoCycle = true
             sliderView.startAutoCycle()
-        }else{
-            binding.offlineModeCentreSlider.visibility = View.GONE
-            //making the top margin to 0dp offlinecentrecourcesrecyclerview
-            val layoutParams = binding.offlinecentrecourcesrecyclerview.layoutParams as ConstraintLayout.LayoutParams
-            layoutParams.topMargin = 0
-            binding.offlinecentrecourcesrecyclerview.layoutParams = layoutParams
         }
 
         if(map!!["contactInfo"] != null) {
@@ -106,19 +140,6 @@ class ShowCourses : Fragment() {
             binding.button2.setOnClickListener {
                 startActivity(dialIntent)
             }
-        }
-
-        var mapWithName = map!!.toMutableMap()
-        mapWithName.remove("slider")
-        mapWithName.remove("contactInfo")
-        mapWithName.remove("joinTeacherTranningProgramForm")
-
-        if(mapWithName.isNotEmpty()) {
-            binding.textView15.visibility = View.GONE
-            binding.offlinecentrecourcesrecyclerview.layoutManager =
-                LinearLayoutManager(requireContext())
-            val adapter = ExploreAndBookseatAdapter(requireContext(), mapWithName, bookSeat, location, type)
-            binding.offlinecentrecourcesrecyclerview.adapter = adapter
         }
 
     }

@@ -8,7 +8,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,9 +25,6 @@
                 app:layout_constraintDimensionRatio="1920:886"
                 android:background="@drawable/white_round_corner"
                 android:clipToOutline="true"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,30 +43,15 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/youtube_player_view_joinTutor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="7dp"
-                android:background="@drawable/white_round_corner"
-                android:clipToOutline="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/IhaveExperincebutton">
-
-            </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bannerContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/youtube_player_view_joinTutor"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.5">
+                app:layout_constraintTop_toBottomOf="@+id/IhaveExperincebutton">
 
 
                 <ImageView
@@ -132,13 +118,38 @@
                     android:layout_marginEnd="2dp"
                     android:background="@drawable/white_round_corner"
                     android:clipToOutline="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image3"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toBottomOf="@+id/image3" />
 
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/Slider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/white_round_corner"
+                    android:clipToOutline="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1920:886"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/video2"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="true" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -161,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:text="Join Teacher\nTraning Program"
                 android:background="@drawable/white_rounder_corner"
-                android:backgroundTint="#EF4444"
+                android:backgroundTint="@color/orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/IhaveExperincebutton"

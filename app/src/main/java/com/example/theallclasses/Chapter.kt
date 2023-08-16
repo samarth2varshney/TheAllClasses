@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.theallclasses.Adapters.Adapter
+import com.example.theallclasses.Adapters.ChapterAdapter
 import com.example.theallclasses.databinding.FragmentChapterBinding
 
 class Chapter : Fragment() {
@@ -33,8 +33,8 @@ class Chapter : Fragment() {
         val mapWithName = map.toMutableMap().toSortedMap()
 
         binding.chapterrecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = Adapter(requireContext(),mapWithName)
-        binding.chapterrecyclerview.adapter = adapter
+        val chapterAdapter = ChapterAdapter(requireContext(),mapWithName)
+        binding.chapterrecyclerview.adapter = chapterAdapter
 
     }
 

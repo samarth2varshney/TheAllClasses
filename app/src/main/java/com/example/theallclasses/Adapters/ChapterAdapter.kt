@@ -17,7 +17,7 @@ import com.example.theallclasses.R
 import com.example.theallclasses.topic1
 import java.io.Serializable
 
-class Adapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+class ChapterAdapter(private val context: Context, private val mapData: Map<String, Any>) : RecyclerView.Adapter<ChapterAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View, activityview: View) : RecyclerView.ViewHolder(itemView) {
         val keyTextView = itemView.findViewById<TextView>(R.id.chaptername)!!
@@ -33,26 +33,30 @@ class Adapter(private val context: Context, private val mapData: Map<String, Any
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val map: Map<String, Any> = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
-        val chaptername = map["chapterName"].toString()
-        val chapterimage = map["chapterImage"].toString()
+        if(mapData[mapData.keys.elementAt(position)] is Map<*, *>) {
+            val map: Map<String, Any> =
+                mapData[mapData.keys.elementAt(position)] as Map<String, Any>
+            val chaptername = map["chapterName"].toString()
+            val chapterimage = map["chapterImage"].toString()
 
-        holder.keyTextView.text = chaptername
-        Glide.with(holder.itemView).load(chapterimage).fitCenter().into(holder.imageView)
+            holder.keyTextView.text = chaptername
+            Glide.with(holder.itemView).load(chapterimage).fitCenter().into(holder.imageView)
 
-        holder.itemView.setOnClickListener{
+            holder.itemView.setOnClickListener {
 
-            val fragment = topic1()
-            val args = Bundle()
-            args.putSerializable("map", map as Serializable)
-            fragment.arguments = args
+                val fragment = topic1()
+                val args = Bundle()
+                args.putSerializable("map", map as Serializable)
+                fragment.arguments = args
 
-            val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
-            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-            transaction.replace(holder.layout.id, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+                val fragmentManager: FragmentManager =
+                    (context as AppCompatActivity).supportFragmentManager
+                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+                transaction.replace(holder.layout.id, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
 
+            }
         }
 
     }

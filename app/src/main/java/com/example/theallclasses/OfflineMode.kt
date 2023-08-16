@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -17,13 +18,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 import java.io.Serializable
 
 class OfflineMode : Fragment() {
     private lateinit var binding: FragmentOfflineModeBinding
-    lateinit var sliderView: SliderView
-    lateinit var sliderAdapter: SliderAdapter
     val db = Firebase.firestore
     var containerId:Int = 0
     var dataLoaded = false
@@ -75,11 +75,49 @@ class OfflineMode : Fragment() {
             centre = "ghaziabad"
             if(dataLoaded) openFragment(centre)
         }
+        binding.gurgaonButton.setOnClickListener {
+            centre = "gurgaon"
+            if(dataLoaded) openFragment(centre)
+        }
+
+    }
+
+    private fun intializeviews() {
+
+        val imagemap = SharedData.OfflineModeData!!["slider1"]  as Map<String, Any>
+        val imagemap2 = SharedData.OfflineModeData!!["slider2"]  as Map<String, Any>
+
+        val centreImages = SharedData.OfflineModeData!!["centreImages"] as Map<String,Any>
+
+        Glide.with(this).load(centreImages["newDelhi"]).fitCenter().into(binding.newDelhiButton)
+        Glide.with(this).load(centreImages["ghaziabad"]).fitCenter().into(binding.ghaziabadButton)
+        Glide.with(this).load(centreImages["noida"]).fitCenter().into(binding.noidaButton)
+        Glide.with(this).load(centreImages["gurgaon"]).fitCenter().into(binding.gurgaonButton)
+
+        Glide.with(this).load(SharedData.OfflineModeData!!["image1"]).fitCenter().into(binding.image1)
+        Glide.with(this).load(SharedData.OfflineModeData!!["image2"]).fitCenter().into(binding.image2)
+        Glide.with(this).load(SharedData.OfflineModeData!!["image3"]).fitCenter().into(binding.image3)
+
+        intializeyoutube(SharedData.OfflineModeData!!["video1"].toString(),binding.video1)
+        intializeyoutube(SharedData.OfflineModeData!!["video2"].toString(),binding.video2)
+
+        intializeslider(imagemap,binding.offlineModeSlider)
+        intializeslider(imagemap2,binding.Slider1)
+
+        if(SharedData.customerCare!=null){
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data =
+                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
+            binding.customercare4.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
+            binding.button2.setOnClickListener {
+                startActivity(dialIntent)
+            }
+        }
 
     }
 
     private fun openFragment(centre: String) {
-        val fragment = ShowCourses()
+        val fragment = showOfflineCourses()
         val args = Bundle()
         args.putSerializable("map", SharedData.OfflineModeData?.get(centre) as Serializable)
         args.putBoolean("bookSeat",true)
@@ -94,64 +132,26 @@ class OfflineMode : Fragment() {
         transaction.commit()
     }
 
-    private fun intializeviews() {
-
-        val imagemap = SharedData.OfflineModeData!!["slider1"]  as Map<String, Any>
-        val slideimages = imagemap.keys.toTypedArray()
-        val centreImages = SharedData.OfflineModeData!!["centreImages"] as Map<String,Any>
-
-        Glide.with(this).load(centreImages["newDelhi"]).fitCenter().into(binding.newDelhiButton)
-        Glide.with(this).load(centreImages["ghaziabad"]).fitCenter().into(binding.ghaziabadButton)
-        Glide.with(this).load(centreImages["noida"]).fitCenter().into(binding.noidaButton)
-
-        //Automatic Slider
-        sliderView = binding.offlineModeSlider
-        sliderAdapter = SliderAdapter(slideimages) //send the array of image
+    private fun intializeslider(imagesMap: Map<String, Any>, ModeSlider: SliderView) {
+        var sliderView: SliderView = ModeSlider
+        var sliderAdapter = SliderAdapter(imagesMap.keys.toTypedArray())
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         sliderView.setSliderAdapter(sliderAdapter)
         sliderView.scrollTimeInSec = 3
         sliderView.isAutoCycle = true
         sliderView.startAutoCycle()
+    }
 
-        val imagemap2 = SharedData.OfflineModeData!!["slider2"]  as Map<String, Any>
-        val slideimages2 = imagemap2.keys.toTypedArray()
+    private fun intializeyoutube(youtubelink: String, youtubePlayerView: YouTubePlayerView) {
 
-        sliderView = binding.offlineModeSlider2
-        sliderAdapter = SliderAdapter(slideimages2) //send the array of image
-        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.scrollTimeInSec = 3
-        sliderView.isAutoCycle = true
-        sliderView.startAutoCycle()
-
-        val youtubelink = SharedData.OfflineModeData!!["exploreTheCentreVideo"].toString()
-        lifecycle.addObserver(binding.youtubePlayerView2)
-
-        binding.youtubePlayerView2.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+        lifecycle.addObserver(youtubePlayerView)
+        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.cueVideo(youtubelink, 0f)
+                youTubePlayer.mute()
             }
         })
-
-        val youtubelink2 = SharedData.OfflineModeData!!["studentExperienceVideo"].toString()
-        lifecycle.addObserver(binding.youtubePlayerView3)
-
-        binding.youtubePlayerView3.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.cueVideo(youtubelink2, 0f)
-            }
-        })
-
-        if(SharedData.customerCare!=null){
-            val dialIntent = Intent(Intent.ACTION_DIAL)
-            dialIntent.data =
-                Uri.parse("tel:${SharedData.customerCare!!["homeTuitionNumber"]}")
-            binding.customercare4.append("${SharedData.customerCare!!["homeTuitionNumber"]} \n")
-            binding.button2.setOnClickListener {
-                startActivity(dialIntent)
-            }
-        }
-
     }
+
 
 }

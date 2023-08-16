@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.theallclasses.Adapters.SliderAdapter
 import com.example.theallclasses.databinding.FragmentJoinTutorBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 import java.io.Serializable
 
@@ -41,26 +43,24 @@ class joinTutor : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycle.addObserver(binding.youtubePlayerViewJoinTutor)
-        binding.youtubePlayerViewJoinTutor.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = SharedData.HomeTuitionData!!["joinTutorVideo"].toString()
-                youTubePlayer.cueVideo(videoId, 0f)
-            }
-        })
+        val map = SharedData.HomeTuitionData!!["joinAsTutorBannersAndVideos"] as Map<String,Any>
 
-        val imageurl = SharedData.HomeTuitionData!!["jointutorslider"] as Map<String, Any>
-        sliderView = binding.imageSliderjoinTutor
-        sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
-        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.scrollTimeInSec = 3
-        sliderView.isAutoCycle = true
-        sliderView.startAutoCycle()
+        val imagemap = map!!["slider1"]  as Map<String, Any>
+        val imagemap2 = map!!["slider2"]  as Map<String, Any>
+
+        intializeslider(imagemap,binding.imageSliderjoinTutor)
+        intializeslider(imagemap2,binding.Slider1)
+
+        Glide.with(this).load(map!!["image1"]).fitCenter().into(binding.image1)
+        Glide.with(this).load(map!!["image2"]).fitCenter().into(binding.image2)
+        Glide.with(this).load(map!!["image3"]).fitCenter().into(binding.image3)
+
+        intializeyoutube(map!!["video1"].toString(),binding.video1)
+        intializeyoutube(map!!["video2"].toString(),binding.video2)
 
         binding.joinTeacherbutton.setOnClickListener {
             SharedData.teacherTrainingProgram = SharedData.HomeTuitionData!!["teacherTrainingProgram"] as Map<String,Any>
-            val fragment = ShowCourses()
+            val fragment = showTutorCourses()
             val args = Bundle()
             args.putSerializable("map", SharedData.teacherTrainingProgram as Serializable)
             args.putBoolean("bookSeat",true)
@@ -98,6 +98,27 @@ class joinTutor : Fragment() {
             }
         }
 
+    }
+
+    private fun intializeslider(imagesMap: Map<String, Any>, ModeSlider: SliderView) {
+        sliderView = ModeSlider
+        sliderAdapter = SliderAdapter(imagesMap.keys.toTypedArray())
+        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+        sliderView.setSliderAdapter(sliderAdapter)
+        sliderView.scrollTimeInSec = 3
+        sliderView.isAutoCycle = true
+        sliderView.startAutoCycle()
+    }
+
+    private fun intializeyoutube(youtubelink: String, youtubePlayerView: YouTubePlayerView) {
+
+        lifecycle.addObserver(youtubePlayerView)
+        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.cueVideo(youtubelink, 0f)
+                youTubePlayer.mute()
+            }
+        })
     }
 
 }

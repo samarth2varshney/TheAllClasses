@@ -63,9 +63,8 @@ class CourseDetails : Fragment() {
         }
 
         Glide.with(this).load(map["teachersImage"]).fitCenter().into(binding.teacherImage)
-
-
-        Glide.with(this).load(map["studyMaterailImage"]).fitCenter().into(binding.studyMaterial)
+        Glide.with(this).load(map["testImage"]).fitCenter().into(binding.testImage)
+        Glide.with(this).load(map["studyMaterialImage"]).fitCenter().into(binding.studyMaterial)
 
         if(map["studyMaterailImage"]==null){
             binding.button13.visibility = View.GONE

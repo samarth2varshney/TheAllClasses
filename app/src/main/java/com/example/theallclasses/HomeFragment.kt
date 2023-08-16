@@ -54,13 +54,6 @@ class HomeFragment : Fragment() {
                 }
         }
 
-        //TODO online button
-//        binding.button.setOnClickListener {
-//            if(set){binding.onlinecontainer.setBackgroundColor(Color.parseColor("#BCEEFF"))}
-//            else{binding.onlinecontainer.setBackgroundColor(Color.parseColor("#FFFFFF"))}
-//            set = !set
-//        }
-
         binding.jeeAdvancedButton.setOnClickListener{
             openShowCourses(SharedData.JEE_Advanced,"jeeadvance")
         }
@@ -121,7 +114,9 @@ class HomeFragment : Fragment() {
         setImages("dreamTurnQuote",binding.dreamTurnQuote)
         setImages("memberofDreamImage",binding.memberOfDream)
         setImages("freeContentImage",binding.freeContent)
-
+        setImages("bookFlashImage",binding.bookImage)
+        setImages("TrainedAndExpertFacultiesImage",binding.TrainedAndExportFaculties)
+        setImages("bottomImage",binding.bottomImage)
     }
 
     private fun setImages(s: String, Imageview: ImageView) {
@@ -151,7 +146,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun openShowCourses(course: Map<String, Any>?, s: String) {
-        val fragment = ShowCourses()
+        val fragment = showOnlineCourses()
         val args = Bundle()
         args.putSerializable("map", course as Serializable)
         args.putBoolean("bookSeat",false)

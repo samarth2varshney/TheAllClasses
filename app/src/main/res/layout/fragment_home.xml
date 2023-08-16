@@ -7,7 +7,11 @@
     android:layout_height="729dp"
     tools:layout_editor_absoluteX = "1dp"
     tools:layout_editor_absoluteY = "1dp"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,9 +21,6 @@
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/white_round_corner"
             android:clipToOutline="true"
             app:layout_constraintDimensionRatio="1920:886"
@@ -68,12 +69,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button3"
-                android:layout_width="120dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/buttonbackground"
                 android:backgroundTint="@color/orange"
                 android:elevation="10dp"
-                android:text="Home Tuition"
+                android:text="THE Home Tuition"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/offlineButton"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -82,12 +83,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/offlineButton"
-                android:layout_width="170dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/buttonbackground"
                 android:backgroundTint="#16A34A"
                 android:elevation="10dp"
-                android:text="Offline ClassRoom"
+                android:text="ClassRoom Program"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -110,7 +111,6 @@
                 android:id="@+id/jeeAdvancedButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="5dp"
                 android:layout_marginEnd="3dp"
                 android:src="@drawable/jee_advanced"
                 app:layout_constraintBottom_toTopOf="@+id/othersButton"
@@ -137,7 +137,7 @@
                 android:id="@+id/cbseButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="5dp"
+
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="5dp"
                 android:src="@drawable/cbse"
@@ -153,7 +153,6 @@
                 android:id="@+id/jeeMainsButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/cbseButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -165,7 +164,6 @@
                 android:id="@+id/neetUgButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/jeeAdvancedButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -177,7 +175,6 @@
                 android:id="@+id/othersButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/foundationButton"
@@ -191,7 +188,6 @@
                 android:id="@+id/foundationButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/othersButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -202,18 +198,27 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ImageView
+            android:id="@+id/bookImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/bookletVideo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="7dp"
             android:background="@drawable/white_round_corner"
             android:clipToOutline="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7">
+            app:layout_constraintTop_toBottomOf="@+id/bookImage">
 
         </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
 
@@ -231,9 +236,7 @@
             android:id="@+id/onlineSystematicContentVideo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="7dp"
             android:background="@drawable/white_round_corner"
             android:clipToOutline="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -501,10 +504,8 @@
             android:layout_marginStart="7dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="7dp"
-            android:layout_marginBottom="5dp"
             android:background="@drawable/white_round_corner"
             android:clipToOutline="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageSlider5" />
@@ -607,6 +608,19 @@
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/successfulStudentvideo" />
+
+        <ImageView
+            android:id="@+id/bottomImage"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/studentVideo"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

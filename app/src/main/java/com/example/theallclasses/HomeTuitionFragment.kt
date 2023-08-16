@@ -17,6 +17,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.smarteist.autoimageslider.SliderView
 
 class HomeTuitionFragment : Fragment() {
@@ -56,8 +57,6 @@ class HomeTuitionFragment : Fragment() {
 
     private fun intializeviews() {
 
-        Glide.with(requireContext()).load(SharedData.HomeTuitionData!!["bannerImage"]).fitCenter().into(binding.textBanner2)
-
         binding.FindingTuttorbutton.setOnClickListener {
             val fragment = WebviewFragment()
             val args = Bundle()
@@ -80,39 +79,18 @@ class HomeTuitionFragment : Fragment() {
             transaction.commit()
         }
 
-        val imageurl = SharedData.HomeTuitionData!!["slider1"] as Map<String, Any>
-        sliderView = binding.imageSliderHomeTuition
-        sliderAdapter = SliderAdapter(imageurl.keys.toTypedArray())
-        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.scrollTimeInSec = 3
-        sliderView.isAutoCycle = true
-        sliderView.startAutoCycle()
+        val imageMap = SharedData.HomeTuitionData!!["slider1"] as Map<String, Any>
+        val imageMap2 = SharedData.HomeTuitionData!!["slider2"] as Map<String, Any>
 
-        val imageurl2 = SharedData.HomeTuitionData!!["slider2"] as Map<String, Any>
-        sliderView = binding.imageSliderHomeTuition2
-        sliderAdapter = SliderAdapter(imageurl2.keys.toTypedArray())
-        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.scrollTimeInSec = 3
-        sliderView.isAutoCycle = true
-        sliderView.startAutoCycle()
+        intializeslider(imageMap,binding.imageSliderHomeTuition)
+        intializeslider(imageMap2,binding.Slider1)
 
-        lifecycle.addObserver(binding.youtubePlayerViewHometuition)
-        binding.youtubePlayerViewHometuition.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = SharedData.HomeTuitionData!!["exploreHomeTuitionVideo"].toString()
-                youTubePlayer.cueVideo(videoId, 0f)
-            }
-        })
+        intializeyoutube(SharedData.HomeTuitionData!!["video1"].toString(),binding.video1)
+        intializeyoutube(SharedData.HomeTuitionData!!["video2"].toString(),binding.video2)
 
-        lifecycle.addObserver(binding.studentsExperience)
-        binding.studentsExperience.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = SharedData.HomeTuitionData!!["studentExperienceVideo"].toString()
-                youTubePlayer.cueVideo(videoId, 0f)
-            }
-        })
+        Glide.with(this).load(SharedData.HomeTuitionData!!["image1"]).fitCenter().into(binding.image1)
+        Glide.with(this).load(SharedData.HomeTuitionData!!["image2"]).fitCenter().into(binding.image2)
+        Glide.with(this).load(SharedData.HomeTuitionData!!["image3"]).fitCenter().into(binding.image3)
 
         if(SharedData.customerCare!=null){
             val dialIntent = Intent(Intent.ACTION_DIAL)
@@ -126,5 +104,25 @@ class HomeTuitionFragment : Fragment() {
 
     }
 
+    private fun intializeslider(imagesMap: Map<String, Any>, ModeSlider: SliderView) {
+        sliderView = ModeSlider
+        sliderAdapter = SliderAdapter(imagesMap.keys.toTypedArray())
+        sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+        sliderView.setSliderAdapter(sliderAdapter)
+        sliderView.scrollTimeInSec = 3
+        sliderView.isAutoCycle = true
+        sliderView.startAutoCycle()
+    }
+
+    private fun intializeyoutube(youtubelink: String, youtubePlayerView: YouTubePlayerView) {
+
+        lifecycle.addObserver(youtubePlayerView)
+        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.cueVideo(youtubelink, 0f)
+                youTubePlayer.mute()
+            }
+        })
+    }
 
 }

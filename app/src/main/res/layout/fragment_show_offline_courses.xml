@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="729dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".showTutorCourses">
+    tools:context=".showOfflineCourses">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,19 +14,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp">
+            android:layout_height="wrap_content">
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/offlineModeCentreSlider"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1920:886"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/white_round_corner"
                 android:clipToOutline="true"
-                app:layout_constraintDimensionRatio="1920:886"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -42,23 +41,37 @@
                 app:sliderIndicatorSelectedColor="#5A5A5A"
                 app:sliderIndicatorUnselectedColor="#FFF"
                 app:sliderScrollTimeInSec="1"
-                app:sliderStartAutoCycle="true">
+                app:sliderStartAutoCycle="true" >
 
             </com.smarteist.autoimageslider.SliderView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/offlineCourcesrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/white_rounder_corner"
                 android:backgroundTint="#FFD977"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button17">
+                app:layout_constraintTop_toBottomOf="@id/offlineCourcesrecyclerview">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -92,7 +105,7 @@
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="79dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="65dp"
                     android:backgroundTint="#07557C"
                     android:text="DIAL"
@@ -103,79 +116,30 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button4"
-                android:layout_width="150dp"
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/buttonbackground"
-                android:backgroundTint="@color/orange"
-                android:text="The Form"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/newstyle"
+                android:text="Course Coming Soon"
+                android:textSize="25dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toTopOf="@+id/offlineCourcesrecyclerview" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Please Fill The Form Before Enroll the Course"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="The classroom centers"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/offlineModeCentreSlider" />
-
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button4"
-                tools:src="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button15"
-                tools:src="@tools:sample/avatars" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button15"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Explore Online Course"
-                android:background="@drawable/buttonbackground"
-                android:backgroundTint="@color/orange"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button17"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Explore Offline Course"
-                android:background="@drawable/buttonbackground"
-                android:backgroundTint="@color/orange"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
