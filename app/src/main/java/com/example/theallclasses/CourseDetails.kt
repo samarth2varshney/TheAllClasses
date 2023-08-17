@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.FragmentCourseDetailsBinding
+import com.google.firebase.auth.FirebaseAuth
 import java.io.Serializable
 
 class CourseDetails : Fragment() {
@@ -21,6 +22,7 @@ class CourseDetails : Fragment() {
     var location:String = ""
     var type:String = ""
     var containerId = 0
+    val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,16 +60,12 @@ class CourseDetails : Fragment() {
         if(map["courseDetails"] != null)
             Glide.with(this).load(map["courseDetails"]).fitCenter().into(binding.courseDetailsImage)
 
-        binding.button13.setOnClickListener {
-            openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
-        }
-
         Glide.with(this).load(map["teachersImage"]).fitCenter().into(binding.teacherImage)
         Glide.with(this).load(map["testImage"]).fitCenter().into(binding.testImage)
         Glide.with(this).load(map["studyMaterialImage"]).fitCenter().into(binding.studyMaterial)
 
-        if(map["studyMaterailImage"]==null){
-            binding.button13.visibility = View.GONE
+        binding.button13.setOnClickListener {
+            openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
         }
 
         if(map["otherDetails"] != null)
@@ -78,25 +76,24 @@ class CourseDetails : Fragment() {
         }
 
         binding.bookSeatbutton.setOnClickListener {
-            val intent = Intent(requireContext(), PurchaseActivity::class.java)
-            if(map["cost"]!="null"){
-                intent.putExtra("courseName" ,map["name"].toString())
-                intent.putExtra("cost", map["cost"].toString().toInt())
-                intent.putExtra("location",location)
-                intent.putExtra("type",type)
-                intent.putExtra("startDate",map["startDate"].toString())
-                intent.putExtra("endDate",map["endDate"].toString())
-                startActivity(intent)
+            if(auth.currentUser!=null) {
+                val intent = Intent(requireContext(), PurchaseActivity::class.java)
+                if(map["cost"]!="null"){
+                    intent.putExtra("courseImage" ,map["courseDetails"].toString())
+                    intent.putExtra("courseName" ,map["name"].toString())
+                    intent.putExtra("cost", map["cost"].toString().toInt())
+                    intent.putExtra("location",location)
+                    intent.putExtra("type",type)
+                    intent.putExtra("startDate",map["startDate"].toString())
+                    intent.putExtra("endDate",map["endDate"].toString())
+                    startActivity(intent)
+                }
+            }else{
+                startActivity(Intent(requireContext(), SignInActivity::class.java))
             }
         }
 
         if(map["freeContent"] != null) {
-//            val mapWithName = map["freeContent"] as MutableMap<String, Any>
-//
-//            binding.freecourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
-//            val adapter = Adapter(requireContext(), mapWithName)
-//            binding.freecourserecyclerview.adapter = adapter
-//
             binding.button9.setOnClickListener {
                 val fragment = ShowFreeContent()
                 val args = Bundle()

@@ -32,7 +32,7 @@
         android:textSize="20sp"
         android:background="@drawable/buttonbackground"
         android:backgroundTint="@color/darkGreen"
-        android:text="PDF"
+        android:text="Notes"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="@+id/topicimage"
         app:layout_constraintTop_toBottomOf="@+id/topicimage" />
@@ -49,5 +49,35 @@
         android:text="DPP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/PDFbutton" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Daily Practice Paper) "
+        app:layout_constraintEnd_toEndOf="@+id/DPPbtn"
+        app:layout_constraintStart_toStartOf="@+id/DPPbtn"
+        app:layout_constraintTop_toBottomOf="@+id/DPPbtn" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+        app:layout_constraintEnd_toEndOf="@+id/imageView14"
+        app:layout_constraintStart_toStartOf="@+id/imageView14"
+        app:layout_constraintTop_toTopOf="@+id/imageView14" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topicimage"
+        app:layout_constraintEnd_toEndOf="@+id/topicimage"
+        app:layout_constraintStart_toStartOf="@+id/topicimage"
+        app:layout_constraintTop_toTopOf="@+id/topicimage"
+        app:srcCompat="@drawable/youtubecolor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

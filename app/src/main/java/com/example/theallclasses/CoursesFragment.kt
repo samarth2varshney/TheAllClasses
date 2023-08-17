@@ -37,6 +37,8 @@ class CoursesFragment : Fragment() {
 
         binding.textView16.visibility = View.GONE
 
+        binding.textView6.text = "Hi,${auth.currentUser!!.displayName.toString()}"
+
         if(auth.currentUser!=null) {
             SharedData.uid = auth.currentUser!!.uid
             val courses = db.document("/users/${SharedData.uid}")

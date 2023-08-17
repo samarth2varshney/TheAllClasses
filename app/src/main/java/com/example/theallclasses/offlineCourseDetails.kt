@@ -77,6 +77,7 @@ class offlineCourseDetails : Fragment() {
         binding.button14.setOnClickListener {
             val intent = Intent(requireContext(), PurchaseActivity::class.java)
             if (auth.currentUser != null && cousercost!="null"){
+                intent.putExtra("courseImage" ,bannermap!!["image1"].toString())
                 intent.putExtra("courseName" ,name)
                 intent.putExtra("cost", cousercost.toInt())
                 intent.putExtra("location",location)

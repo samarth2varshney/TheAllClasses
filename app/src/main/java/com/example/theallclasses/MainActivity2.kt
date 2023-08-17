@@ -210,7 +210,6 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment, flag: Boolean) {
-
         if(flag || auth.currentUser!=null) {
             supportFragmentManager.beginTransaction()
                 .replace(binding.frameLayout.id, fragment)

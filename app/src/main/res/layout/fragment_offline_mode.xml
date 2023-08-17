@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/noidaButton"
+                        android:id="@+id/newDelhiButton"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -64,7 +64,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/ghaziabadButton"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/newDelhiButton"
+                        app:layout_constraintStart_toEndOf="@+id/noidaButton"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5"
                         tools:srcCompat="@tools:sample/avatars" />
@@ -88,7 +88,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/gurgaonButton"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/noidaButton"
+                        app:layout_constraintStart_toEndOf="@+id/newDelhiButton"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5"
                         tools:srcCompat="@tools:sample/avatars" />
@@ -104,13 +104,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/ghaziabadButton" />
 
                     <ImageView
-                        android:id="@+id/newDelhiButton"
+                        android:id="@+id/noidaButton"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
                         android:layout_marginEnd="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/noidaButton"
+                        app:layout_constraintEnd_toStartOf="@+id/newDelhiButton"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -134,7 +133,6 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"

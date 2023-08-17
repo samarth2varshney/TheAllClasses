@@ -54,6 +54,30 @@ class HomeFragment : Fragment() {
                 }
         }
 
+        binding.textView7.setOnClickListener{
+            openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
+        }
+
+        binding.textView18.setOnClickListener {
+            val fragment = OfflineMode()
+            val fragmentManager: FragmentManager =
+                (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        binding.textView19.setOnClickListener {
+            val fragment = HomeTuitionFragment()
+            val fragmentManager: FragmentManager =
+                (context as AppCompatActivity).supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction.replace(containerId, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         binding.jeeAdvancedButton.setOnClickListener{
             openShowCourses(SharedData.JEE_Advanced,"jeeadvance")
         }
@@ -152,6 +176,19 @@ class HomeFragment : Fragment() {
         args.putBoolean("bookSeat",false)
         args.putString("location",s)
         args.putString("type","online")
+        fragment.arguments = args
+
+        val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(containerId, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun openShowMaterial(course: Map<String, Any>?) {
+        val fragment = ShowMaterial()
+        val args = Bundle()
+        args.putSerializable("map", course as Serializable)
         fragment.arguments = args
 
         val fragmentManager: FragmentManager = (context as AppCompatActivity).supportFragmentManager

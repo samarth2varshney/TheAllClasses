@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.ActivityPurchaseBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
@@ -16,6 +18,7 @@ import org.json.JSONObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
+import kotlin.math.roundToInt
 
 class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     private lateinit var binding: ActivityPurchaseBinding
@@ -24,32 +27,51 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     var type:String = ""
     var startDate:String =""
     var endDate:String =""
+    var courseImage = ""
+    val auth = FirebaseAuth.getInstance()
+    var cost = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var cost = intent.getIntExtra("cost",0)
+        cost = intent.getIntExtra("cost",0)
 
         courseName = intent.getStringExtra("courseName").toString()
         location = intent.getStringExtra("location").toString()
         type = intent.getStringExtra("type").toString()
         startDate = intent.getStringExtra("startDate").toString()
         endDate = intent.getStringExtra("endDate").toString()
+        courseImage = intent.getStringExtra("courseImage").toString()
 
         binding.courseName.text = courseName
         binding.endDate.text = endDate
-        binding.cost.text = cost.toString()
-        binding.tvTransact.text = cost.toString()
+        binding.cost.text = "₹ ${(cost)}"
+        binding.textView35.text = "₹ ${(cost*0.25)}"
+        binding.textView38.text = "₹ ${(cost*0.75)}"
+        binding.textView39.text = "₹ ${0}"
+        Glide.with(this).load(courseImage).fitCenter().into(binding.imageView5)
 
         Checkout.preload(this@PurchaseActivity)
 
+        binding.button18.setOnClickListener {
+            var check = binding.textView40.text
+            if(check.length>=3&&check[0]=='T'&&check[1]=='H'&&check[2]=='E'){
+                binding.textView39.text = "₹ ${(cost*0.10)}"
+                cost = (cost*0.9).roundToInt()
+                binding.cost.text = "₹ ${(cost)}"
+                binding.textView35.text = "₹ ${(cost*0.25)}"
+                binding.textView38.text = "₹ ${(cost*0.75)}"
+            }
+        }
+
         binding.btnPayNow.setOnClickListener {
-            payNow(cost, courseName)
+            payNow((cost*0.75).roundToInt(), courseName)
         }
     }
     fun payNow(amount: Int, courseName: String?){
+
         val checkout = Checkout()
         checkout.setKeyID("rzp_test_z4hn27x6bb4cZV")
 
@@ -143,13 +165,13 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
             }
         }
 //        binding.tvTransact.text = "Payment ID: ${p0}"
-        binding.tvTransact.setTextColor(Color.GREEN)
+        //binding.tvTransact.setTextColor(Color.GREEN)
         startActivity(Intent(this,MainActivity2::class.java))
     }
 
 
     override fun onPaymentError(p0: Int, p1: String?) {
 //        binding.tvTransact.text = "Payment Failed: ${p1}"
-        binding.tvTransact.setTextColor(Color.RED)
+        //binding.tvTransact.setTextColor(Color.RED)
     }
 }

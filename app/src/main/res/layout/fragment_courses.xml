@@ -6,43 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".CoursesFragment">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/mycourserecyclerview"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mycourserecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-       </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
-       <ProgressBar
-           android:id="@+id/spinner"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_centerInParent="true"
-           app:layout_constraintBottom_toBottomOf="@+id/mycourserecyclerview"
-           app:layout_constraintEnd_toEndOf="@+id/mycourserecyclerview"
-           app:layout_constraintStart_toStartOf="@+id/mycourserecyclerview"
-           app:layout_constraintTop_toTopOf="@+id/mycourserecyclerview" />
+        <ProgressBar
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="@+id/mycourserecyclerview"
+            app:layout_constraintEnd_toEndOf="@+id/mycourserecyclerview"
+            app:layout_constraintStart_toStartOf="@+id/mycourserecyclerview"
+            app:layout_constraintTop_toTopOf="@+id/mycourserecyclerview" />
 
-       <TextView
-           android:id="@+id/textView16"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:fontFamily="@font/newstyle"
-           android:textSize="25sp"
-           android:text="No Courses Purchased Yet"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="@+id/mycourserecyclerview"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/newstyle"
+            android:text="No Courses Purchased Yet"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mycourserecyclerview"
+            app:layout_constraintEnd_toEndOf="@+id/mycourserecyclerview"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free Content are available in all courses Plaease visit"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/darkGreen"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
