@@ -39,6 +39,7 @@ class Show_live_Adapter(private val context: Context, private val mapData: Map<S
             holder.textView.visibility = View.GONE
             holder.textView2.visibility = View.GONE
         }else{
+            //
             holder.textView.text = zoomMeeting
             holder.imageView.visibility = View.GONE
         }

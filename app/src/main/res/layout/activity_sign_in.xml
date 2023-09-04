@@ -36,6 +36,31 @@
             android:textColor="#D3D3D3"
             android:textSize="15dp" />
 
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Welcome to THE Classes         "
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo_white"/>
+
     </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout

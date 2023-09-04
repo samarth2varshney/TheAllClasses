@@ -170,7 +170,7 @@
                 android:id="@+id/joinTeacherbutton"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:text="Join Teacher\nTraning Program"
+                android:text="Join Teacher\nTraining Program"
                 android:background="@drawable/white_rounder_corner"
                 android:backgroundTint="@color/orange"
                 app:layout_constraintEnd_toEndOf="parent"

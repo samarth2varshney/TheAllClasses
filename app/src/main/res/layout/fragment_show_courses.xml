@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Please Fill The Form Before Enroll the Course"
+                android:text="Please Fill The Form Before Enrolling the Course"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"

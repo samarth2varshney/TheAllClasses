@@ -88,7 +88,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
                     app:layout_constraintWidth_percent="0.333"
-                    app:srcCompat="@drawable/customersupporticon" />
+                    app:srcCompat="@drawable/customersupporticon"/>
 
                 <TextView
                     android:id="@+id/customercare"
@@ -100,7 +100,7 @@
                     android:autoSizeMinTextSize="15sp"
                     android:autoSizeStepGranularity="2sp"
                     android:autoSizeTextType="uniform"
-                    android:text="Need Clarity ?\nTalk to our helpful mentor for more information  "
+                    android:text="Need Clarity ?\nTalk to our helpful support team for more information  "
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView6"
                     app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +141,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/buttonbackground"
                 android:backgroundTint="@color/darkGreen"
-                android:text="Free Content"
+                android:text="Free Contents"
                 app:layout_constraintEnd_toStartOf="@+id/bookSeatbutton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

@@ -36,6 +36,7 @@ class CoursesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.textView16.visibility = View.GONE
+        binding.textView37.visibility = View.GONE
 
         binding.textView6.text = "Hi,${auth.currentUser!!.displayName.toString()}"
 
@@ -215,6 +216,7 @@ class CoursesFragment : Fragment() {
             if(SharedData.Mycourses!!.isEmpty()) {
                 binding.spinner.visibility = View.GONE
                 binding.textView16.visibility = View.VISIBLE
+                binding.textView37.visibility = View.VISIBLE
             }
             else{
                 copyCourses()

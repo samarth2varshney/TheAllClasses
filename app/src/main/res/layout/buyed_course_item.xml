@@ -38,7 +38,7 @@
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/buttonbackground"
-        android:backgroundTint="#B41A00"
+        android:backgroundTint="@color/orange"
         android:text="Order Now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

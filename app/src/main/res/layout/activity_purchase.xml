@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="533dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.65"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:background="@drawable/upper_round_corners"
@@ -52,29 +53,32 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/textView40"
+                android:id="@+id/coupon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:hint="Write Coupon Code"
+                app:backgroundTint="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button18"
+                app:layout_constraintEnd_toStartOf="@+id/apply"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/apply"
                 android:layout_width="wrap_content"
                 android:layout_height="47dp"
                 android:layout_marginStart="10dp"
                 android:backgroundTint="#574BD0"
                 android:text="Apply"
                 android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView40"
-                tools:layout_editor_absoluteY="6dp" />
+                app:layout_constraintStart_toEndOf="@+id/coupon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -199,7 +203,7 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/discount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -208,7 +212,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView24" />
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -217,7 +221,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/textView39"
+                android:id="@+id/couponDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"

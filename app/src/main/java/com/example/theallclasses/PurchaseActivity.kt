@@ -1,14 +1,11 @@
 package com.example.theallclasses
 
-import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.ActivityPurchaseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,7 +14,6 @@ import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import kotlin.math.roundToInt
 
 class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
@@ -27,57 +23,60 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     var type:String = ""
     var startDate:String =""
     var endDate:String =""
-    var courseImage = ""
     val auth = FirebaseAuth.getInstance()
+    var originalCost = 0;
     var cost = 0
+    var discount = 0.25
+    var couponDiscount = 0.15
+    var chechFlag = true
+    var coupon = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPurchaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        cost = intent.getIntExtra("cost",0)
+        originalCost = intent.getIntExtra("cost",0)
+        cost = (originalCost*(1-discount)).roundToInt()
 
         courseName = intent.getStringExtra("courseName").toString()
         location = intent.getStringExtra("location").toString()
         type = intent.getStringExtra("type").toString()
         startDate = intent.getStringExtra("startDate").toString()
         endDate = intent.getStringExtra("endDate").toString()
-        courseImage = intent.getStringExtra("courseImage").toString()
 
         binding.courseName.text = courseName
         binding.endDate.text = endDate
-        binding.cost.text = "₹ ${(cost)}"
-        binding.textView35.text = "₹ ${(cost*0.25)}"
-        binding.textView38.text = "₹ ${(cost*0.75)}"
-        binding.textView39.text = "₹ ${0}"
-        Glide.with(this).load(courseImage).fitCenter().into(binding.imageView5)
+        binding.cost.text = originalCost.toString()
+        binding.discount.text = (originalCost*discount).roundToInt().toString()
+        binding.couponDiscount.text = 0.toString()
+        binding.total.text = cost.toString()
 
-        Checkout.preload(this@PurchaseActivity)
-
-        binding.button18.setOnClickListener {
-            var check = binding.textView40.text
-            if(check.length>=3&&check[0]=='T'&&check[1]=='H'&&check[2]=='E'){
-                binding.textView39.text = "₹ ${(cost*0.10)}"
-                cost = (cost*0.9).roundToInt()
-                binding.cost.text = "₹ ${(cost)}"
-                binding.textView35.text = "₹ ${(cost*0.25)}"
-                binding.textView38.text = "₹ ${(cost*0.75)}"
+        binding.apply.setOnClickListener {
+            coupon = binding.coupon.text.toString()
+            if(coupon.length>=3&&coupon[0]=='T'&&coupon[1]=='H'&&coupon[2]=='E'&&chechFlag){
+                binding.couponDiscount.text = (originalCost*couponDiscount).roundToInt().toString()
+                cost-= (originalCost*couponDiscount).roundToInt()
+                binding.total.text = cost.toString()
+                chechFlag = false
+            }else if(chechFlag){
+                Toast.makeText(this,"Invalid Coupon Code",Toast.LENGTH_SHORT).show()
             }
         }
 
+        Checkout.preload(this@PurchaseActivity)
+
         binding.btnPayNow.setOnClickListener {
-            payNow((cost*0.75).roundToInt(), courseName)
+            payNow(cost, courseName)
         }
     }
     fun payNow(amount: Int, courseName: String?){
-
         val checkout = Checkout()
         checkout.setKeyID("rzp_test_z4hn27x6bb4cZV")
 
         try {
             val options = JSONObject()
-            options.put("name", "The All Classes")
+            options.put("name", "all THE Classes")
             options.put("description", courseName)
             options.put("currency", "INR")
             options.put("amount", amount*100)
@@ -86,6 +85,9 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
             retryObj.put("enable", true)
             retryObj.put("max_count", 4)
             options.put("retry", retryObj)
+
+            val image: Int = R.drawable.logo
+            checkout.setImage(image)
 
             checkout.open(this@PurchaseActivity, options)
         } catch (e: Exception) {
@@ -97,7 +99,7 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onPaymentSuccess(p0: String?) {
         Toast.makeText(this@PurchaseActivity,"Payment Complete", Toast.LENGTH_SHORT ).show()
-        val documentRef = FirebaseFirestore.getInstance().collection("users").document(SharedData.uid!!)
+        val documentRef = FirebaseFirestore.getInstance().collection("users").document(auth.currentUser!!.uid)
         documentRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
                 val data = documentSnapshot.data
@@ -117,7 +119,8 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             "endDate" to endDate,
                             "startDate" to startDate,
                             "location" to location,
-                            "type" to type
+                            "type" to type,
+                            "referralCode" to coupon
                         )
                         existingMap[existingMap.size.toString()] = innermap
 
@@ -142,7 +145,8 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             "endDate" to endDate,
                             "startDate" to startDate,
                             "location" to location,
-                            "type" to type
+                            "type" to type,
+                            "referralCode" to coupon
                         )
                         data["mycourses"] = hashMapOf(
                             "0" to innermap
@@ -161,12 +165,11 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
                             }
                     }
                 }
-
             }
         }
+
 //        binding.tvTransact.text = "Payment ID: ${p0}"
         //binding.tvTransact.setTextColor(Color.GREEN)
-        startActivity(Intent(this,MainActivity2::class.java))
     }
 
 

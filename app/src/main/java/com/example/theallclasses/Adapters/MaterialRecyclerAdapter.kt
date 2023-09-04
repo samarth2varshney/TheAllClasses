@@ -17,10 +17,8 @@ class MaterialRecyclerAdapter(private val context: Context, private val mapData:
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        //val keyTextView = itemView.findViewById<TextView>(R.id.keyTextView1)!!
         val imageView = itemView.findViewById<ImageView>(R.id.pic1)
         val button = itemView.findViewById<Button>(R.id.studybt)
-        val horizontalItemBG = itemView.findViewById<ConstraintLayout>(R.id.horizontalItemBG)
 
     }
 
@@ -31,80 +29,8 @@ class MaterialRecyclerAdapter(private val context: Context, private val mapData:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-//        if (position % 5 == 0) {
-//            holder.horizontalItemBG.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.LightSkyBlue
-//                )
-//            )
-//            holder.keyTextView.setTextColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.RoyalBlue
-//                )
-//            )
-//        }
-//        else if (position % 5 == 1) {
-//            holder.horizontalItemBG.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.SalmonPink
-//                )
-//            )
-//            holder.keyTextView.setTextColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.Rojo
-//                )
-//            )
-//        }
-//        else if (position % 5 == 2) {
-//            holder.horizontalItemBG.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.Mauve
-//                )
-//            )
-//            holder.keyTextView.setTextColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.BlueViolet
-//                )
-//            )
-//        }
-//        else if (position % 5 == 3) {
-//            holder.horizontalItemBG.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.Timberwolf
-//                )
-//            )
-//            holder.keyTextView.setTextColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.DavyGray
-//                )
-//            )
-//        }
-//        else if (position % 5 == 4) {
-//            holder.horizontalItemBG.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.Aquamarine
-//                )
-//            )
-//            holder.keyTextView.setTextColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.PigmentGreen
-//                )
-//            )
-//        }
-
         val map = mapData[mapData.keys.elementAt(position)] as Map<String, Any>
 
-        //holder.keyTextView.text = map["name"].toString()
         Glide.with(holder.itemView).load(map["image"]).fitCenter().into(holder.imageView)
 
         holder.button.setOnClickListener {
