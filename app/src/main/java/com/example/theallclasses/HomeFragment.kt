@@ -56,6 +56,22 @@ class HomeFragment : Fragment() {
                 }
         }
 
+        GlobalScope.launch (Dispatchers.IO) {
+            val customerCareNumber = db.document("/Homepage_button_icons/buttonIcon")
+            customerCareNumber.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        SharedData.icons = document.data as Map<String, Any>
+                        putbuttonicon("class11&12Icon",binding.cbseButton)
+                        putbuttonicon("governmentjobexamIcon",binding.jeeAdvancedButton)
+                        putbuttonicon("jeeIcon",binding.jeeMainsButton)
+                        putbuttonicon("neetIcon",binding.neetUgButton)
+                        putbuttonicon("otherIcon",binding.othersButton)
+                        putbuttonicon("perfoundationIcon",binding.foundationButton)
+                    }
+                }
+        }
+
         binding.textView7.setOnClickListener{
             openShowMaterial(SharedData.MaterialFragmentData!!["booklets"] as Map<String,Any>)
         }
@@ -143,6 +159,11 @@ class HomeFragment : Fragment() {
         setImages("bookFlashImage",binding.bookImage)
         setImages("TrainedAndExpertFacultiesImage",binding.TrainedAndExportFaculties)
         setImages("bottomImage",binding.bottomImage)
+    }
+
+    private fun putbuttonicon(s: String, Imageview: ImageView) {
+        if(SharedData.icons!![s]!=null)
+        Glide.with(requireContext()).load(SharedData.icons!![s]).fitCenter().into(Imageview)
     }
 
     private fun setImages(s: String, Imageview: ImageView) {

@@ -1,6 +1,7 @@
 package com.example.theallclasses
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class CoursesFragment : Fragment() {
     var flag1=false
     var flag2=false
     var flag3=false
+    var checked = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,14 +37,14 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView16.visibility = View.GONE
-        binding.textView37.visibility = View.GONE
+        binding.NoCoursesPurchasedText.visibility = View.GONE
+        binding.FreeContentText.visibility = View.GONE
 
-        binding.textView6.text = "Hi,${auth.currentUser!!.displayName.toString()}"
+        binding.UserNameText.text = "Hi,${auth.currentUser!!.displayName.toString()}"
 
         if(auth.currentUser!=null) {
             SharedData.uid = auth.currentUser!!.uid
-            val courses = db.document("/users/${SharedData.uid}")
+            val courses = db.document("/users/${auth.currentUser!!.uid}")
             courses.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
@@ -112,10 +114,8 @@ class CoursesFragment : Fragment() {
 
         val map = SharedData.Mycoursesdata
 
-        val mapWithName = map!!.toMutableMap()
-
         binding.mycourserecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = BuyedCourseAdapter(requireContext(), mapWithName)
+        val adapter = BuyedCourseAdapter(requireContext(), map!!)
         binding.mycourserecyclerview.adapter = adapter
     }
 
@@ -134,7 +134,7 @@ class CoursesFragment : Fragment() {
                  val comparisonResult = currentDate.compareTo(dateFromInput)
 
                  if (value != null && comparisonResult<0) {
-                    SharedData.Mycoursesdata?.put(key, value)
+                     SharedData.Mycoursesdata?.put(key, value)
                 }
             }
             else if(map["location"].toString() == "jeeadvance"){
@@ -211,15 +211,17 @@ class CoursesFragment : Fragment() {
 
     private fun checkifloaded() {
 
-        if(flag1 && flag2 && flag3){
+        if(flag1 && flag2 && flag3 && !checked){
+
+            checked = true
 
             if(SharedData.Mycourses!!.isEmpty()) {
                 binding.spinner.visibility = View.GONE
-                binding.textView16.visibility = View.VISIBLE
-                binding.textView37.visibility = View.VISIBLE
+                binding.NoCoursesPurchasedText.visibility = View.VISIBLE
+                binding.FreeContentText.visibility = View.VISIBLE
             }
             else{
-                copyCourses()
+               copyCourses()
             }
 
         }

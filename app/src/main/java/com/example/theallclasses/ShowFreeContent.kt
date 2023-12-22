@@ -46,6 +46,7 @@ class ShowFreeContent : Fragment() {
         binding.button11.setOnClickListener {
             val intent = Intent(requireContext(), PurchaseActivity::class.java)
             if(map["cost"]!="null"){
+                intent.putExtra("courseImage",map["courseDetails"].toString())
                 intent.putExtra("courseName" ,map["name"].toString())
                 intent.putExtra("cost", map["cost"].toString().toInt())
                 intent.putExtra("location",location)

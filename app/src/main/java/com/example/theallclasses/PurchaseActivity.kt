@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
 import com.example.theallclasses.databinding.ActivityPurchaseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +31,7 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
     var couponDiscount = 0.15
     var chechFlag = true
     var coupon = ""
+    var courseImage = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +41,14 @@ class PurchaseActivity : AppCompatActivity(), PaymentResultListener {
         originalCost = intent.getIntExtra("cost",0)
         cost = (originalCost*(1-discount)).roundToInt()
 
+        courseImage = intent.getStringExtra("courseImage").toString()
         courseName = intent.getStringExtra("courseName").toString()
         location = intent.getStringExtra("location").toString()
         type = intent.getStringExtra("type").toString()
         startDate = intent.getStringExtra("startDate").toString()
         endDate = intent.getStringExtra("endDate").toString()
 
+        Glide.with(this).load(courseImage).fitCenter().into(binding.imageView5)
         binding.courseName.text = courseName
         binding.endDate.text = endDate
         binding.cost.text = originalCost.toString()

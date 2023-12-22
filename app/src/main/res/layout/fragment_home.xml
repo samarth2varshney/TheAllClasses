@@ -136,10 +136,9 @@
                 android:id="@+id/cbseButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="5dp"
-                android:src="@drawable/cbse"
+                android:src="@drawable/icon"
                 app:layout_constraintBottom_toTopOf="@+id/jeeAdvancedButton"
                 app:layout_constraintDimensionRatio="W,2:1.25"
                 app:layout_constraintEnd_toStartOf="@+id/jeeMainsButton"

@@ -17,7 +17,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6">
+            app:layout_constraintTop_toBottomOf="@+id/UserNameText">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="@+id/mycourserecyclerview" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/NoCoursesPurchasedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/newstyle"
@@ -42,10 +42,10 @@
             app:layout_constraintEnd_toEndOf="@+id/mycourserecyclerview"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            app:layout_constraintTop_toBottomOf="@+id/FreeContentText" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/UserNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -56,15 +56,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/FreeContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Free Content are available in all courses Plaease visit"
+            android:text="Free Content are available in all courses Please visit"
             android:textSize="20sp"
             android:gravity="center"
             android:textColor="@color/darkGreen"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintBottom_toTopOf="@+id/NoCoursesPurchasedText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

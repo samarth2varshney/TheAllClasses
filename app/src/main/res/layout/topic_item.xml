@@ -61,8 +61,8 @@
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="@+id/imageView14"
@@ -71,13 +71,11 @@
 
     <ImageView
         android:id="@+id/imageView14"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/topicimage"
         app:layout_constraintEnd_toEndOf="@+id/topicimage"
-        app:layout_constraintStart_toStartOf="@+id/topicimage"
-        app:layout_constraintTop_toTopOf="@+id/topicimage"
         app:srcCompat="@drawable/youtubecolor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

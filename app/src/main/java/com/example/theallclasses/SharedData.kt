@@ -1,9 +1,5 @@
 package com.example.theallclasses
 
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat.startActivity
-
 object SharedData {
 
     //onlinecourseinfo
@@ -34,5 +30,7 @@ object SharedData {
     var customerCare: Map<String, Any>? = null
 
     var socialMediaLinks: Map<String, Any>? = null
+
+    var icons: Map<String, Any>? = null
 
 }
